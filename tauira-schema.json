@@ -105,6 +105,7 @@
       "type": "object",
       "properties": {
         "schemaType": {
+          "type": "string",
           "const": "encounter"
         },
         "id": {
@@ -159,6 +160,7 @@
       "type": "object",
       "properties": {
         "schemaType": {
+          "type": "string",
           "const": "analyticMemo"
         },
         "id": {
@@ -194,6 +196,7 @@
       "type": "object",
       "properties": {
         "schemaType": {
+          "type": "string",
           "const": "essay"
         },
         "id": {
@@ -226,6 +229,7 @@
       "type": "object",
       "properties": {
         "schemaType": {
+          "type": "string",
           "const": "artefact"
         },
         "id": {

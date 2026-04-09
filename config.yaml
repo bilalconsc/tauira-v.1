@@ -38,7 +38,9 @@ params:
 
   # Tauira project settings
   schemaVersion: "v1"
-  graphDataPath: "/graph/tauira-graph.json"
+  # Points to the Hugo-generated JSON graph output (from layouts/index.json.json)
+  # This is always in sync with data/nodes/ and data/edges/ at build time.
+  graphDataPath: "/index.json"
 
   name: Ben Cuan
   title: 📓 Amethyst
