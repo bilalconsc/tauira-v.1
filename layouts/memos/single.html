@@ -1,0 +1,44 @@
+{{ define "main" }}
+<article class="tauira-memo">
+  <header>
+    <h1>{{ .Title }}</h1>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ with .Params.encounterId }}
+      <p class="memo-encounter-link">
+        Encounter: <a href="{{ "encounters/" | relURL }}{{ . }}/">{{ . }}</a>
+      </p>
+    {{ end }}
+  </header>
+
+  {{ if .Params.rqFocus }}
+  <section class="rq-focus">
+    <h2>Research Question Focus</h2>
+    <ul>
+      {{ range .Params.rqFocus }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  {{ if .Params.gapSuggestions }}
+  <section class="gap-suggestions">
+    <h2>Gap Suggestions</h2>
+    <ul>
+      {{ range .Params.gapSuggestions }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  {{ if .Params.diffractiveFocus }}
+  <section class="diffractive-focus">
+    <h2>Diffractive Focus</h2>
+    <ul>
+      {{ range .Params.diffractiveFocus }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  <section class="memo-body">
+    {{ .Content }}
+  </section>
+</article>
+{{ end }}

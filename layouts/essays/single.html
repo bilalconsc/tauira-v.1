@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article class="tauira-essay">
+  <header>
+    <h1>{{ .Title }}</h1>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ with .Params.abstract }}<p class="essay-abstract">{{ . }}</p>{{ end }}
+  </header>
+
+  {{ if .Params.rqAlignment }}
+    {{ partial "rq-alignment.html" .Params.rqAlignment }}
+  {{ end }}
+
+  {{ if .Params.nodeRefs }}
+  <section class="node-refs">
+    <h2>Referenced Nodes</h2>
+    <div class="node-badges">
+      {{ range .Params.nodeRefs }}
+        {{ $node := index $.Site.Data.nodes . }}
+        {{ if $node }}{{ partial "node-badge.html" $node }}{{ end }}
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{ if .Params.encounterRefs }}
+  <section class="encounter-refs">
+    <h2>Related Encounters</h2>
+    <ul>
+      {{ range .Params.encounterRefs }}
+        <li><a href="{{ "encounters/" | relURL }}{{ . }}/">{{ . }}</a></li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  <section class="essay-body">
+    {{ .Content }}
+  </section>
+
+  {{ partial "graph-embed.html" . }}
+</article>
+{{ end }}

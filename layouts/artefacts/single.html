@@ -1,0 +1,38 @@
+{{ define "main" }}
+<article class="tauira-artefact">
+  <header>
+    <h1>{{ .Title }}</h1>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ with .Params.type }}<span class="artefact-type">{{ . }}</span>{{ end }}
+    {{ if .Params.anonymised }}<span class="artefact-anonymised">Anonymised</span>{{ end }}
+  </header>
+
+  {{ with .Params.encounterId }}
+  <p class="artefact-encounter-link">
+    Encounter: <a href="{{ "encounters/" | relURL }}{{ . }}/">{{ . }}</a>
+  </p>
+  {{ end }}
+
+  {{ with .Params.description }}
+  <section class="artefact-description">
+    <p>{{ . }}</p>
+  </section>
+  {{ end }}
+
+  {{ if .Params.nodeRefs }}
+  <section class="node-refs">
+    <h2>Related Nodes</h2>
+    <div class="node-badges">
+      {{ range .Params.nodeRefs }}
+        {{ $node := index $.Site.Data.nodes . }}
+        {{ if $node }}{{ partial "node-badge.html" $node }}{{ end }}
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <section class="artefact-body">
+    {{ .Content }}
+  </section>
+</article>
+{{ end }}

@@ -1,0 +1,7 @@
+{{- $colors := dict "M" "#01696f" "K" "#5b4fcf" "I" "#d19900" -}}
+{{- $labels := dict "M" "Material" "K" "Knowledge" "I" "Instinctual" -}}
+{{- $bg := index $colors .category | default "#666" -}}
+{{- $catLabel := index $labels .category | default .category -}}
+<span class="node-badge" style="background-color: {{ $bg }}; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 0.85em; display: inline-block; margin: 2px;">
+  {{ .label }} <small>({{ $catLabel }})</small>
+</span>

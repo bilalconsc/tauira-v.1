@@ -1,0 +1,51 @@
+{{ define "main" }}
+<article class="tauira-encounter">
+  <header>
+    <h1>{{ .Title }}</h1>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ with .Params.location }}<span class="encounter-location">{{ . }}</span>{{ end }}
+    {{ with .Params.duration }}<span class="encounter-duration">{{ . }} min</span>{{ end }}
+  </header>
+
+  {{ if .Params.rqAlignment }}
+    {{ partial "rq-alignment.html" .Params.rqAlignment }}
+  {{ end }}
+
+  {{ if .Params.fieldnote }}
+  <section class="fieldnote">
+    <h2>Fieldnote</h2>
+    {{ with .Params.fieldnote.scene }}<div class="fieldnote-scene"><h3>Scene</h3><p>{{ . }}</p></div>{{ end }}
+    {{ with .Params.fieldnote.agency }}<div class="fieldnote-agency"><h3>Agency</h3><p>{{ . }}</p></div>{{ end }}
+    {{ with .Params.fieldnote.care }}<div class="fieldnote-care"><h3>Care</h3><p>{{ . }}</p></div>{{ end }}
+    {{ with .Params.fieldnote.vignette }}<div class="fieldnote-vignette"><h3>Vignette</h3><p>{{ . }}</p></div>{{ end }}
+  </section>
+  {{ end }}
+
+  {{ if .Params.nodeRefs }}
+  <section class="node-refs">
+    <h2>Participants</h2>
+    <div class="node-badges">
+      {{ range .Params.nodeRefs }}
+        {{ $node := index $.Site.Data.nodes . }}
+        {{ if $node }}{{ partial "node-badge.html" $node }}{{ end }}
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{ if .Params.assemblages }}
+  <section class="assemblages">
+    <h2>Assemblages</h2>
+    <ul>
+      {{ range .Params.assemblages }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  <section class="encounter-body">
+    {{ .Content }}
+  </section>
+
+  {{ partial "graph-embed.html" . }}
+</article>
+{{ end }}
