@@ -4,7 +4,8 @@ date: "2025-03-10"
 weight: 20250310
 schemaType: artefact
 id: artefact-001
-artefactType: lesson-plan
+type: lesson-plan
+layout: single
 encounterId: enc-2025-T1-W3-L2
 anonymised: true
 nodeRefs:
