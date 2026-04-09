@@ -1,0 +1,13 @@
+{{- $nodes := slice -}}
+{{- range $id, $node := .Site.Data.nodes -}}
+  {{- $entry := dict "id" $node.id "label" $node.label "category" $node.category "subcategory" (default "" $node.subcategory) -}}
+  {{- $nodes = $nodes | append $entry -}}
+{{- end -}}
+{{- $edges := slice -}}
+{{- range $id, $edge := .Site.Data.edges -}}
+  {{- $weight := 0.5 -}}
+  {{- if isset $edge "weight" -}}{{- $weight = $edge.weight -}}{{- end -}}
+  {{- $entry := dict "id" $edge.id "source" $edge.source "target" $edge.target "weight" $weight "relationshipType" (default "co-presence" $edge.relationshipType) -}}
+  {{- $edges = $edges | append $entry -}}
+{{- end -}}
+{{- dict "nodes" $nodes "edges" $edges | jsonify (dict "indent" "  ") -}}

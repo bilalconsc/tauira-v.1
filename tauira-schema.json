@@ -1,0 +1,473 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tauira.io/tauira-schema.json",
+  "title": "Tauira Schema",
+  "description": "Master JSON schema for the Tauira autoethnographic knowledge graph",
+  "oneOf": [
+    { "$ref": "#/definitions/node" },
+    { "$ref": "#/definitions/edge" },
+    { "$ref": "#/definitions/encounter" },
+    { "$ref": "#/definitions/analyticMemo" },
+    { "$ref": "#/definitions/essay" },
+    { "$ref": "#/definitions/artefact" },
+    { "$ref": "#/definitions/rhizomaticMap" },
+    { "$ref": "#/definitions/tour" },
+    { "$ref": "#/definitions/graphExport" },
+    { "$ref": "#/definitions/chatQuery" },
+    { "$ref": "#/definitions/gapSuggestionResponse" }
+  ],
+  "definitions": {
+    "node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^node-\\d+$"
+        },
+        "label": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["M", "K", "I"]
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "encounterRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["id", "label", "category"],
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^edge-\\d+$"
+        },
+        "source": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "directed": {
+          "type": "boolean",
+          "default": false
+        },
+        "relationshipType": {
+          "type": "string",
+          "enum": [
+            "co-presence",
+            "affect",
+            "constraint",
+            "enables",
+            "disrupts",
+            "mediates",
+            "assembles",
+            "diffracts"
+          ]
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "encounterRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "source", "target", "relationshipType"],
+      "additionalProperties": false
+    },
+    "encounter": {
+      "type": "object",
+      "properties": {
+        "schemaType": {
+          "type": "string",
+          "const": "encounter"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^enc-\\d{4}-T\\d+-W\\d+-L\\d+$"
+        },
+        "location": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "nodeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "edgeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assemblages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "memoRef": {
+          "type": "string"
+        },
+        "artefactRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rqAlignment": {
+          "$ref": "#/definitions/rqAlignment"
+        },
+        "fieldnote": {
+          "$ref": "#/definitions/fourPartFieldnote"
+        }
+      },
+      "required": ["schemaType", "id", "nodeRefs", "rqAlignment", "fieldnote"],
+      "additionalProperties": false
+    },
+    "analyticMemo": {
+      "type": "object",
+      "properties": {
+        "schemaType": {
+          "type": "string",
+          "const": "analyticMemo"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^memo-\\d+$"
+        },
+        "encounterId": {
+          "type": "string"
+        },
+        "rqFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gapSuggestions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "diffractiveFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["schemaType", "id", "encounterId"],
+      "additionalProperties": false
+    },
+    "essay": {
+      "type": "object",
+      "properties": {
+        "schemaType": {
+          "type": "string",
+          "const": "essay"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^essay-\\d+$"
+        },
+        "abstract": {
+          "type": "string"
+        },
+        "rqAlignment": {
+          "$ref": "#/definitions/rqAlignment"
+        },
+        "encounterRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nodeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["schemaType", "id", "rqAlignment"],
+      "additionalProperties": false
+    },
+    "artefact": {
+      "type": "object",
+      "properties": {
+        "schemaType": {
+          "type": "string",
+          "const": "artefact"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^artefact-\\d+$"
+        },
+        "encounterId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "anonymised": {
+          "type": "boolean",
+          "default": true
+        },
+        "nodeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["schemaType", "id", "encounterId", "type", "anonymised"],
+      "additionalProperties": false
+    },
+    "fourPartFieldnote": {
+      "type": "object",
+      "properties": {
+        "scene": {
+          "type": "string"
+        },
+        "agency": {
+          "type": "string"
+        },
+        "care": {
+          "type": "string"
+        },
+        "vignette": {
+          "type": "string"
+        }
+      },
+      "required": ["scene", "agency", "care", "vignette"],
+      "additionalProperties": false
+    },
+    "rqAlignment": {
+      "type": "object",
+      "properties": {
+        "RQ1": {
+          "type": "string"
+        },
+        "RQ1a": {
+          "type": "string"
+        },
+        "RQ1b": {
+          "type": "string"
+        }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "rhizomaticMap": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^map-\\d+$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "nodeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "edgeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters": {
+          "type": "object"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "title", "nodeRefs", "edgeRefs"],
+      "additionalProperties": false
+    },
+    "tour": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^tour-\\d+$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "rqFocus": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "encounterId": {
+                "type": "string"
+              },
+              "commentary": {
+                "type": "string"
+              }
+            },
+            "required": ["encounterId", "commentary"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["id", "title", "rqFocus"],
+      "additionalProperties": false
+    },
+    "graphExport": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string",
+                "enum": ["M", "K", "I"]
+              },
+              "subcategory": {
+                "type": "string"
+              }
+            },
+            "required": ["id", "label", "category"],
+            "additionalProperties": false
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "relationshipType": {
+                "type": "string"
+              }
+            },
+            "required": ["id", "source", "target"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "chatQuery": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "response": {
+          "type": "string"
+        },
+        "referencedNodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "referencedEncounters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["query", "response"],
+      "additionalProperties": false
+    },
+    "gapSuggestionResponse": {
+      "type": "object",
+      "properties": {
+        "gapSuggestions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "diffractiveFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bridgingQuestion": {
+          "type": "string"
+        }
+      },
+      "required": ["gapSuggestions", "diffractiveFocus"],
+      "additionalProperties": false
+    }
+  }
+}

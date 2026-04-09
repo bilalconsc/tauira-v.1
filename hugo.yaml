@@ -1,0 +1,6 @@
+# Tauira Hugo configuration has been consolidated into config.yaml.
+#
+# This file exists as a placeholder only. Do not add configuration here.
+# Hugo loads config.yaml as the active root configuration for this project.
+# See config.yaml for all site settings including outputs, taxonomies,
+# and Tauira-specific params (schemaVersion, graphDataPath).

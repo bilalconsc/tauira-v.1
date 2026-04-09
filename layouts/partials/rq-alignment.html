@@ -1,0 +1,10 @@
+{{ if or .RQ1 .RQ1a .RQ1b }}
+<section class="rq-alignment">
+  <h2>Research Question Alignment</h2>
+  <dl>
+    {{ with .RQ1 }}<dt>RQ1</dt><dd>{{ . }}</dd>{{ end }}
+    {{ with .RQ1a }}<dt>RQ1a</dt><dd>{{ . }}</dd>{{ end }}
+    {{ with .RQ1b }}<dt>RQ1b</dt><dd>{{ . }}</dd>{{ end }}
+  </dl>
+</section>
+{{ end }}
