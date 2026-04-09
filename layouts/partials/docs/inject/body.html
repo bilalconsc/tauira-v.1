@@ -1,16 +1,16 @@
 {{/* Part 2.4 — Rhizomatic Map Script Injection
-     Loads D3.js and renders the Tauira rhizomatic graph ONLY on map pages.
-     Uses the deployed subpath-aware URL: /tauira/graph/tauira-graph.json */}}
+     Loads D3.js and renders the Tauira rhizomatic graph on map pages and the home page.
+     Uses Hugo relURL to produce a subpath-aware root-relative URL that works both
+     under `hugo serve` and on the deployed GitHub Pages site. */}}
 {{- $section := .Section | default "" -}}
-{{- if eq $section "map" -}}
+{{- if or (eq $section "map") .IsHome -}}
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
 (function() {
   var container = document.getElementById('tauira-rhizomatic-map');
   if (!container) return;
 
-  var baseURL = {{ site.BaseURL | default "/tauira/" | jsonify }};
-  var graphURL = baseURL.replace(/\/$/, '') + '/graph/tauira-graph.json';
+  var graphURL = '{{ "graph/tauira-graph.json" | relURL }}';
 
   fetch(graphURL)
     .then(function(res) { return res.json(); })

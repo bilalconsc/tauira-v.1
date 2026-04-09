@@ -38,9 +38,9 @@ params:
 
   # Tauira project settings
   schemaVersion: "v1"
-  # Points to the Hugo-generated JSON graph output (from layouts/index.json.json)
-  # This is always in sync with data/nodes/ and data/edges/ at build time.
-  graphDataPath: "/index.json"
+  # Points to the static pre-built graph JSON (from static/graph/tauira-graph.json).
+  # The template uses Hugo relURL to derive the correct subpath at render time.
+  graphDataPath: "graph/tauira-graph.json"
 
   name: Tauira
   title: 📓 Tauira
