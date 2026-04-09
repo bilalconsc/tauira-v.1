@@ -1,0 +1,9 @@
+{
+  "id": "node-002",
+  "label": "Student S3",
+  "category": "M",
+  "subcategory": "humanoid",
+  "description": "A student participant known for lateral thinking and comedic interruptions that reorient the room.",
+  "tags": ["student", "humour", "agency"],
+  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W5-L3"]
+}

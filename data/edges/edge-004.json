@@ -1,0 +1,10 @@
+{
+  "id": "edge-004",
+  "source": "node-006",
+  "target": "node-005",
+  "directed": true,
+  "relationshipType": "disrupts",
+  "weight": 0.85,
+  "encounterRefs": ["enc-2025-T1-W3-L2"],
+  "notes": "Laughter disrupts boredom, producing a visible affective shift across the classroom."
+}

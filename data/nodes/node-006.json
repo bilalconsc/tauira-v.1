@@ -1,0 +1,9 @@
+{
+  "id": "node-006",
+  "label": "Laughter",
+  "category": "I",
+  "subcategory": "affect",
+  "description": "Spontaneous collective laughter, often triggered by S3, that shifts the affective register of the room.",
+  "tags": ["affect", "humour", "collective", "reorientation"],
+  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W5-L3"]
+}

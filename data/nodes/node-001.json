@@ -1,0 +1,9 @@
+{
+  "id": "node-001",
+  "label": "Round Tables",
+  "category": "M",
+  "subcategory": "furniture",
+  "description": "Four round tables arranged in a cluster near the whiteboard, each seating four students.",
+  "tags": ["spatial", "furniture", "arrangement"],
+  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W4-L1", "enc-2025-T1-W5-L3"]
+}

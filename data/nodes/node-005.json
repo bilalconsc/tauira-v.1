@@ -1,0 +1,9 @@
+{
+  "id": "node-005",
+  "label": "Boredom",
+  "category": "I",
+  "subcategory": "affect",
+  "description": "A flat, diffuse affect observable in the first 15 minutes of several lessons — bodies turned away, minimal eye contact.",
+  "tags": ["affect", "disengagement", "attention"],
+  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W4-L1"]
+}

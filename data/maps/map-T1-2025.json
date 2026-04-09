@@ -1,0 +1,13 @@
+{
+  "id": "map-001",
+  "title": "Term 1 2025 — Full Rhizomatic Map",
+  "description": "All nodes and edges active across T1 W3–W5.",
+  "nodeRefs": ["node-001","node-002","node-003","node-004","node-005","node-006"],
+  "edgeRefs": ["edge-001","edge-002","edge-003","edge-004","edge-005"],
+  "filters": {
+    "categories": ["M","K","I"],
+    "encounterRefs": ["enc-2025-T1-W3-L2","enc-2025-T1-W4-L1","enc-2025-T1-W5-L3"],
+    "minEdgeWeight": 0.0
+  },
+  "createdAt": "2025-03-28T12:00:00Z"
+}
