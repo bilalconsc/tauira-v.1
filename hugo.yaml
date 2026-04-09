@@ -1,0 +1,24 @@
+baseURL: "https://tauira.io/"
+languageCode: "en-nz"
+title: "Tauira"
+disablePathToLower: true
+enableGitInfo: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 1
+
+outputs:
+  home: [HTML, JSON]
+  section: [HTML]
+
+taxonomies:
+  tag: tags
+  assemblage: assemblages
+
+params:
+  schemaVersion: "v1"
+  graphDataPath: "/graph/tauira-graph.json"
