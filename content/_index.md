@@ -14,4 +14,4 @@ enableToc: false
 
 <div id="tauira-rhizomatic-map" style="width:100%;height:560px;border:1px solid #ddd;border-radius:8px;margin-top:1rem;"></div>
 
-> Explore encounters in the sidebar, or open the [Rhizomatic Map](/tauira/map/) to navigate by term.
+> Explore encounters in the sidebar, or open the [Rhizomatic Map]({{< relref "/map" >}}) to navigate by term.

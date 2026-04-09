@@ -5,7 +5,7 @@
     (function() {
       var container = document.getElementById('tauira-graph');
       if (!container) return;
-      var graphDataPath = '{{ "graph/tauira-graph.json" | relURL }}';
+      var graphDataPath = '{{ site.Params.graphDataPath | relURL }}';
       var script = document.createElement('script');
       script.src = '{{ with resources.Get "js/rhizome.js" }}{{ .RelPermalink }}{{ else }}{{ "js/rhizome.js" | relURL }}{{ end }}';
       script.onload = function() {

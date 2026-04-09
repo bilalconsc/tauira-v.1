@@ -10,7 +10,7 @@
   var container = document.getElementById('tauira-rhizomatic-map');
   if (!container) return;
 
-  var graphURL = '{{ "graph/tauira-graph.json" | relURL }}';
+  var graphURL = '{{ site.Params.graphDataPath | relURL }}';
 
   fetch(graphURL)
     .then(function(res) { return res.json(); })
