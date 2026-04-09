@@ -22,7 +22,10 @@ const SYSTEM_PROMPT = [
   '2. Suggest 2–3 alternative diffractive framings: "What if you foregrounded [X] as the apparatus here?"',
   '3. Ask one bridging question that connects this encounter to an under-explored area of the graph.',
   '',
-  'Return your response as a JSON object with keys: "gapSuggestions" (array of strings) and "diffractiveFocus" (array of strings).',
+  'Return your response as a JSON object with keys:',
+  '  "gapSuggestions" (array of strings),',
+  '  "diffractiveFocus" (array of strings),',
+  '  "bridgingQuestion" (a single string).',
   'Do not invent new node IDs. Reference only the node labels provided in the context.'
 ].join('\n');
 
@@ -107,7 +110,8 @@ exports.handler = async function (event) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         gapSuggestions: result.gapSuggestions || [],
-        diffractiveFocus: result.diffractiveFocus || []
+        diffractiveFocus: result.diffractiveFocus || [],
+        bridgingQuestion: result.bridgingQuestion || ''
       })
     };
   } catch (err) {

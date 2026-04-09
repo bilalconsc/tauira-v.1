@@ -3,6 +3,19 @@
   "$id": "https://tauira.io/tauira-schema.json",
   "title": "Tauira Schema",
   "description": "Master JSON schema for the Tauira autoethnographic knowledge graph",
+  "oneOf": [
+    { "$ref": "#/definitions/node" },
+    { "$ref": "#/definitions/edge" },
+    { "$ref": "#/definitions/encounter" },
+    { "$ref": "#/definitions/analyticMemo" },
+    { "$ref": "#/definitions/essay" },
+    { "$ref": "#/definitions/artefact" },
+    { "$ref": "#/definitions/rhizomaticMap" },
+    { "$ref": "#/definitions/tour" },
+    { "$ref": "#/definitions/graphExport" },
+    { "$ref": "#/definitions/chatQuery" },
+    { "$ref": "#/definitions/gapSuggestionResponse" }
+  ],
   "definitions": {
     "node": {
       "type": "object",
@@ -139,7 +152,7 @@
           "$ref": "#/definitions/fourPartFieldnote"
         }
       },
-      "required": ["id", "nodeRefs", "rqAlignment", "fieldnote"],
+      "required": ["schemaType", "id", "nodeRefs", "rqAlignment", "fieldnote"],
       "additionalProperties": false
     },
     "analyticMemo": {
@@ -174,7 +187,7 @@
           }
         }
       },
-      "required": ["id", "encounterId"],
+      "required": ["schemaType", "id", "encounterId"],
       "additionalProperties": false
     },
     "essay": {
@@ -206,7 +219,7 @@
           }
         }
       },
-      "required": ["id", "rqAlignment"],
+      "required": ["schemaType", "id", "rqAlignment"],
       "additionalProperties": false
     },
     "artefact": {
@@ -239,7 +252,7 @@
           }
         }
       },
-      "required": ["id", "encounterId", "type", "anonymised"],
+      "required": ["schemaType", "id", "encounterId", "type", "anonymised"],
       "additionalProperties": false
     },
     "fourPartFieldnote": {
@@ -274,6 +287,7 @@
           "type": "string"
         }
       },
+      "minProperties": 1,
       "additionalProperties": false
     },
     "rhizomaticMap": {
@@ -340,7 +354,8 @@
                 "type": "string"
               }
             },
-            "required": ["encounterId", "commentary"]
+            "required": ["encounterId", "commentary"],
+            "additionalProperties": false
           }
         }
       },
@@ -362,12 +377,15 @@
                 "type": "string"
               },
               "category": {
-                "type": "string"
+                "type": "string",
+                "enum": ["M", "K", "I"]
               },
               "subcategory": {
                 "type": "string"
               }
-            }
+            },
+            "required": ["id", "label", "category"],
+            "additionalProperties": false
           }
         },
         "edges": {
@@ -385,12 +403,16 @@
                 "type": "string"
               },
               "weight": {
-                "type": "number"
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
               },
               "relationshipType": {
                 "type": "string"
               }
-            }
+            },
+            "required": ["id", "source", "target"],
+            "additionalProperties": false
           }
         }
       },
@@ -435,6 +457,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "bridgingQuestion": {
+          "type": "string"
         }
       },
       "required": ["gapSuggestions", "diffractiveFocus"],

@@ -1,10 +1,11 @@
-baseURL: https://amethyst.bencuan.me
+baseURL: "https://tauira.io/"
+languageCode: "en-nz"
 
 # Book configuration
 disablePathToLower: true
 enableGitInfo: true
 
-# # Needed for mermaid/katex shortcodes
+# Needed for mermaid/katex shortcodes
 markup:
   goldmark:
     renderer:
@@ -12,12 +13,17 @@ markup:
   tableOfContents:
     startLevel: 1
 
-# Multi-lingual mode config
-# There are different options to translate files
-# See https://gohugo.io/content-management/multilingual/#translation-by-filename
-# And https://gohugo.io/content-management/multilingual/#translation-by-content-directory
+# Tauira output formats: generate HTML for all sections + JSON at home for graph export
+outputs:
+  home: [HTML, JSON]
+  section: [HTML]
 
-# Sidebar menu additional links
+# Tauira taxonomies
+taxonomies:
+  tag: tags
+  assemblage: assemblages
+
+
 menu:
   # before:
   #   - name: "Sample"
@@ -29,6 +35,10 @@ menu:
       weight: 10
 
 params:
+
+  # Tauira project settings
+  schemaVersion: "v1"
+  graphDataPath: "/graph/tauira-graph.json"
 
   name: Ben Cuan
   title: 📓 Amethyst

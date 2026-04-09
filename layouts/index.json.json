@@ -5,7 +5,9 @@
 {{- end -}}
 {{- $edges := slice -}}
 {{- range $id, $edge := .Site.Data.edges -}}
-  {{- $entry := dict "id" $edge.id "source" $edge.source "target" $edge.target "weight" (default 0.5 $edge.weight) "relationshipType" (default "co-presence" $edge.relationshipType) -}}
+  {{- $weight := 0.5 -}}
+  {{- if isset $edge "weight" -}}{{- $weight = $edge.weight -}}{{- end -}}
+  {{- $entry := dict "id" $edge.id "source" $edge.source "target" $edge.target "weight" $weight "relationshipType" (default "co-presence" $edge.relationshipType) -}}
   {{- $edges = $edges | append $entry -}}
 {{- end -}}
 {{- dict "nodes" $nodes "edges" $edges | jsonify (dict "indent" "  ") -}}

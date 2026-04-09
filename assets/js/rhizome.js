@@ -79,7 +79,7 @@ function renderGraph(container, graph) {
       ctx.beginPath();
       ctx.moveTo(src.x, src.y);
       ctx.lineTo(tgt.x, tgt.y);
-      ctx.globalAlpha = edge.weight || 0.5;
+      ctx.globalAlpha = edge.weight == null ? 0.5 : edge.weight;
       ctx.stroke();
       ctx.globalAlpha = 1;
     }

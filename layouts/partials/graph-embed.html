@@ -5,9 +5,9 @@
     (function() {
       var container = document.getElementById('tauira-graph');
       if (!container) return;
-      var graphDataPath = '{{ site.Params.graphDataPath | default "/graph/tauira-graph.json" }}';
+      var graphDataPath = '{{ site.Params.graphDataPath | default ("index.json" | relURL) }}';
       var script = document.createElement('script');
-      script.src = '{{ "js/rhizome.js" | relURL }}';
+      script.src = '{{ with resources.Get "js/rhizome.js" }}{{ .RelPermalink }}{{ else }}{{ "js/rhizome.js" | relURL }}{{ end }}';
       script.onload = function() {
         if (typeof initTauiraGraph === 'function') {
           initTauiraGraph(container, graphDataPath);

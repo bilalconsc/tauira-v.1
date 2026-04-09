@@ -1,24 +1,6 @@
-baseURL: "https://tauira.io/"
-languageCode: "en-nz"
-title: "Tauira"
-disablePathToLower: true
-enableGitInfo: true
-
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-  tableOfContents:
-    startLevel: 1
-
-outputs:
-  home: [HTML, JSON]
-  section: [HTML]
-
-taxonomies:
-  tag: tags
-  assemblage: assemblages
-
-params:
-  schemaVersion: "v1"
-  graphDataPath: "/graph/tauira-graph.json"
+# Tauira Hugo configuration has been consolidated into config.yaml.
+#
+# This file exists as a placeholder only. Do not add configuration here.
+# Hugo loads config.yaml as the active root configuration for this project.
+# See config.yaml for all site settings including outputs, taxonomies,
+# and Tauira-specific params (schemaVersion, graphDataPath).

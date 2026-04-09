@@ -12,6 +12,14 @@ const path = require('path');
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+// Common English stopwords to exclude from keyword matching
+const STOPWORDS = new Set([
+  'a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
+  'of', 'with', 'by', 'from', 'is', 'it', 'as', 'be', 'was', 'are',
+  'that', 'this', 'i', 'my', 'we', 'you', 'he', 'she', 'they', 'how',
+  'what', 'which', 'who', 'do', 'did', 'have', 'has', 'had', 'not', 'no'
+]);
+
 /**
  * Load graph data from the published static file.
  */
@@ -29,14 +37,31 @@ function loadGraph() {
  * Retrieve relevant nodes and encounters based on keyword matching.
  */
 function retrieveContext(graph, query) {
-  const terms = query.toLowerCase().split(/\s+/);
+  const terms = query.toLowerCase().split(/\s+/).filter(function (t) {
+    return t.length >= 3 && !STOPWORDS.has(t);
+  });
   const matchedNodes = [];
+  const matchedNodeIds = new Set();
   const matchedEncounters = new Set();
 
   for (const node of graph.nodes || []) {
     const text = [node.label, node.category, node.subcategory || ''].join(' ').toLowerCase();
     if (terms.some(function (t) { return text.includes(t); })) {
       matchedNodes.push(node);
+      if (node.id) matchedNodeIds.add(node.id);
+      // Collect encounter refs from matched nodes
+      if (Array.isArray(node.encounterRefs)) {
+        node.encounterRefs.forEach(function (ref) { matchedEncounters.add(ref); });
+      }
+    }
+  }
+
+  // Also collect encounter refs from edges connecting matched nodes
+  for (const edge of graph.edges || []) {
+    if (matchedNodeIds.has(edge.source) || matchedNodeIds.has(edge.target)) {
+      if (Array.isArray(edge.encounterRefs)) {
+        edge.encounterRefs.forEach(function (ref) { matchedEncounters.add(ref); });
+      }
     }
   }
 

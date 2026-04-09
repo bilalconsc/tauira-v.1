@@ -11,8 +11,8 @@ The governing JSON schema is at `tauira-schema.json` in the repo root. Every pie
 ```
 tauira/
 ├── .github/
-│   ├── copilot-instructions.md     ← this file
-│   └── prompts/                    ← reusable prompt files
+│   ├── copilot-instructions.md     ← always-on Copilot instructions
+│   └── prompts/                    ← reusable prompt files (includes this scaffold prompt)
 ├── hugo.yaml                       ← Hugo site config
 ├── tauira-schema.json              ← master JSON schema (source of truth)
 ├── content/

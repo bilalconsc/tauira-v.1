@@ -41,7 +41,7 @@ tauira/
 │       ├── node-badge.html
 │       ├── graph-embed.html
 │       └── rq-alignment.html
-└── functions/                      ← serverless functions (Netlify / CF Workers)
+└── functions/                      ← serverless functions (Netlify Functions / Node.js)
     ├── chat.js                     ← rhizome chat endpoint (RAG + OpenAI)
     └── diffractive-memo.js         ← GPT gap-suggestion endpoint
 ```
