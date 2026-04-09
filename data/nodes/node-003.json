@@ -1,0 +1,9 @@
+{
+  "id": "node-003",
+  "label": "Assessment Rubric",
+  "category": "K",
+  "subcategory": "policy",
+  "description": "The collaborative writing rubric distributed in Week 2, referencing NCEA Level 2 criteria.",
+  "tags": ["assessment", "policy", "NCEA", "writing"],
+  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W4-L1"]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "node-004",
+  "label": "Rhizomatic Thinking",
+  "category": "K",
+  "subcategory": "theory",
+  "description": "Deleuze and Guattari's concept of the rhizome as a model for non-hierarchical, multi-entry knowledge.",
+  "tags": ["theory", "Deleuze", "Guattari", "rhizome"],
+  "encounterRefs": ["enc-2025-T1-W4-L1", "enc-2025-T1-W5-L3"]
+}

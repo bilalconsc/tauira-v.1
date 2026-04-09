@@ -2,6 +2,15 @@
   "id": "tour-2",
   "title": "Examiner Tour — RQ1a: Being-With Participants",
   "rqFocus": "RQ1a",
-  "description": "A guided reading path for examiners exploring RQ1a: In what ways do participants in such a setting affect my being-with them? This tour begins with a clear exemplar encounter demonstrating affect and co-presence, moves through a theorising essay, visits the rhizomatic map, and ends with a memo showing accepted diffractive suggestions.",
-  "steps": []
+  "description": "A guided reading path for examiners exploring RQ1a: In what ways do participants in such a setting affect my being-with them? This tour begins with the clearest first instance of participant affect, moves to the cluster's recurrence and anticipatory being-with, then visits the essay for the theoretical scaffold via Barad and Deleuze.",
+  "steps": [
+    {
+      "encounterId": "enc-2025-T1-W3-L2",
+      "commentary": "The clearest first instance of participant affect: S3's joke disrupts boredom, producing a visible affective shift. Edge-002 (enables) and edge-004 (disrupts) are the structural backbone of RQ1a here."
+    },
+    {
+      "encounterId": "enc-2025-T1-W5-L3",
+      "commentary": "Cluster recurrence and anticipatory being-with: S3 arrives early and rearranges a chair, then restores it. The theory-laughter bridge assembles. This encounter shows RQ1a operating across time — not a single event but a pattern of being-affected."
+    }
+  ]
 }
