@@ -25,15 +25,19 @@ function parseFrontMatter(content) {
   return { rawYaml: match[1], body };
 }
 
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function extractYamlList(yaml, key) {
-  const regex = new RegExp(`${key}:\\s*\\n((?:\\s+-\\s+.+\\n?)*)`, 'm');
+  const regex = new RegExp(`${escapeRegex(key)}:\\s*\\n((?:\\s+-\\s+.+\\n?)*)`, 'm');
   const match = yaml.match(regex);
   if (!match) return [];
   return match[1].match(/-\s+(.+)/g)?.map(l => l.replace(/^-\s+/, '').replace(/["']/g, '').trim()) || [];
 }
 
 function extractYamlValue(yaml, key) {
-  const regex = new RegExp(`^\\s*${key}:\\s*"?(.+?)"?\\s*$`, 'm');
+  const regex = new RegExp(`^\\s*${escapeRegex(key)}:\\s*"?(.+?)"?\\s*$`, 'm');
   const match = yaml.match(regex);
   return match ? match[1].trim() : '';
 }

@@ -28,9 +28,8 @@ const outputPath = path.resolve(__dirname, 'training-data.jsonl');
  */
 function parseFrontMatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return { data: {}, body: '' };
+  if (!match) return { rawYaml: '', body: '' };
   const body = content.slice(match[0].length).trim();
-  // Return raw YAML string and body — caller must handle parsing
   return { rawYaml: match[1], body };
 }
 

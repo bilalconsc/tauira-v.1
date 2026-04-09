@@ -9,7 +9,7 @@
   var container = document.getElementById('tauira-rhizomatic-map');
   if (!container) return;
 
-  var baseURL = {{ site.BaseURL | default "/tauira/" }};
+  var baseURL = {{ site.BaseURL | default "/tauira/" | jsonify }};
   var graphURL = baseURL.replace(/\/$/, '') + '/graph/tauira-graph.json';
 
   fetch(graphURL)
