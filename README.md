@@ -27,6 +27,119 @@ A good rule of thumb is that each piece of content renders in around 1 milliseco
 
 Hugo is designed to work well for any kind of website including blogs, tumbles, and docs.
 
+---
+
+## Hugo Installation (Pinned Version)
+
+This project requires **Hugo v0.96.0 (Extended)** for SCSS support. The standard version will fail during build.
+
+### Windows Setup (PyCharm / PowerShell)
+
+1. Download the correct binary from Hugo releases:
+   File name:
+
+   ```
+   hugo_extended_0.96.0_windows-amd64.zip
+   ```
+
+2. Extract the archive. You should get:
+
+   ```
+   hugo.exe
+   ```
+
+3. Place the binary inside the project:
+
+   **Option A (recommended — project-local)**
+
+   ```powershell
+   mkdir tools\hugo
+   move hugo.exe tools\hugo\
+   ```
+
+   Then add it to PATH for the session:
+
+   ```powershell
+   $env:PATH="$PWD\tools\hugo;$env:PATH"
+   ```
+
+   **Option B (inside Python virtual environment)**
+
+   ```powershell
+   move hugo.exe .venv\Scripts\
+   ```
+
+4. Verify installation:
+
+   ```powershell
+   hugo version
+   ```
+
+   Expected output must include:
+
+   ```
+   +extended
+   ```
+
+5. Run the server:
+
+   ```powershell
+   hugo serve
+   ```
+
+---
+
+### Linux Setup
+
+1. Download:
+
+   ```
+   hugo_extended_0.96.0_Linux-64bit.tar.gz
+   ```
+
+2. Extract:
+
+   ```bash
+   tar -xzf hugo_extended_0.96.0_Linux-64bit.tar.gz
+   ```
+
+3. Place binary:
+
+   **Option A (recommended)**
+
+   ```bash
+   mkdir -p tools/hugo
+   mv hugo tools/hugo/
+   export PATH=$PWD/tools/hugo:$PATH
+   ```
+
+   **Option B (.venv)**
+
+   ```bash
+   mv hugo .venv/bin/
+   chmod +x .venv/bin/hugo
+   ```
+
+4. Verify:
+
+   ```bash
+   hugo version
+   ```
+
+---
+
+### Important Notes
+
+* Only **Extended** Hugo supports SCSS (`TOCSS`); without it, the build will fail.
+* Always confirm:
+
+  ```
+  hugo version → must include "+extended"
+  ```
+* Avoid global installs; keep Hugo version pinned per project for reproducibility.
+
+---
+
 #### Supported Architectures
 
 Currently, we provide pre-built Hugo binaries for Windows, Linux, FreeBSD, NetBSD, DragonFly BSD, OpenBSD, macOS (Darwin), and [Android](https://gist.github.com/bep/a0d8a26cf6b4f8bc992729b8e50b480b) for x64, i386 and ARM architectures.
