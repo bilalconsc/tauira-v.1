@@ -1,4 +1,4 @@
-baseURL: "https://tauira.io/"
+baseURL: "https://bibymaths.github.io/tauira/"
 languageCode: "en-nz"
 
 # Book configuration
@@ -31,7 +31,7 @@ menu:
   #     weight: 10
   after:
     - name: "Github"
-      url: "https://github.com/64bitpandas/amethyst"
+      url: "https://github.com/bibymaths/tauira"
       weight: 10
 
 params:
@@ -42,8 +42,8 @@ params:
   # This is always in sync with data/nodes/ and data/edges/ at build time.
   graphDataPath: "/index.json"
 
-  name: Ben Cuan
-  title: 📓 Amethyst
+  name: Tauira
+  title: 📓 Tauira
 
   # OPTIONAL: custom favicon location
   # favicon: 'location/to/favicon.png'
@@ -82,7 +82,7 @@ params:
   enableMermaid: true
 
   # Link to your Github repo
-  GitHubLink: https://github.com/64bitpandas/amethyst
+  GitHubLink: https://github.com/bibymaths/tauira
 
   # Search (WIP)
   search:
@@ -92,15 +92,13 @@ params:
 
   # Site description and title
   description:
-    Notes, hosted by bencuan
+    Tauira — Autoethnographic knowledge graph for classroom entanglements
 
   
   # Footer links
   links:
-    - link_name: Website
-      link: https://bencuan.me
-    - link_name: Blog
-      link: https://blog.bencuan.me
+    - link_name: GitHub
+      link: https://github.com/bibymaths/tauira
 
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
@@ -122,7 +120,7 @@ params:
 
   # Set source repository location.
   # Used for 'Last Modified' and 'Edit this page' links.
-  BookRepo: https://github.com/64bitpandas/amethyst
+  BookRepo: https://github.com/bibymaths/tauira
 
   # (Optional, default 'commit') Specifies commit portion of the link to the page's last modified
   # commit hash for 'doc' page type.

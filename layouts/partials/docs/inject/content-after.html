@@ -1,0 +1,66 @@
+{{/* Part 2.3 — Assemblage and Related Content Panel
+     Renders assemblage tags, related encounters sharing assemblages,
+     and a link to the encounter's memo if memoRef exists. */}}
+{{- $section := .CurrentSection.File.Dir | default "" -}}
+{{- if or (hasPrefix $section "encounters") (hasPrefix $section "essays") -}}
+
+  {{/* Assemblage tags */}}
+  {{- with .Params.assemblages -}}
+    <div class="tauira-assemblages" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
+      <h3 style="font-size: 0.95em; margin-bottom: 0.5rem;">Assemblages</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        {{- range . -}}
+          <a href='{{ "assemblages" | relURL }}/{{ . | urlize }}/' style="background: #f0f0f0; padding: 2px 10px; border-radius: 12px; font-size: 0.85em; text-decoration: none; color: #333;">
+            {{ . }}
+          </a>
+        {{- end -}}
+      </div>
+    </div>
+  {{- end -}}
+
+  {{/* Related encounters sharing assemblages */}}
+  {{- with .Params.assemblages -}}
+    {{- $currentId := $.Params.id -}}
+    {{- $myAssemblages := . -}}
+    {{- $related := slice -}}
+    {{- range where $.Site.RegularPages "Section" "encounters" -}}
+      {{- if ne .Params.id $currentId -}}
+        {{- $pageAssemblages := .Params.assemblages | default slice -}}
+        {{- $shared := false -}}
+        {{- range $myAssemblages -}}
+          {{- $a := . -}}
+          {{- range $pageAssemblages -}}
+            {{- if eq . $a -}}{{- $shared = true -}}{{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- if $shared -}}
+          {{- $related = $related | append . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with $related -}}
+      <div class="tauira-related" style="margin-top: 1rem;">
+        <h3 style="font-size: 0.95em; margin-bottom: 0.5rem;">Related Encounters</h3>
+        <ul style="padding-left: 1.2rem; font-size: 0.9em;">
+          {{- range . -}}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{- end -}}
+        </ul>
+      </div>
+    {{- end -}}
+  {{- end -}}
+
+  {{/* Memo link */}}
+  {{- with .Params.memoRef -}}
+    <div class="tauira-memo-link" style="margin-top: 1rem;">
+      <h3 style="font-size: 0.95em; margin-bottom: 0.5rem;">Analytic Memo</h3>
+      {{- $memoPage := $.Site.GetPage (printf "/memos/%s" .) -}}
+      {{- if $memoPage -}}
+        <a href="{{ $memoPage.RelPermalink }}" style="font-size: 0.9em;">{{ $memoPage.Title }}</a>
+      {{- else -}}
+        <span style="font-size: 0.9em; color: #999;">{{ . }} (not yet written)</span>
+      {{- end -}}
+    </div>
+  {{- end -}}
+
+{{- end -}}

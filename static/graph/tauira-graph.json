@@ -1,4 +1,12 @@
 {
+  "metadata": {
+    "generatedAt": "2026-04-09T21:55:05.612Z",
+    "nodeCount": 0,
+    "edgeCount": 0,
+    "schemaVersion": "v1",
+    "baseURL": "/tauira/",
+    "categories": { "M": 0, "K": 0, "I": 0 }
+  },
   "nodes": [],
   "edges": []
 }

@@ -1,0 +1,25 @@
+{{/* Part 2.1 — Node Badge Strip
+     Renders a responsive row of MKI-coloured node badges for encounters and essays.
+     Reads .Params.nodeRefs, resolves via .Site.Data.nodes, skips memos. */}}
+{{- $section := .CurrentSection.File.Dir | default "" -}}
+{{- if or (hasPrefix $section "encounters") (hasPrefix $section "essays") -}}
+  {{- with .Params.nodeRefs -}}
+    <div class="tauira-node-badges" style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem;">
+      {{- $colors := dict "M" "#01696f" "K" "#5b4fcf" "I" "#d19900" -}}
+      {{- $textColors := dict "M" "#fff" "K" "#fff" "I" "#1a1a1a" -}}
+      {{- $labels := dict "M" "Material" "K" "Knowledge" "I" "Instinctual" -}}
+      {{- range . -}}
+        {{- $nodeId := . -}}
+        {{- $node := index $.Site.Data.nodes $nodeId -}}
+        {{- with $node -}}
+          {{- $bg := index $colors .category | default "#666" -}}
+          {{- $fg := index $textColors .category | default "#fff" -}}
+          {{- $catLabel := index $labels .category | default .category -}}
+          <span class="node-badge" style="background-color: {{ $bg }}; color: {{ $fg }}; padding: 2px 10px; border-radius: 12px; font-size: 0.85em; display: inline-block; white-space: nowrap;">
+            {{ .label }} <small>({{ $catLabel }})</small>
+          </span>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  {{- end -}}
+{{- end -}}
