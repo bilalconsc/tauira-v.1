@@ -1,8 +1,8 @@
 {{/* Part 2.1 — Node Badge Strip
      Renders a responsive row of MKI-coloured node badges for encounters and essays.
      Reads .Params.nodeRefs, resolves via .Site.Data.nodes, skips memos. */}}
-{{- $section := .CurrentSection.File.Dir | default "" -}}
-{{- if or (hasPrefix $section "encounters") (hasPrefix $section "essays") -}}
+{{- $section := .Section | default "" -}}
+{{- if or (eq $section "encounters") (eq $section "essays") -}}
   {{- with .Params.nodeRefs -}}
     <div class="tauira-node-badges" style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem;">
       {{- $colors := dict "M" "#01696f" "K" "#5b4fcf" "I" "#d19900" -}}

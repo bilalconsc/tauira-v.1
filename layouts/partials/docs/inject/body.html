@@ -1,8 +1,8 @@
 {{/* Part 2.4 — Rhizomatic Map Script Injection
      Loads D3.js and renders the Tauira rhizomatic graph ONLY on map pages.
      Uses the deployed subpath-aware URL: /tauira/graph/tauira-graph.json */}}
-{{- $section := .CurrentSection.File.Dir | default "" -}}
-{{- if hasPrefix $section "map" -}}
+{{- $section := .Section | default "" -}}
+{{- if eq $section "map" -}}
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
 (function() {

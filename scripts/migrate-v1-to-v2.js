@@ -63,7 +63,7 @@ function main() {
 
       // Node-specific: add frequency and firstEncounterRef if missing
       if (type === 'nodes') {
-        if (!migrated.frequency) migrated.frequency = (migrated.encounterRefs || []).length;
+        if (migrated.frequency == null) migrated.frequency = (migrated.encounterRefs || []).length;
         if (!migrated.firstEncounterRef && (migrated.encounterRefs || []).length > 0) {
           migrated.firstEncounterRef = migrated.encounterRefs[0];
         }

@@ -6,7 +6,7 @@
 #          Amethyst-specific wiring, and preparation for
 #          publication, examination, or GPT fine-tuning.
 #
-# Stack:   Hugo 0.96 Extended · Amethyst theme · hugo-obsidian v2.18
+# Stack:   Hugo Extended v0.128+ · Amethyst theme · hugo-obsidian v2.18
 #          GitHub Pages (bibymaths.github.io/tauira) · deploy branch
 ---
 

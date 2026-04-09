@@ -17,21 +17,11 @@
 
 const fs = require('fs');
 const path = require('path');
+const matter = require('gray-matter');
 
 const encountersDir = path.resolve(__dirname, '../../content/encounters');
 const memosDir = path.resolve(__dirname, '../../content/memos');
 const outputPath = path.resolve(__dirname, 'training-data.jsonl');
-
-/**
- * Minimal YAML front-matter parser (extracts between --- delimiters).
- * For production use, consider a library like gray-matter.
- */
-function parseFrontMatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return { rawYaml: '', body: '' };
-  const body = content.slice(match[0].length).trim();
-  return { rawYaml: match[1], body };
-}
 
 function main() {
   const encounterFiles = fs.readdirSync(encountersDir)
@@ -51,9 +41,9 @@ function main() {
   const memoIndex = {};
   for (const file of memoFiles) {
     const raw = fs.readFileSync(path.join(memosDir, file), 'utf-8');
-    const { body } = parseFrontMatter(raw);
+    const parsed = matter(raw);
     const slug = path.basename(file, '.md');
-    memoIndex[slug] = body;
+    memoIndex[slug] = parsed.content.trim();
   }
 
   const pairs = [];
@@ -62,33 +52,31 @@ function main() {
 
   for (const file of encounterFiles) {
     const raw = fs.readFileSync(path.join(encountersDir, file), 'utf-8');
-    const { rawYaml, body } = parseFrontMatter(raw);
+    const { data, content } = matter(raw);
 
-    // Extract fieldnote parts (simplified regex extraction)
-    const sceneMatch = rawYaml.match(/scene:\s*"?(.+?)"?\s*$/m);
-    const agencyMatch = rawYaml.match(/agency:\s*"?(.+?)"?\s*$/m);
-    const careMatch = rawYaml.match(/care:\s*"?(.+?)"?\s*$/m);
-    const vignetteMatch = rawYaml.match(/vignette:\s*"?(.+?)"?\s*$/m);
-    const memoRefMatch = rawYaml.match(/memoRef:\s*"?(.+?)"?\s*$/m);
+    const fieldnote = data.fieldnote || {};
+    const scene = fieldnote.scene || '';
+    const agency = fieldnote.agency || '';
+    const care = fieldnote.care || '';
+    const vignette = fieldnote.vignette || '';
+    const memoRef = data.memoRef || '';
 
-    if (!sceneMatch || !memoRefMatch) continue;
+    if (!scene || !memoRef) continue;
 
-    const scene = sceneMatch[1].trim();
-    const agency = agencyMatch ? agencyMatch[1].trim() : '';
-    const care = careMatch ? careMatch[1].trim() : '';
-    const vignette = vignetteMatch ? vignetteMatch[1].trim() : '';
-    const memoRef = memoRefMatch[1].trim();
-
-    const completion = memoIndex[memoRef] || body || '';
-    if (!completion) continue;
+    const completion = memoIndex[memoRef];
+    if (!completion) {
+      console.warn(`Skipping ${file}: memoRef "${memoRef}" not found in memos/`);
+      continue;
+    }
 
     const wordCount = completion.split(/\s+/).length;
     if (wordCount < 100) shortMemos++;
     totalLen += completion.length;
 
-    // Determine RQ focus
-    const rqFocus = rawYaml.includes('RQ1a') ? 'RQ1a' :
-                    rawYaml.includes('RQ1b') ? 'RQ1b' : 'RQ1';
+    // Determine RQ focus from rqAlignment
+    const rqAlignment = data.rqAlignment || {};
+    const rqFocus = rqAlignment.RQ1a ? 'RQ1a' :
+                    rqAlignment.RQ1b ? 'RQ1b' : 'RQ1';
 
     const prompt = `Scene: ${scene}\nAgency: ${agency}\nCare: ${care}\nVignette: ${vignette}\n\nWrite an analytic memo addressing ${rqFocus}:`;
 

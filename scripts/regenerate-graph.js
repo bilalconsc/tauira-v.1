@@ -17,17 +17,22 @@ const outputPath = path.resolve(__dirname, '../static/graph/tauira-graph.json');
 
 function loadJsonFiles(dir) {
   if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir)
-    .filter(f => f.endsWith('.json'))
-    .map(f => {
-      try {
-        return JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8'));
-      } catch (e) {
-        console.error(`Error parsing ${f}:`, e.message);
-        return null;
-      }
-    })
-    .filter(Boolean);
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+  const results = [];
+  let hasError = false;
+  for (const f of files) {
+    try {
+      results.push(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8')));
+    } catch (e) {
+      console.error(`Error parsing ${f}:`, e.message);
+      hasError = true;
+    }
+  }
+  if (hasError) {
+    console.error('Aborting: one or more JSON files could not be parsed.');
+    process.exit(1);
+  }
+  return results;
 }
 
 function main() {

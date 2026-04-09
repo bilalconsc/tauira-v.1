@@ -1,8 +1,8 @@
 {{/* Part 2.2 — RQ Alignment Panel
      Shows a compact panel above the ToC for encounters and essays.
      Renders only non-empty RQ entries as subtle cards. */}}
-{{- $section := .CurrentSection.File.Dir | default "" -}}
-{{- if or (hasPrefix $section "encounters") (hasPrefix $section "essays") -}}
+{{- $section := .Section | default "" -}}
+{{- if or (eq $section "encounters") (eq $section "essays") -}}
   {{- with .Params.rqAlignment -}}
     {{- if or .RQ1 .RQ1a .RQ1b -}}
       <div class="tauira-rq-panel" style="margin-bottom: 1rem; display: flex; flex-direction: column; gap: 6px;">

@@ -1,8 +1,8 @@
 {{/* Part 2.3 — Assemblage and Related Content Panel
      Renders assemblage tags, related encounters sharing assemblages,
      and a link to the encounter's memo if memoRef exists. */}}
-{{- $section := .CurrentSection.File.Dir | default "" -}}
-{{- if or (hasPrefix $section "encounters") (hasPrefix $section "essays") -}}
+{{- $section := .Section | default "" -}}
+{{- if or (eq $section "encounters") (eq $section "essays") -}}
 
   {{/* Assemblage tags */}}
   {{- with .Params.assemblages -}}

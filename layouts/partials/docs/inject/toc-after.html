@@ -1,13 +1,13 @@
 {{/* Toc-After — Links to Tauira memo and rhizomatic map for encounters */}}
-{{- $section := .CurrentSection.File.Dir | default "" -}}
-{{- if hasPrefix $section "encounters" -}}
+{{- $section := .Section | default "" -}}
+{{- if eq $section "encounters" -}}
   <div class="tauira-toc-links" style="margin-top: 1rem; font-size: 0.85em; border-top: 1px solid #eee; padding-top: 0.75rem;">
     {{- with .Params.memoRef -}}
       {{- $memoPage := $.Site.GetPage (printf "/memos/%s" .) -}}
       {{- if $memoPage -}}
-        <div style="margin-bottom: 4px;">📝 <a href="{{ $memoPage.RelPermalink }}">{{ $memoPage.Title }}</a></div>
+        <div style="margin-bottom: 4px;"><span aria-hidden="true">📝</span> <a href="{{ $memoPage.RelPermalink }}" aria-label="{{ $memoPage.Title }}">{{ $memoPage.Title }}</a></div>
       {{- end -}}
     {{- end -}}
-    <div>🗺️ <a href='{{ "map" | relURL }}/'>Rhizomatic Map</a></div>
+    <div><span aria-hidden="true">🗺️</span> <a href='{{ "map" | relURL }}/' aria-label="Rhizomatic Map">Rhizomatic Map</a></div>
   </div>
 {{- end -}}
