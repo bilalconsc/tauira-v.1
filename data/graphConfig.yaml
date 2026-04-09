@@ -1,3 +1,24 @@
+# ─────────────────────────────────────────────────────────
+# Tauira / Amethyst Graph Configuration
+# ─────────────────────────────────────────────────────────
+#
+# IMPORTANT — There are TWO separate graphs in this site:
+#
+# 1. Amethyst force-graph (this file)
+#    - Based on wikilinks extracted by hugo-obsidian
+#    - Generated into assets/indices/ (never edit by hand)
+#    - Displayed in page footers and the global graph view
+#
+# 2. Tauira rhizomatic map (NOT this file)
+#    - Based on the Tauira schema: data/nodes/, data/edges/
+#    - Exported to static/graph/tauira-graph.json
+#    - Displayed on the /map/ page via D3.js
+#    - MKI colours (M=#01696f, K=#5b4fcf, I=#d19900) apply
+#      ONLY to the Tauira rhizomatic map, not to Amethyst.
+#
+# Do not write Tauira graph data into assets/indices/.
+# ─────────────────────────────────────────────────────────
+
 # if true, a Global Graph will be shown on home page with full width, no backlink.
 # A different set of Local Graphs will be shown on sub pages.
 # if false, Local Graph will be default on every page as usual
@@ -6,32 +27,37 @@ enableGlobalGraph: true
 ### Local Graph ###
 
 localGraph:
-    enableLegend: false
+    enableLegend: true
     enableDrag: true
     enableZoom: true
     depth: 1 # set to -1 to show full graph
+    enableRadial: false
     scale: 1.2
-    repelForce: 2
-    centerForce: 1
-    linkDistance: 1
-    fontSize: 0.6
+    repelForce: 0.5
+    centerForce: 0.3
+    linkDistance: 50
+    fontSize: 12
     opacityScale: 3
 
 ### Global Graph ###
 
 globalGraph:
-    enableLegend: false
+    enableLegend: true
     enableDrag: true
     enableZoom: true
     depth: -1 # set to -1 to show full graph
+    enableRadial: false
     scale: 1.4
-    repelForce: 1
-    centerForce: 1
-    linkDistance: 1
-    fontSize: 0.5
+    repelForce: 0.5
+    centerForce: 0.3
+    linkDistance: 50
+    fontSize: 12
     opacityScale: 3
 
 ### For all graphs ###
 
 paths:
   - /moc: "#4388cc"
+  - /encounters: "#01696f"
+  - /memos: "#5b4fcf"
+  - /essays: "#d19900"

@@ -369,6 +369,26 @@
     "graphExport": {
       "type": "object",
       "properties": {
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "generatedAt": { "type": "string" },
+            "nodeCount": { "type": "integer", "minimum": 0 },
+            "edgeCount": { "type": "integer", "minimum": 0 },
+            "schemaVersion": { "type": "string" },
+            "baseURL": { "type": "string" },
+            "categories": {
+              "type": "object",
+              "properties": {
+                "M": { "type": "integer", "minimum": 0 },
+                "K": { "type": "integer", "minimum": 0 },
+                "I": { "type": "integer", "minimum": 0 }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
         "nodes": {
           "type": "array",
           "items": {

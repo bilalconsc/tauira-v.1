@@ -1,0 +1,33 @@
+{{/* Head inject — Tauira-specific styles for node badges, RQ panels, and assemblages */}}
+<style>
+  .tauira-node-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+  .tauira-rq-panel {
+    margin-bottom: 1rem;
+  }
+  .tauira-rq-card {
+    transition: background-color 0.2s;
+  }
+  .tauira-rq-card:hover {
+    background: rgba(0,0,0,0.07) !important;
+  }
+  .tauira-assemblages a {
+    transition: background-color 0.2s;
+  }
+  .tauira-assemblages a:hover {
+    background: #ddd !important;
+  }
+  @media (max-width: 600px) {
+    .tauira-node-badges {
+      gap: 4px;
+    }
+    .node-badge {
+      font-size: 0.78em !important;
+      padding: 2px 6px !important;
+    }
+  }
+</style>
