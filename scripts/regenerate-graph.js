@@ -85,7 +85,8 @@ function main() {
       id: n.id,
       label: n.label,
       category: n.category,
-      subcategory: n.subcategory || ''
+      subcategory: n.subcategory || '',
+      ...(n.contentURL ? { contentURL: n.contentURL } : {})
     })),
     edges: validEdges
   };

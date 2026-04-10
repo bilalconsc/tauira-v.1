@@ -48,6 +48,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "contentURL": {
+          "type": "string",
+          "description": "Root-relative URL of the Hugo content page for this node, if one exists."
         }
       },
       "required": ["id", "label", "category"],

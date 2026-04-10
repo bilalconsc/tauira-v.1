@@ -1,3 +1,117 @@
 /* You can add custom styles here. */
 
 // @import "plugins/numbered";
+
+// ── Suppress Amethyst dynamic backlinks globally ────────────────────
+// Relationships are encoded in the rhizomatic graph.
+.book-footer ul[aria-label="Backlinks"],
+.book-backlinks,
+.backlinks-container,
+aside.book-aside .book-backlinks {
+  display: none !important;
+}
+
+// ── Graph control bar ───────────────────────────────────────────────
+#tauira-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--body-background, #fafafa);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.ctrl-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+
+  &--actions { margin-left: auto; }
+}
+
+.ctrl-chip {
+  padding: 3px 11px;
+  border-radius: 9999px;
+  border: 1px solid #ccc;
+  background: transparent;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 140ms, color 140ms, border-color 140ms;
+  color: var(--body-font-color, #333);
+
+  &--active { background: #f0f0f0; border-color: #999; font-weight: 600; }
+
+  &[data-filter-cat="M"] { &.ctrl-chip--active { background: #01696f22; border-color: #01696f; color: #01696f; } }
+  &[data-filter-cat="K"] { &.ctrl-chip--active { background: #5b4fcf22; border-color: #5b4fcf; color: #5b4fcf; } }
+  &[data-filter-cat="I"] { &.ctrl-chip--active { background: #d1990022; border-color: #d19900; color: #d19900; } }
+
+  &--community {
+    &.ctrl-chip--active {
+      // rgba fallback for browsers that don't support color-mix()
+      background: rgba(100, 100, 100, 0.12);
+      background: color-mix(in srgb, var(--community-color) 15%, transparent);
+      border-color: var(--community-color);
+      color: var(--community-color);
+    }
+  }
+}
+
+.ctrl-btn {
+  padding: 3px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: transparent;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 140ms;
+
+  &:hover { background: #f0f0f0; }
+}
+
+#graph-search {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  outline: none;
+  width: 140px;
+  transition: border-color 140ms;
+
+  &:focus { border-color: #01696f; }
+}
+
+// ── TOC toggle ──────────────────────────────────────────────────────
+#toc-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 4px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  background: transparent;
+  color: inherit;
+  transition: background 140ms;
+
+  &:hover { background: #f5f5f5; }
+}
+
+// ── Tooltip ─────────────────────────────────────────────────────────
+#tauira-tooltip {
+  transition: opacity 100ms;
+  a { pointer-events: auto !important; }
+}
+
+// ── Fullscreen graph ─────────────────────────────────────────────────
+#tauira-graph:fullscreen {
+  height: 100vh !important;
+  border-radius: 0 !important;
+  background: var(--body-background, #fff);
+}
+
