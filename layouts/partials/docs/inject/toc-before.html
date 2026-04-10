@@ -1,6 +1,35 @@
-{{/* Part 2.2 — RQ Alignment Panel
-     Shows a compact panel above the ToC for encounters and essays.
-     Renders only non-empty RQ entries as subtle cards. */}}
+{{/* Part 2.2 — RQ Alignment Panel + TOC Toggle
+     Shows a TOC toggle button and (for encounters/essays) a compact RQ alignment panel
+     above the ToC. */}}
+
+<button id="toc-toggle" aria-label="Toggle table of contents"
+        aria-expanded="true" aria-controls="book-toc-inner">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="21" y2="12"/>
+    <line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+  <span id="toc-toggle-label">Hide contents</span>
+</button>
+
+<script>
+(function () {
+  var btn = document.getElementById('toc-toggle');
+  if (!btn) return;
+  var toc = document.querySelector('.book-toc nav, .book-toc > ul');
+  if (!toc) return;
+  toc.id = 'book-toc-inner';
+  btn.addEventListener('click', function () {
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    toc.style.display = expanded ? 'none' : '';
+    document.getElementById('toc-toggle-label').textContent =
+      expanded ? 'Show contents' : 'Hide contents';
+  });
+})();
+</script>
+
 {{- $section := .Section | default "" -}}
 {{- if or (eq $section "encounters") (eq $section "essays") -}}
   {{- with .Params.rqAlignment -}}

@@ -1,95 +1,336 @@
-{{/* Part 2.4 — Rhizomatic Map Script Injection
-     Loads D3.js and renders the Tauira rhizomatic graph on map pages and the home page.
+{{/* Part 2.4 — Rhizomatic Map Script Injection (sigma.js rewrite)
+     Full interactivity: tooltips, click navigation, Louvain community detection,
+     filter/control bar (landing page only), and fullscreen support.
      Uses Hugo relURL to produce a subpath-aware root-relative URL that works both
      under `hugo serve` and on the deployed GitHub Pages site. */}}
 {{- $section := .Section | default "" -}}
 {{- if or (eq $section "map") .IsHome -}}
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
-(function() {
-  var container = document.getElementById('tauira-rhizomatic-map');
-  if (!container) return;
+(function () {
+  // Support both landing page (#tauira-graph) and map pages (#tauira-rhizomatic-map)
+  var graphEl = document.getElementById('tauira-graph')
+             || document.getElementById('tauira-rhizomatic-map');
+  if (!graphEl) return;
 
   var graphURL = '{{ site.Params.graphDataPath | relURL }}';
+  var MKI = { M: '#01696f', K: '#5b4fcf', I: '#d19900' };
+  var communityPalette = [
+    '#e07b54', '#5b8db8', '#6aab6a', '#b07cc6',
+    '#c4a44e', '#7abfbf', '#d4687a', '#8e8e8e'
+  ];
 
-  fetch(graphURL)
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      var nodes = data.nodes || [];
-      var edges = data.edges || [];
-      if (nodes.length === 0) {
-        container.innerHTML = '<p style="text-align:center;color:#999;padding:2rem;">No graph data available yet. Add nodes and edges to populate the rhizomatic map.</p>';
-        return;
-      }
+  // ── Tooltip (created once, reused) ─────────────────────────────────
+  var tooltip = document.createElement('div');
+  tooltip.id = 'tauira-tooltip';
+  tooltip.style.cssText = [
+    'position:fixed',
+    'pointer-events:none',
+    'background:var(--body-background,#fff)',
+    'border:1px solid #ddd',
+    'border-radius:8px',
+    'padding:10px 14px',
+    'font-size:13px',
+    'max-width:240px',
+    'box-shadow:0 4px 16px rgba(0,0,0,0.12)',
+    'z-index:9999',
+    'display:none',
+    'line-height:1.5'
+  ].join(';');
+  document.body.appendChild(tooltip);
 
-      var colors = { M: '#01696f', K: '#5b4fcf', I: '#d19900' };
-      var width = container.clientWidth || 800;
-      var height = 500;
+  function positionTooltip(event) {
+    var x = (event.original && event.original.clientX != null)
+      ? event.original.clientX
+      : (event.x != null ? event.x : 0);
+    var y = (event.original && event.original.clientY != null)
+      ? event.original.clientY
+      : (event.y != null ? event.y : 0);
+    var tw = tooltip.offsetWidth;
+    var th = tooltip.offsetHeight;
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+    tooltip.style.left = (x + 16 + tw > vw ? x - tw - 12 : x + 16) + 'px';
+    tooltip.style.top  = (y + 16 + th > vh ? y - th - 8  : y + 16) + 'px';
+  }
 
-      var svg = d3.select(container).append('svg')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('viewBox', [0, 0, width, height]);
+  // ── Load scripts sequentially then fetch data ───────────────────────
+  var libs = [
+    'https://cdn.jsdelivr.net/npm/graphology@0.25.1/dist/graphology.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/graphology-communities-louvain@2.0.0/dist/graphology-communities-louvain.min.js',
+    'https://cdn.jsdelivr.net/npm/sigma@2.4.0/build/sigma.min.js'
+  ];
 
-      var simulation = d3.forceSimulation(nodes)
-        .force('link', d3.forceLink(edges).id(function(d) { return d.id; }).distance(80))
-        .force('charge', d3.forceManyBody().strength(-200))
-        .force('center', d3.forceCenter(width / 2, height / 2));
+  function loadScripts(urls, cb) {
+    if (!urls.length) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = urls[0];
+    s.onload = function () { loadScripts(urls.slice(1), cb); };
+    s.onerror = function () { console.error('Failed to load', urls[0]); };
+    document.head.appendChild(s);
+  }
 
-      var link = svg.append('g')
-        .attr('stroke', '#ccc')
-        .attr('stroke-opacity', 0.6)
-        .selectAll('line')
-        .data(edges)
-        .join('line')
-        .attr('stroke-width', function(d) { return Math.max(1, (d.weight || 0.5) * 4); });
-
-      var node = svg.append('g')
-        .selectAll('circle')
-        .data(nodes)
-        .join('circle')
-        .attr('r', 8)
-        .attr('fill', function(d) { return colors[d.category] || '#666'; })
-        .call(d3.drag()
-          .on('start', function(event, d) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x; d.fy = d.y;
-          })
-          .on('drag', function(event, d) {
-            d.fx = event.x; d.fy = event.y;
-          })
-          .on('end', function(event, d) {
-            if (!event.active) simulation.alphaTarget(0);
-            d.fx = null; d.fy = null;
-          }));
-
-      node.append('title').text(function(d) { return d.label + ' (' + d.category + ')'; });
-
-      var label = svg.append('g')
-        .selectAll('text')
-        .data(nodes)
-        .join('text')
-        .text(function(d) { return d.label; })
-        .attr('font-size', '11px')
-        .attr('dx', 12)
-        .attr('dy', 4)
-        .attr('fill', '#333');
-
-      simulation.on('tick', function() {
-        link.attr('x1', function(d) { return d.source.x; })
-            .attr('y1', function(d) { return d.source.y; })
-            .attr('x2', function(d) { return d.target.x; })
-            .attr('y2', function(d) { return d.target.y; });
-        node.attr('cx', function(d) { return d.x; })
-            .attr('cy', function(d) { return d.y; });
-        label.attr('x', function(d) { return d.x; })
-             .attr('y', function(d) { return d.y; });
+  loadScripts(libs, function () {
+    fetch(graphURL)
+      .then(function (res) { return res.json(); })
+      .then(function (data) { initGraph(data); })
+      .catch(function (err) {
+        console.error('Failed to load Tauira graph:', err);
+        graphEl.innerHTML = '<p style="text-align:center;color:#c00;padding:2rem;">Error loading graph data.</p>';
       });
-    })
-    .catch(function(err) {
-      console.error('Failed to load Tauira graph:', err);
-      container.innerHTML = '<p style="text-align:center;color:#c00;">Error loading graph data.</p>';
+  });
+
+  // ── Main graph initialisation ───────────────────────────────────────
+  function initGraph(data) {
+    var nodes = data.nodes || [];
+    var edges = data.edges || [];
+
+    if (nodes.length === 0) {
+      graphEl.innerHTML = '<p style="text-align:center;color:#999;padding:2rem;">No graph data available yet. Add nodes and edges to populate the rhizomatic map.</p>';
+      return;
+    }
+
+    // Build graphology Graph
+    var g = new graphology.Graph({ multi: false });
+
+    nodes.forEach(function (n) {
+      g.addNode(n.id, {
+        label:       n.label       || n.id,
+        category:    n.category    || 'M',
+        subcategory: n.subcategory || '',
+        contentURL:  n.contentURL  || '',
+        x: Math.random(),
+        y: Math.random(),
+        size: 8,
+        color: MKI[n.category] || '#999',
+        hidden: false
+      });
     });
+
+    edges.forEach(function (e) {
+      if (g.hasNode(e.source) && g.hasNode(e.target)) {
+        try {
+          g.addEdge(e.source, e.target, {
+            id:               e.id || '',
+            weight:           e.weight || 0.5,
+            relationshipType: e.relationshipType || '',
+            color: '#ccc',
+            size:  Math.max(1, (e.weight || 0.5) * 3),
+            hidden: false
+          });
+        } catch (_) {}
+      }
+    });
+
+    // ── Louvain community detection ─────────────────────────────────
+    var communities = {};
+    try {
+      communities = graphologyCommunitiesLouvain(g);
+    } catch (err) {
+      console.warn('Louvain community detection failed:', err);
+    }
+
+    g.nodes().forEach(function (n) {
+      var idx = communities[n] != null ? communities[n] : 0;
+      g.setNodeAttribute(n, 'community',      idx);
+      g.setNodeAttribute(n, 'communityColor', communityPalette[idx % communityPalette.length]);
+      // MKI colour always takes priority in the renderer
+    });
+
+    // ── Sigma renderer ──────────────────────────────────────────────
+    var renderer = new Sigma(g, graphEl, {
+      renderEdgeLabels: false,
+      defaultEdgeColor: '#ccc'
+    });
+
+    // ── Tooltip events ──────────────────────────────────────────────
+    renderer.on('enterNode', function (payload) {
+      var a = g.getNodeAttributes(payload.node);
+      var color = MKI[a.category] || '#999';
+      var linksHTML = '';
+      if (a.contentURL) {
+        linksHTML = '<div style="margin-top:6px"><a href="' + a.contentURL +
+          '" style="color:' + color + ';text-decoration:underline;pointer-events:auto">' +
+          '→ Open page</a></div>';
+      }
+      tooltip.innerHTML =
+        '<div style="font-weight:700;color:' + color + '">' + a.label + '</div>' +
+        '<div style="margin-top:2px">' +
+          '<span style="background:' + color + ';color:#fff;border-radius:4px;' +
+                'padding:1px 7px;font-size:11px;font-weight:600">' + a.category + '</span>' +
+          (a.subcategory
+            ? '<span style="color:#888;margin-left:6px;font-size:12px">' + a.subcategory + '</span>'
+            : '') +
+        '</div>' +
+        linksHTML;
+      tooltip.style.display = 'block';
+      graphEl.style.cursor = 'pointer';
+      if (payload.event) positionTooltip(payload.event);
+    });
+
+    renderer.on('moveBody', function (payload) {
+      if (payload.event) positionTooltip(payload.event);
+    });
+
+    renderer.on('leaveNode', function () {
+      tooltip.style.display = 'none';
+      graphEl.style.cursor = 'default';
+    });
+
+    // ── Click navigation ────────────────────────────────────────────
+    renderer.on('clickNode', function (payload) {
+      var attrs = g.getNodeAttributes(payload.node);
+      if (attrs.contentURL) window.location.href = attrs.contentURL;
+    });
+
+    renderer.on('clickStage', function () {
+      g.nodes().forEach(function (n) { g.setNodeAttribute(n, 'highlighted', false); });
+      g.edges().forEach(function (e) { g.setEdgeAttribute(e, 'color', '#ccc'); });
+      renderer.refresh();
+      var info = document.getElementById('tauira-selected-info');
+      if (info) info.remove();
+    });
+
+    // ── Filter bar (landing page only — requires #tauira-controls) ──
+    var controlsEl = document.getElementById('tauira-controls');
+    if (!controlsEl) return;
+
+    // Collect unique relationship types from the raw data
+    var allRelTypes = [];
+    (data.edges || []).forEach(function (e) {
+      if (e.relationshipType && allRelTypes.indexOf(e.relationshipType) === -1) {
+        allRelTypes.push(e.relationshipType);
+      }
+    });
+
+    // Collect unique community IDs after Louvain
+    var allCommunityIds = [];
+    Object.keys(communities).forEach(function (n) {
+      var idx = communities[n];
+      if (allCommunityIds.indexOf(idx) === -1) allCommunityIds.push(idx);
+    });
+    allCommunityIds.sort(function (a, b) { return a - b; });
+
+    // Filter state — sets contain currently-visible values
+    var filterState = {
+      categories:  new Set(['M', 'K', 'I']),
+      relTypes:    new Set(allRelTypes),
+      communities: new Set(allCommunityIds.map(String)),
+      search: ''
+    };
+
+    // Populate relationship-type chips
+    var relContainer = document.getElementById('rel-filters');
+    if (relContainer) {
+      allRelTypes.forEach(function (rt) {
+        var btn = document.createElement('button');
+        btn.className = 'ctrl-chip ctrl-chip--active ctrl-chip--rel';
+        btn.dataset.filterRel = rt;
+        btn.textContent = rt;
+        relContainer.appendChild(btn);
+      });
+    }
+
+    // Populate community chips
+    var comContainer = document.getElementById('community-filters');
+    if (comContainer) {
+      allCommunityIds.forEach(function (idx) {
+        var btn = document.createElement('button');
+        btn.className = 'ctrl-chip ctrl-chip--active ctrl-chip--community';
+        btn.dataset.filterCommunity = String(idx);
+        btn.style.setProperty('--community-color', communityPalette[idx % communityPalette.length]);
+        btn.textContent = 'Community ' + (idx + 1);
+        comContainer.appendChild(btn);
+      });
+    }
+
+    function applyFilters() {
+      g.nodes().forEach(function (n) {
+        var a = g.getNodeAttributes(n);
+        var catOK  = filterState.categories.has(a.category);
+        var comOK  = filterState.communities.size === 0 ||
+                     filterState.communities.has(String(a.community));
+        var term   = filterState.search.toLowerCase();
+        var searchOK = term === '' || a.label.toLowerCase().indexOf(term) !== -1;
+        g.setNodeAttribute(n, 'hidden', !(catOK && comOK && searchOK));
+      });
+
+      g.edges().forEach(function (e) {
+        var srcHidden = g.getNodeAttribute(g.source(e), 'hidden');
+        var tgtHidden = g.getNodeAttribute(g.target(e), 'hidden');
+        var relType   = g.getEdgeAttribute(e, 'relationshipType');
+        var relOK     = filterState.relTypes.size === 0 ||
+                        filterState.relTypes.has(relType);
+        g.setEdgeAttribute(e, 'hidden', srcHidden || tgtHidden || !relOK);
+      });
+
+      renderer.refresh();
+    }
+
+    // Event delegation for all filter chips
+    controlsEl.addEventListener('click', function (e) {
+      var btn = e.target.closest(
+        '[data-filter-cat],[data-filter-rel],[data-filter-community]'
+      );
+      if (!btn) return;
+      btn.classList.toggle('ctrl-chip--active');
+      var cat = btn.dataset.filterCat;
+      var rel = btn.dataset.filterRel;
+      var com = btn.dataset.filterCommunity;
+      if (cat) filterState.categories[filterState.categories.has(cat) ? 'delete' : 'add'](cat);
+      if (rel) filterState.relTypes[filterState.relTypes.has(rel)     ? 'delete' : 'add'](rel);
+      if (com) filterState.communities[filterState.communities.has(com) ? 'delete' : 'add'](com);
+      applyFilters();
+    });
+
+    // Search input
+    var searchInput = document.getElementById('graph-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function (e) {
+        filterState.search = e.target.value;
+        applyFilters();
+      });
+    }
+
+    // Reset button
+    var resetBtn = document.getElementById('btn-reset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        filterState.categories  = new Set(['M', 'K', 'I']);
+        filterState.relTypes    = new Set(allRelTypes);
+        filterState.communities = new Set(allCommunityIds.map(String));
+        filterState.search      = '';
+        var si = document.getElementById('graph-search');
+        if (si) si.value = '';
+        document.querySelectorAll('.ctrl-chip').forEach(function (b) {
+          b.classList.add('ctrl-chip--active');
+        });
+        applyFilters();
+      });
+    }
+
+    // ── Fullscreen ──────────────────────────────────────────────────
+    var fsBtn = document.getElementById('btn-fullscreen');
+    if (fsBtn) {
+      fsBtn.addEventListener('click', function () {
+        if (!document.fullscreenElement) {
+          graphEl.requestFullscreen().catch(function () {});
+        } else {
+          document.exitFullscreen();
+        }
+      });
+    }
+
+    document.addEventListener('fullscreenchange', function () {
+      if (document.fullscreenElement === graphEl) {
+        graphEl.style.height = '100vh';
+        graphEl.style.borderRadius = '0';
+      } else {
+        graphEl.style.height = '560px';
+        graphEl.style.borderRadius = '8px';
+      }
+      renderer.refresh();
+    });
+  }
 })();
 </script>
 {{- end -}}
