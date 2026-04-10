@@ -122,9 +122,12 @@
     });
 
     // ── Louvain community detection ─────────────────────────────────
+    var louvain = (typeof graphologyCommunitiesLouvain !== 'undefined')
+      ? graphologyCommunitiesLouvain
+      : (window.graphologyCommunitiesLouvain || null);
     var communities = {};
     try {
-      communities = graphologyCommunitiesLouvain(g);
+      if (louvain) communities = louvain(g);
     } catch (err) {
       console.warn('Louvain community detection failed:', err);
     }
@@ -282,12 +285,17 @@
       applyFilters();
     });
 
-    // Search input
+    // Search input (debounced to reduce filter runs during rapid typing)
     var searchInput = document.getElementById('graph-search');
     if (searchInput) {
+      var searchTimer = null;
       searchInput.addEventListener('input', function (e) {
-        filterState.search = e.target.value;
-        applyFilters();
+        clearTimeout(searchTimer);
+        var val = e.target.value;
+        searchTimer = setTimeout(function () {
+          filterState.search = val;
+          applyFilters();
+        }, 150);
       });
     }
 
