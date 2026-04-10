@@ -3,7 +3,7 @@
      above the ToC. */}}
 
 <button id="toc-toggle" aria-label="Toggle table of contents"
-        aria-expanded="true" aria-controls="book-toc-inner">
+        aria-expanded="true" aria-controls="">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
        stroke="currentColor" stroke-width="2">
     <line x1="3" y1="6"  x2="21" y2="6"/>
@@ -19,7 +19,11 @@
   if (!btn) return;
   var toc = document.querySelector('.book-toc nav, .book-toc > ul');
   if (!toc) return;
-  toc.id = 'book-toc-inner';
+  // Use the element's existing id; only assign a new one if it has none.
+  // This preserves #TableOfContents or any other id the theme sets.
+  var tocId = toc.id || 'tauira-toc-inner';
+  if (!toc.id) toc.id = tocId;
+  btn.setAttribute('aria-controls', tocId);
   btn.addEventListener('click', function () {
     var expanded = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', String(!expanded));

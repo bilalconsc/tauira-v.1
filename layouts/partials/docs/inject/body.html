@@ -24,7 +24,6 @@
   tooltip.id = 'tauira-tooltip';
   tooltip.style.cssText = [
     'position:fixed',
-    'pointer-events:none',
     'background:var(--body-background,#fff)',
     'border:1px solid #ddd',
     'border-radius:8px',
@@ -34,7 +33,8 @@
     'box-shadow:0 4px 16px rgba(0,0,0,0.12)',
     'z-index:9999',
     'display:none',
-    'line-height:1.5'
+    'line-height:1.5',
+    'pointer-events:none'
   ].join(';');
   document.body.appendChild(tooltip);
 
@@ -111,10 +111,10 @@
         try {
           g.addEdge(e.source, e.target, {
             id:               e.id || '',
-            weight:           e.weight || 0.5,
+            weight:           e.weight != null ? e.weight : 0.5,
             relationshipType: e.relationshipType || '',
             color: '#ccc',
-            size:  Math.max(1, (e.weight || 0.5) * 3),
+            size:  Math.max(1, (e.weight != null ? e.weight : 0.5) * 3),
             hidden: false
           });
         } catch (_) {}
@@ -146,25 +146,59 @@
     });
 
     // ── Tooltip events ──────────────────────────────────────────────
+    var hideTimeout = null;
+
+    // Validate that a URL is a safe relative path or https/http URL (blocks javascript:)
+    function isSafeURL(url) {
+      return typeof url === 'string' && /^(https?:\/\/|\/)/.test(url);
+    }
+
     renderer.on('enterNode', function (payload) {
+      clearTimeout(hideTimeout);
       var a = g.getNodeAttributes(payload.node);
       var color = MKI[a.category] || '#999';
-      var linksHTML = '';
-      if (a.contentURL) {
-        linksHTML = '<div style="margin-top:6px"><a href="' + a.contentURL +
-          '" style="color:' + color + ';text-decoration:underline;pointer-events:auto">' +
-          '→ Open page</a></div>';
+
+      // Build tooltip using DOM methods to avoid XSS
+      while (tooltip.firstChild) tooltip.removeChild(tooltip.firstChild);
+
+      // Label row
+      var labelDiv = document.createElement('div');
+      labelDiv.style.cssText = 'font-weight:700;color:' + color;
+      labelDiv.textContent = a.label;
+      tooltip.appendChild(labelDiv);
+
+      // Badge + subcategory row
+      var badgeRow = document.createElement('div');
+      badgeRow.style.marginTop = '2px';
+      var badge = document.createElement('span');
+      badge.style.cssText = 'background:' + color +
+        ';color:#fff;border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600';
+      badge.textContent = a.category;
+      badgeRow.appendChild(badge);
+      if (a.subcategory) {
+        var sub = document.createElement('span');
+        sub.style.cssText = 'color:#888;margin-left:6px;font-size:12px';
+        sub.textContent = a.subcategory;
+        badgeRow.appendChild(sub);
       }
-      tooltip.innerHTML =
-        '<div style="font-weight:700;color:' + color + '">' + a.label + '</div>' +
-        '<div style="margin-top:2px">' +
-          '<span style="background:' + color + ';color:#fff;border-radius:4px;' +
-                'padding:1px 7px;font-size:11px;font-weight:600">' + a.category + '</span>' +
-          (a.subcategory
-            ? '<span style="color:#888;margin-left:6px;font-size:12px">' + a.subcategory + '</span>'
-            : '') +
-        '</div>' +
-        linksHTML;
+      tooltip.appendChild(badgeRow);
+
+      // Link row — only if contentURL is a safe URL
+      if (isSafeURL(a.contentURL)) {
+        var linkDiv = document.createElement('div');
+        linkDiv.style.marginTop = '6px';
+        var link = document.createElement('a');
+        link.href = a.contentURL;
+        link.style.cssText = 'color:' + color + ';text-decoration:underline';
+        link.textContent = '→ Open page';
+        linkDiv.appendChild(link);
+        tooltip.appendChild(linkDiv);
+        // Allow mouse interaction so the link is clickable
+        tooltip.style.pointerEvents = 'auto';
+      } else {
+        tooltip.style.pointerEvents = 'none';
+      }
+
       tooltip.style.display = 'block';
       graphEl.style.cursor = 'pointer';
       if (payload.event) positionTooltip(payload.event);
@@ -175,7 +209,22 @@
     });
 
     renderer.on('leaveNode', function () {
+      // Short delay so the mouse can move from the node to the tooltip link
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(function () {
+        tooltip.style.display = 'none';
+        tooltip.style.pointerEvents = 'none';
+        graphEl.style.cursor = 'default';
+      }, 120);
+    });
+
+    // Keep tooltip visible while the mouse is over it (for clickable link)
+    tooltip.addEventListener('mouseenter', function () {
+      clearTimeout(hideTimeout);
+    });
+    tooltip.addEventListener('mouseleave', function () {
       tooltip.style.display = 'none';
+      tooltip.style.pointerEvents = 'none';
       graphEl.style.cursor = 'default';
     });
 

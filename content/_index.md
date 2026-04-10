@@ -12,7 +12,7 @@ enableToc: false
 - 🟣 **Knowledge (K)** — concepts, curricula, skills
 - 🟡 **Instinctual (I)** — affects, habits, embodied responses
 
-<div id="tauira-controls" aria-label="Graph controls">
+<section id="tauira-controls" role="region" aria-label="Graph controls">
 
   <!-- Category filter -->
   <div class="ctrl-group" aria-label="Filter by category">
@@ -39,7 +39,7 @@ enableToc: false
     <button id="btn-fullscreen" class="ctrl-btn" aria-label="Fullscreen graph">⛶ Fullscreen</button>
   </div>
 
-</div>
+</section>
 
 <div id="tauira-graph" style="width:100%;height:560px;border-radius:8px;"></div>
 
