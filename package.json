@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "graphology": "0.26.0",
-    "graphology-communities-louvain": "2.0.2",
+    "openai": "4.104.0",
     "sigma": "3.0.2"
   },
   "devDependencies": {
-    "ajv-cli": "5.0.0"
+    "ajv-cli": "5.0.0",
+    "gray-matter": "4.0.3"
   }
 }

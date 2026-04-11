@@ -1,4 +1,4 @@
-{{- if or (eq .File.Path "_index.md") (hasPrefix .File.Dir "map") }}
+{{- if and .File (or (eq .File.Path "_index.md") (hasPrefix .File.Dir "map")) }}
 <script>
 (function () {
   /* ── 0. Guard: only run if the graph container exists on this page ── */
@@ -81,10 +81,10 @@
     data.edges.forEach(function (e) {
       if (g.hasNode(e.source) && g.hasNode(e.target)) {
         g.addEdge(e.source, e.target, {
-          weight:           e.weight || 0.5,
+          weight:           e.weight != null ? e.weight : 0.5,
           relationshipType: e.relationshipType || '',
           color:            '#ccc',
-          size:             Math.max(1, (e.weight || 0.5) * 3)
+          size:             Math.max(1, (e.weight != null ? e.weight : 0.5) * 3)
         });
       }
     });
@@ -142,7 +142,7 @@
       el.style.cursor = 'pointer';
     });
 
-    renderer.on('mousemovebody', function (payload) { moveTip(payload); });
+    renderer.on('mousemovebody', function (payload) { moveTip(payload.event); });
 
     renderer.on('leaveNode', function () {
       tip.style.display = 'none';
@@ -152,7 +152,10 @@
     /* ── Click navigation ── */
     renderer.on('clickNode', function (payload) {
       var attrs = g.getNodeAttributes(payload.node);
-      if (attrs.contentURL) window.location.href = attrs.contentURL;
+      // Guard: only navigate to safe root-relative or http(s) URLs (blocks javascript: etc.)
+      if (attrs.contentURL && /^(https?:\/\/|\/)/.test(attrs.contentURL)) {
+        window.location.href = attrs.contentURL;
+      }
     });
 
     /* ── Background click — reset ── */
@@ -185,7 +188,6 @@
   var graphURL = '{{ site.Params.graphDataPath | relURL }}';
   var libs = [
     'https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js',
-    'https://cdn.jsdelivr.net/npm/graphology-communities-louvain@2.0.2/dist/graphology-communities-louvain.min.js',
     'https://cdn.jsdelivr.net/npm/sigma@3.0.2/build/sigma.min.js'
   ];
   var loaded = 0;
