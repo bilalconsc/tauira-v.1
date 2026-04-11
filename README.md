@@ -83,6 +83,45 @@ There are two distinct graph systems on this site — do not confuse them:
 | Hugo Extended | 0.93+ | [github.com/gohugoio/hugo/releases](https://github.com/gohugoio/hugo/releases) |
 | hugo-obsidian | latest | `go install github.com/jackyzha0/hugo-obsidian@latest` |
 
+## Local Setup
+
+Run these commands once after cloning, and again whenever `package.json`
+changes:
+
+```bash
+# 1. Install Node.js dependencies (graphology, sigma, ajv-cli)
+npm install
+
+# 2. Install hugo-obsidian (Go required)
+go install github.com/jackyzha0/hugo-obsidian@latest
+
+# 3. Build the content-gated graph JSON
+node scripts/regenerate-graph.js
+
+# 4. Generate wikilink index
+hugo-obsidian -input=content -output=assets/indices -index -root=.
+```
+
+After setup, start the local dev server:
+
+```bash
+make serve
+```
+
+> **Note:** `make serve` runs steps 3 and 4 automatically on every start.
+> Run them manually only if you are debugging the graph or wikilink index
+> outside of Hugo.
+
+### npm commands reference
+
+| Command | What it does |
+|---|---|
+| `npm install` | Install / update all pinned dependencies |
+| `npm run graph` | Rebuild `static/graph/tauira-graph.json` |
+| `npm run validate` | Validate all node and edge JSON against the schema |
+| `npm run build` | Full production build (runs graph builder first) |
+| `npm run serve` | Start Hugo dev server |
+
 ### Commands
 
 ```bash

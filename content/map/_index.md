@@ -13,6 +13,8 @@ This is the Tauira rhizomatic map — a force-directed visualisation of the know
 - 🟣 **Knowledge (K)** — concepts, curricula, skills
 - 🟡 **Instinctual (I)** — affects, habits, embodied responses
 
-<div id="tauira-rhizomatic-map" style="width: 100%; min-height: 500px; border: 1px solid #ddd; border-radius: 4px; margin-top: 1rem;"></div>
+<div id="tauira-graph" style="width:100%;height:560px;border-radius:8px;"></div>
+<button id="btn-fullscreen" class="ctrl-btn" aria-label="Fullscreen graph"
+        style="margin-top:.5rem">⛶ Fullscreen</button>
 
 > **Note:** This map visualises the Tauira schema-based rhizomatic graph (`static/graph/tauira-graph.json`), which is distinct from the Amethyst wikilink graph displayed in footers. The rhizomatic graph is built from `data/nodes/` and `data/edges/` and represents the autoethnographic knowledge network.

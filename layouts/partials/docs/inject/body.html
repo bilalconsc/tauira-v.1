@@ -1,179 +1,123 @@
-{{/* Part 2.4 — Rhizomatic Map Script Injection (sigma.js rewrite)
-     Full interactivity: tooltips, click navigation, Louvain community detection,
-     filter/control bar (landing page only), and fullscreen support.
-     Uses Hugo relURL to produce a subpath-aware root-relative URL that works both
-     under `hugo serve` and on the deployed GitHub Pages site. */}}
-{{- $section := .Section | default "" -}}
-{{- if or (eq $section "map") .IsHome -}}
+{{- if or (eq .File.Path "_index.md") (hasPrefix .File.Dir "map") }}
 <script>
 (function () {
-  // Support both landing page (#tauira-graph) and map pages (#tauira-rhizomatic-map)
-  var graphEl = document.getElementById('tauira-graph')
-             || document.getElementById('tauira-rhizomatic-map');
-  if (!graphEl) return;
+  /* ── 0. Guard: only run if the graph container exists on this page ── */
+  var el = document.getElementById('tauira-graph');
+  if (!el) return;
 
-  var graphURL = '{{ site.Params.graphDataPath | relURL }}';
+  /* ── 1. MKI colour palette ── */
   var MKI = { M: '#01696f', K: '#5b4fcf', I: '#d19900' };
-  var communityPalette = [
-    '#e07b54', '#5b8db8', '#6aab6a', '#b07cc6',
-    '#c4a44e', '#7abfbf', '#d4687a', '#8e8e8e'
-  ];
 
-  // ── Tooltip (created once, reused) ─────────────────────────────────
-  var tooltip = document.createElement('div');
-  tooltip.id = 'tauira-tooltip';
-  tooltip.style.cssText = [
+  /* ── 2. Compact label helper ──
+     Extracts a short identifier from the node label.
+     Examples:
+       "Round Tables"        → "Round Tables"   (short already)
+       "enc-2025-T1-W3-L2"   → "W3-L2"
+       "Assessment Rubric"   → "Rubric"
+     Rule: if label contains a hyphenated date-like segment, show last
+     two dash-segments; otherwise show the label as-is truncated to 14 chars.
+  */
+  function compactLabel(label) {
+    if (!label) return '';
+    var parts = label.split('-');
+    if (parts.length >= 4 && /^\d{4}$/.test(parts[1])) {
+      return parts.slice(-2).join('-');   // e.g. W3-L2
+    }
+    return label.length > 14 ? label.slice(0, 13) + '\u2026' : label;
+  }
+
+  /* ── 3. Tooltip DOM element (one, reused) ── */
+  var tip = document.createElement('div');
+  tip.id = 'tauira-tooltip';
+  tip.style.cssText = [
     'position:fixed',
+    'pointer-events:none',
     'background:var(--body-background,#fff)',
     'border:1px solid #ddd',
     'border-radius:8px',
     'padding:10px 14px',
     'font-size:13px',
     'max-width:240px',
-    'box-shadow:0 4px 16px rgba(0,0,0,0.12)',
+    'box-shadow:0 4px 16px rgba(0,0,0,.12)',
     'z-index:9999',
     'display:none',
-    'line-height:1.5',
-    'pointer-events:none'
+    'line-height:1.5'
   ].join(';');
-  document.body.appendChild(tooltip);
+  document.body.appendChild(tip);
 
-  function positionTooltip(event) {
-    // sigma 3.x: event may be a sigma SigmaMouseEvent or native MouseEvent
-    var x = event?.original?.clientX ?? event?.clientX ?? event?.x ?? 0;
-    var y = event?.original?.clientY ?? event?.clientY ?? event?.y ?? 0;
-    var tw = tooltip.offsetWidth  || 200;
-    var th = tooltip.offsetHeight || 80;
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
-    tooltip.style.left = (x + 16 + tw > vw ? x - tw - 12 : x + 16) + 'px';
-    tooltip.style.top  = (y + 16 + th > vh ? y - th - 8  : y + 16) + 'px';
+  function moveTip(e) {
+    var x = (e && (e.original ? e.original.clientX : e.clientX)) || 0;
+    var y = (e && (e.original ? e.original.clientY : e.clientY)) || 0;
+    var tw = tip.offsetWidth  || 200;
+    var th = tip.offsetHeight || 80;
+    tip.style.left = (x + 16 + tw > window.innerWidth  ? x - tw - 12 : x + 16) + 'px';
+    tip.style.top  = (y + 16 + th > window.innerHeight ? y - th - 8  : y + 16) + 'px';
   }
 
-  // ── Load scripts sequentially then fetch data ───────────────────────
-  var libs = [
-    'https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js',
-    'https://cdn.jsdelivr.net/npm/graphology-communities-louvain/dist/graphology-communities-louvain.min.js',
-    'https://cdn.jsdelivr.net/npm/sigma@3.0.2/build/sigma.min.js'
-  ];
-
-  function loadScripts(urls, cb) {
-    if (!urls.length) { cb(); return; }
-    var s = document.createElement('script');
-    s.src = urls[0];
-    s.onload = function () { loadScripts(urls.slice(1), cb); };
-    s.onerror = function () { console.error('Failed to load', urls[0]); };
-    document.head.appendChild(s);
+  /* ── 4. Empty-state renderer ── */
+  function showEmpty() {
+    el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-style:italic;font-size:.9rem;color:#888">No encounters published yet. The graph will appear once fieldnotes are added.</div>';
   }
 
-  loadScripts(libs, function () {
-    fetch(graphURL)
-      .then(function (res) { return res.json(); })
-      .then(function (data) { initGraph(data); })
-      .catch(function (err) {
-        console.error('Failed to load Tauira graph:', err);
-        graphEl.innerHTML = '<p style="text-align:center;color:#c00;padding:2rem;">Error loading graph data.</p>';
-      });
-  });
-
-  // ── Main graph initialisation ───────────────────────────────────────
+  /* ── 5. Core graph initialiser — called after all CDN libs load ── */
   function initGraph(data) {
-    var nodes = data.nodes || [];
-    var edges = data.edges || [];
+    if (!data || !data.nodes || data.nodes.length === 0) { showEmpty(); return; }
 
-    if (nodes.length === 0) {
-      graphEl.innerHTML = '<p style="text-align:center;color:#999;padding:2rem;">No graph data available yet. Add nodes and edges to populate the rhizomatic map.</p>';
-      return;
-    }
+    var g = new graphology.Graph({ multi: true });
 
-    // Build graphology Graph
-    var g = new graphology.Graph({ multi: false });
-
-    nodes.forEach(function (n) {
+    data.nodes.forEach(function (n) {
       g.addNode(n.id, {
-        label:       n.label       || n.id,
-        category:    n.category    || 'M',
+        label:       compactLabel(n.label),
+        fullLabel:   n.label,
+        category:    n.category,
+        color:       MKI[n.category] || '#999',
+        size:        10,
+        contentURL:  n.contentURL || null,
         subcategory: n.subcategory || '',
-        contentURL:  n.contentURL  || '',
         x: Math.random(),
-        y: Math.random(),
-        size: 8,
-        color: MKI[n.category] || '#999',
-        hidden: false
+        y: Math.random()
       });
     });
 
-    edges.forEach(function (e) {
+    data.edges.forEach(function (e) {
       if (g.hasNode(e.source) && g.hasNode(e.target)) {
-        try {
-          g.addEdge(e.source, e.target, {
-            id:               e.id || '',
-            weight:           e.weight != null ? e.weight : 0.5,
-            relationshipType: e.relationshipType || '',
-            color: '#ccc',
-            size:  Math.max(1, (e.weight != null ? e.weight : 0.5) * 3),
-            hidden: false
-          });
-        } catch (_) {}
+        g.addEdge(e.source, e.target, {
+          weight:           e.weight || 0.5,
+          relationshipType: e.relationshipType || '',
+          color:            '#ccc',
+          size:             Math.max(1, (e.weight || 0.5) * 3)
+        });
       }
     });
 
-    // ── Louvain community detection ─────────────────────────────────
-    var louvain = (typeof graphologyCommunitiesLouvain !== 'undefined')
-      ? graphologyCommunitiesLouvain
-      : (window.graphologyCommunitiesLouvain || null);
-    var communities = {};
-    try {
-      if (louvain) communities = louvain(g);
-    } catch (err) {
-      console.warn('Louvain community detection failed:', err);
-    }
-
-    g.nodes().forEach(function (n) {
-      var idx = communities[n] != null ? communities[n] : 0;
-      g.setNodeAttribute(n, 'community',      idx);
-      g.setNodeAttribute(n, 'communityColor', communityPalette[idx % communityPalette.length]);
-      // MKI colour always takes priority in the renderer
+    var renderer = new Sigma(g, el, {
+      renderEdgeLabels:       false,
+      defaultEdgeColor:       '#ccc',
+      defaultNodeColor:       '#999',
+      labelFont:              'inherit',
+      labelSize:              11,
+      labelWeight:            '500',
+      labelColor:             { color: '#555' },
+      allowInvalidContainer:  true
     });
 
-    // ── Sigma renderer ──────────────────────────────────────────────
-    var renderer = new Sigma(g, graphEl, {
-      renderEdgeLabels: false,
-      defaultEdgeColor: '#ccc',
-      defaultNodeColor: '#999',
-      labelFont: 'inherit',
-      labelSize: 13,
-      allowInvalidContainer: true
-    });
-
-    // ── Tooltip events ──────────────────────────────────────────────
-    var hideTimeout = null;
-
-    // Validate that a URL is a safe relative path or https/http URL (blocks javascript:)
-    function isSafeURL(url) {
-      return typeof url === 'string' && /^(https?:\/\/|\/)/.test(url);
-    }
-
+    /* ── Hover tooltip ── */
     renderer.on('enterNode', function (payload) {
-      clearTimeout(hideTimeout);
-      var a = g.getNodeAttributes(payload.node);
-      var color = MKI[a.category] || '#999';
+      var a   = g.getNodeAttributes(payload.node);
+      var col = MKI[a.category] || '#999';
 
       // Build tooltip using DOM methods to avoid XSS
-      while (tooltip.firstChild) tooltip.removeChild(tooltip.firstChild);
+      while (tip.firstChild) tip.removeChild(tip.firstChild);
 
-      // Label row
       var labelDiv = document.createElement('div');
-      labelDiv.style.cssText = 'font-weight:700;color:' + color;
-      labelDiv.textContent = a.label;
-      tooltip.appendChild(labelDiv);
+      labelDiv.style.cssText = 'font-weight:700;color:' + col;
+      labelDiv.textContent = a.fullLabel;
+      tip.appendChild(labelDiv);
 
-      // Badge + subcategory row
       var badgeRow = document.createElement('div');
-      badgeRow.style.marginTop = '2px';
+      badgeRow.style.marginTop = '3px';
       var badge = document.createElement('span');
-      badge.style.cssText = 'background:' + color +
-        ';color:#fff;border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600';
+      badge.style.cssText = 'background:' + col + ';color:#fff;border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600';
       badge.textContent = a.category;
       badgeRow.appendChild(badge);
       if (a.subcategory) {
@@ -182,213 +126,91 @@
         sub.textContent = a.subcategory;
         badgeRow.appendChild(sub);
       }
-      tooltip.appendChild(badgeRow);
+      tip.appendChild(badgeRow);
 
-      // Link row — only if contentURL is a safe URL
-      if (isSafeURL(a.contentURL)) {
+      if (a.contentURL) {
         var linkDiv = document.createElement('div');
         linkDiv.style.marginTop = '6px';
-        var link = document.createElement('a');
-        link.href = a.contentURL;
-        link.style.cssText = 'color:' + color + ';text-decoration:underline';
-        link.textContent = '→ Open page';
-        linkDiv.appendChild(link);
-        tooltip.appendChild(linkDiv);
-        // Allow mouse interaction so the link is clickable
-        tooltip.style.pointerEvents = 'auto';
-      } else {
-        tooltip.style.pointerEvents = 'none';
+        var linkSpan = document.createElement('span');
+        linkSpan.style.cssText = 'color:' + col + ';font-size:12px';
+        linkSpan.textContent = 'Click to open \u2192';
+        linkDiv.appendChild(linkSpan);
+        tip.appendChild(linkDiv);
       }
 
-      tooltip.style.display = 'block';
-      graphEl.style.cursor = 'pointer';
-      if (payload.event) positionTooltip(payload.event);
+      tip.style.display = 'block';
+      moveTip(payload.event);
+      el.style.cursor = 'pointer';
     });
 
-    renderer.on('mousemovebody', function (payload) {
-      if (payload.event) positionTooltip(payload.event);
-    });
+    renderer.on('mousemovebody', function (payload) { moveTip(payload); });
 
     renderer.on('leaveNode', function () {
-      // Short delay so the mouse can move from the node to the tooltip link
-      clearTimeout(hideTimeout);
-      hideTimeout = setTimeout(function () {
-        tooltip.style.display = 'none';
-        tooltip.style.pointerEvents = 'none';
-        graphEl.style.cursor = 'default';
-      }, 120);
+      tip.style.display = 'none';
+      el.style.cursor = 'default';
     });
 
-    // Keep tooltip visible while the mouse is over it (for clickable link)
-    tooltip.addEventListener('mouseenter', function () {
-      clearTimeout(hideTimeout);
-    });
-    tooltip.addEventListener('mouseleave', function () {
-      tooltip.style.display = 'none';
-      tooltip.style.pointerEvents = 'none';
-      graphEl.style.cursor = 'default';
-    });
-
-    // ── Click navigation ────────────────────────────────────────────
+    /* ── Click navigation ── */
     renderer.on('clickNode', function (payload) {
       var attrs = g.getNodeAttributes(payload.node);
       if (attrs.contentURL) window.location.href = attrs.contentURL;
     });
 
+    /* ── Background click — reset ── */
     renderer.on('clickStage', function () {
       g.nodes().forEach(function (n) { g.setNodeAttribute(n, 'highlighted', false); });
       g.edges().forEach(function (e) { g.setEdgeAttribute(e, 'color', '#ccc'); });
       renderer.refresh();
-      var info = document.getElementById('tauira-selected-info');
-      if (info) info.remove();
     });
 
-    // ── Filter bar (landing page only — requires #tauira-controls) ──
-    var controlsEl = document.getElementById('tauira-controls');
-    if (!controlsEl) return;
-
-    // Collect unique relationship types from the raw data
-    var allRelTypes = [];
-    (data.edges || []).forEach(function (e) {
-      if (e.relationshipType && allRelTypes.indexOf(e.relationshipType) === -1) {
-        allRelTypes.push(e.relationshipType);
-      }
-    });
-
-    // Collect unique community IDs after Louvain
-    var allCommunityIds = [];
-    Object.keys(communities).forEach(function (n) {
-      var idx = communities[n];
-      if (allCommunityIds.indexOf(idx) === -1) allCommunityIds.push(idx);
-    });
-    allCommunityIds.sort(function (a, b) { return a - b; });
-
-    // Filter state — sets contain currently-visible values
-    var filterState = {
-      categories:  new Set(['M', 'K', 'I']),
-      relTypes:    new Set(allRelTypes),
-      communities: new Set(allCommunityIds.map(String)),
-      search: ''
-    };
-
-    // Populate relationship-type chips
-    var relContainer = document.getElementById('rel-filters');
-    if (relContainer) {
-      allRelTypes.forEach(function (rt) {
-        var btn = document.createElement('button');
-        btn.className = 'ctrl-chip ctrl-chip--active ctrl-chip--rel';
-        btn.dataset.filterRel = rt;
-        btn.textContent = rt;
-        relContainer.appendChild(btn);
-      });
-    }
-
-    // Populate community chips
-    var comContainer = document.getElementById('community-filters');
-    if (comContainer) {
-      allCommunityIds.forEach(function (idx) {
-        var btn = document.createElement('button');
-        btn.className = 'ctrl-chip ctrl-chip--active ctrl-chip--community';
-        btn.dataset.filterCommunity = String(idx);
-        btn.style.setProperty('--community-color', communityPalette[idx % communityPalette.length]);
-        btn.textContent = 'Community ' + (idx + 1);
-        comContainer.appendChild(btn);
-      });
-    }
-
-    function applyFilters() {
-      g.nodes().forEach(function (n) {
-        var a = g.getNodeAttributes(n);
-        var catOK  = filterState.categories.has(a.category);
-        var comOK  = filterState.communities.size === 0 ||
-                     filterState.communities.has(String(a.community));
-        var term   = filterState.search.toLowerCase();
-        var searchOK = term === '' || a.label.toLowerCase().indexOf(term) !== -1;
-        g.setNodeAttribute(n, 'hidden', !(catOK && comOK && searchOK));
-      });
-
-      g.edges().forEach(function (e) {
-        var srcHidden = g.getNodeAttribute(g.source(e), 'hidden');
-        var tgtHidden = g.getNodeAttribute(g.target(e), 'hidden');
-        var relType   = g.getEdgeAttribute(e, 'relationshipType');
-        var relOK     = filterState.relTypes.size === 0 ||
-                        filterState.relTypes.has(relType);
-        g.setEdgeAttribute(e, 'hidden', srcHidden || tgtHidden || !relOK);
-      });
-
-      renderer.refresh();
-    }
-
-    // Event delegation for all filter chips
-    controlsEl.addEventListener('click', function (e) {
-      var btn = e.target.closest(
-        '[data-filter-cat],[data-filter-rel],[data-filter-community]'
-      );
-      if (!btn) return;
-      btn.classList.toggle('ctrl-chip--active');
-      var cat = btn.dataset.filterCat;
-      var rel = btn.dataset.filterRel;
-      var com = btn.dataset.filterCommunity;
-      if (cat) filterState.categories[filterState.categories.has(cat) ? 'delete' : 'add'](cat);
-      if (rel) filterState.relTypes[filterState.relTypes.has(rel)     ? 'delete' : 'add'](rel);
-      if (com) filterState.communities[filterState.communities.has(com) ? 'delete' : 'add'](com);
-      applyFilters();
-    });
-
-    // Search input (debounced to reduce filter runs during rapid typing)
-    var searchInput = document.getElementById('graph-search');
-    if (searchInput) {
-      var searchTimer = null;
-      searchInput.addEventListener('input', function (e) {
-        clearTimeout(searchTimer);
-        var val = e.target.value;
-        searchTimer = setTimeout(function () {
-          filterState.search = val;
-          applyFilters();
-        }, 150);
-      });
-    }
-
-    // Reset button
-    var resetBtn = document.getElementById('btn-reset');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', function () {
-        filterState.categories  = new Set(['M', 'K', 'I']);
-        filterState.relTypes    = new Set(allRelTypes);
-        filterState.communities = new Set(allCommunityIds.map(String));
-        filterState.search      = '';
-        var si = document.getElementById('graph-search');
-        if (si) si.value = '';
-        document.querySelectorAll('.ctrl-chip').forEach(function (b) {
-          b.classList.add('ctrl-chip--active');
-        });
-        applyFilters();
-      });
-    }
-
-    // ── Fullscreen ──────────────────────────────────────────────────
+    /* ── Fullscreen ── */
     var fsBtn = document.getElementById('btn-fullscreen');
     if (fsBtn) {
       fsBtn.addEventListener('click', function () {
         if (!document.fullscreenElement) {
-          graphEl.requestFullscreen().catch(function () {});
+          el.requestFullscreen().catch(function(){});
         } else {
           document.exitFullscreen();
         }
       });
+      document.addEventListener('fullscreenchange', function () {
+        el.style.height = document.fullscreenElement === el ? '100vh' : '560px';
+        el.style.borderRadius = document.fullscreenElement === el ? '0' : '8px';
+        renderer.refresh();
+      });
     }
-
-    document.addEventListener('fullscreenchange', function () {
-      if (document.fullscreenElement === graphEl) {
-        graphEl.style.height = '100vh';
-        graphEl.style.borderRadius = '0';
-      } else {
-        graphEl.style.height = '560px';
-        graphEl.style.borderRadius = '8px';
-      }
-      renderer.refresh();
-    });
   }
+
+  /* ── 6. Dynamic CDN loader ── */
+  var libs = [
+    'https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/graphology-communities-louvain@2.0.2/dist/graphology-communities-louvain.min.js',
+    'https://cdn.jsdelivr.net/npm/sigma@3.0.2/build/sigma.min.js'
+  ];
+  var loaded = 0;
+  libs.forEach(function (src) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.onerror = function () {
+      console.error('[tauira-graph] Failed to load: ' + src);
+      showEmpty();
+    };
+    s.onload = function () {
+      if (++loaded === libs.length) {
+        fetch('/tauira/graph/tauira-graph.json')
+          .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+          })
+          .then(function (data) { initGraph(data); })
+          .catch(function (err) {
+            console.error('[tauira-graph] Fetch error:', err);
+            showEmpty();
+          });
+      }
+    };
+    document.head.appendChild(s);
+  });
 })();
 </script>
-{{- end -}}
+{{- end }}
