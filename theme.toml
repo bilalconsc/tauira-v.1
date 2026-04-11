@@ -2,23 +2,64 @@ baseURL = "https://bibymaths.github.io/tauira/"
 title = "Tauira"
 theme = "amethyst"
 
+disablePathToLower = true
+enableGitInfo = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 1
+
+[menu]
+  [[menu.after]]
+    name   = "GitHub"
+    url    = "https://github.com/bibymaths/tauira"
+    weight = 10
+
 [params]
-  # Amethyst-specific display settings
+  name        = "Abhinav Mishra"
+  title       = "Tauira"
   description = "Capturing entanglements of an educator-researcher experience."
-  author = "Your Name"
 
-  # Graph settings (used by Amethyst's built-in force graph)
-  enableGraph = true
+  # ── Features ────────────────────────────────────────────────────────────────
+  enableLinkPreview        = true
+  enableLatex              = true
+  enableCodeBlockTitle     = true
+  enableCodeBlockCopy      = true
+  enableCallouts           = true
+  enableMermaid            = true
+  enableGitHubEdit         = false
 
-  # Search
-  enableSearch = true
+  # ── Footer: disable Amethyst's graph + backlinks
+  # (Tauira uses its own sigma.js rhizomatic graph in body.html)
+  enableFooter             = false
+  enableContextualBacklinks = false
+  enableRecentNotes        = false
 
-  # Show backlinks panel on every page
-  enableBacklinks = true
+  # ── ToC: off globally; enable per-page with bookToC = true in front matter
+  BookToC                  = false
+
+  # ── Amethyst internals (do not change)
+  enableSPA                = false
+  BookSearch               = false
+  BookServiceWorker        = false
+  BookPortableLinks        = false
+  BookComments             = false
+
+  # ── Repo link (used by Last Modified footer and Edit links)
+  BookRepo                 = "https://github.com/bibymaths/tauira"
+  BookDateFormat           = "January 2, 2006"
+  BookSection              = "/"
+
+  # ── Search (WIP in Amethyst — semantic search not active)
+  [params.search]
+    enableSemanticSearch = false
 
 [taxonomies]
-  tag = "tags"
+  tag        = "tags"
   assemblage = "assemblages"
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]   # JSON output needed for graph export + search index
+  home = ["HTML", "RSS", "JSON"]
