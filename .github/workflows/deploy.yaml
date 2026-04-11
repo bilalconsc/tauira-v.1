@@ -29,13 +29,13 @@ jobs:
         run: npm ci
 
       - name: Install hugo-obsidian
-        run: go install github.com/jackyzha0/hugo-obsidian@latest
+        run: go install github.com/jackyzha0/hugo-obsidian@v0.3.0
 
       - name: Build wikilink index
         run: hugo-obsidian -input=content -output=assets/indices -index -root=.
 
       - name: Build graph JSON
-        run: python3 scripts/build-graph.sh
+        run: node scripts/regenerate-graph.js
 
       - name: Build site
         run: hugo --minify

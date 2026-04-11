@@ -4,10 +4,10 @@
   "private": true,
   "description": "Tauira — rhizomatic educator-researcher site",
   "scripts": {
-    "prebuild": "python3 scripts/build-graph.sh",
+    "prebuild": "node scripts/regenerate-graph.js",
     "build": "hugo --minify",
     "serve": "hugo server --navigateToChanged",
-    "graph": "python3 scripts/build-graph.sh",
+    "graph": "node scripts/regenerate-graph.js",
     "validate": "ajv validate -s tauira-schema.json -d \"data/nodes/*.json\" --errors=json && ajv validate -s tauira-schema.json -d \"data/edges/*.json\" --errors=json"
   },
   "dependencies": {

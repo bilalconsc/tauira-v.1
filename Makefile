@@ -18,11 +18,11 @@ update-force: ## Forcefully pull all changes and don't ask to patch
 
 .PHONY: build serve build-graph validate
 
-node_modules: package.json
+node_modules: package.json package-lock.json
 	npm install
 
 build-graph: ## Build the rhizomatic graph JSON
-	python3 scripts/build-graph.sh
+	node scripts/regenerate-graph.js
 
 build: node_modules build-graph ## Build the Hugo site
 	hugo-obsidian -input=content -output=assets/indices -index -root=.
