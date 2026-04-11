@@ -9,29 +9,39 @@ jobs:
   deploy:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
-
-      - name: Build Link Index
-        uses: jackyzha0/hugo-obsidian@v2.18
-        with:
-          index: true
-          input: content
-          output: assets/indices
-          root: .
+          fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.96.0'
+          hugo-version: '0.128.0'
           extended: true
 
-      - name: Build
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install hugo-obsidian
+        run: go install github.com/jackyzha0/hugo-obsidian@latest
+
+      - name: Build wikilink index
+        run: hugo-obsidian -input=content -output=assets/indices -index -root=.
+
+      - name: Build graph JSON
+        run: python3 scripts/build-graph.sh
+
+      - name: Build site
         run: hugo --minify
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
