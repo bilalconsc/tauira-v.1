@@ -10,20 +10,19 @@
 
   /* ── 2. Compact label helper ──
      Extracts a short identifier from the node label.
-     Examples:
-       "Round Tables"        → "Round Tables"   (short already)
-       "enc-2025-T1-W3-L2"   → "W3-L2"
-       "Assessment Rubric"   → "Rubric"
-     Rule: if label contains a hyphenated date-like segment, show last
-     two dash-segments; otherwise show the label as-is truncated to 14 chars.
+     Expected ID format: "enc-YYYY-TN-WN-LN" (e.g., "enc-2025-T1-W3-L2").
+     If the label has ≥4 dash-segments and index 1 is a 4-digit year,
+     show only the last two segments (e.g., "W3-L2").
+     Otherwise truncate to MAX_LABEL_CHARS characters.
   */
+  var MAX_LABEL_CHARS = 14;
   function compactLabel(label) {
     if (!label) return '';
     var parts = label.split('-');
     if (parts.length >= 4 && /^\d{4}$/.test(parts[1])) {
       return parts.slice(-2).join('-');   // e.g. W3-L2
     }
-    return label.length > 14 ? label.slice(0, 13) + '\u2026' : label;
+    return label.length > MAX_LABEL_CHARS ? label.slice(0, MAX_LABEL_CHARS - 1) + '\u2026' : label;
   }
 
   /* ── 3. Tooltip DOM element (one, reused) ── */
@@ -164,6 +163,7 @@
     });
 
     /* ── Fullscreen ── */
+    var DEFAULT_HEIGHT = '560px';  // matches the inline height on #tauira-graph divs in content files
     var fsBtn = document.getElementById('btn-fullscreen');
     if (fsBtn) {
       fsBtn.addEventListener('click', function () {
@@ -174,7 +174,7 @@
         }
       });
       document.addEventListener('fullscreenchange', function () {
-        el.style.height = document.fullscreenElement === el ? '100vh' : '560px';
+        el.style.height = document.fullscreenElement === el ? '100vh' : DEFAULT_HEIGHT;
         el.style.borderRadius = document.fullscreenElement === el ? '0' : '8px';
         renderer.refresh();
       });
@@ -182,6 +182,7 @@
   }
 
   /* ── 6. Dynamic CDN loader ── */
+  var graphURL = '{{ site.Params.graphDataPath | relURL }}';
   var libs = [
     'https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js',
     'https://cdn.jsdelivr.net/npm/graphology-communities-louvain@2.0.2/dist/graphology-communities-louvain.min.js',
@@ -197,7 +198,7 @@
     };
     s.onload = function () {
       if (++loaded === libs.length) {
-        fetch('/tauira/graph/tauira-graph.json')
+        fetch(graphURL)
           .then(function (r) {
             if (!r.ok) throw new Error('HTTP ' + r.status);
             return r.json();
