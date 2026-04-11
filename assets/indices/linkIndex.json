@@ -1,564 +1,299 @@
 {
   "index": {
     "links": {
-      "/": [
+      "/artefacts/artefact-001": [
         {
-          "source": "/",
-          "target": "/setup/setup",
-          "text": "Setup your own Amethyst instance"
-        },
-        {
-          "source": "/",
-          "target": "/setup/editing",
-          "text": "Editing Notes in Amethyst"
-        },
-        {
-          "source": "/",
-          "target": "/setup/obsidian",
-          "text": "How to setup your Obsidian Vault to work with Amethyst"
-        },
-        {
-          "source": "/",
-          "target": "/setup/preview-changes",
-          "text": "Preview Changes"
-        },
-        {
-          "source": "/",
-          "target": "/setup/hosting",
-          "text": "Hosting Amethyst online!"
-        },
-        {
-          "source": "/",
-          "target": "/setup/config",
-          "text": "Customizing Amethyst"
-        },
-        {
-          "source": "/",
-          "target": "/setup/updating",
-          "text": "update"
-        },
-        {
-          "source": "/",
-          "target": "/tags/setup",
-          "text": "setup-related notes"
-        },
-        {
-          "source": "/",
-          "target": "/setup/troubleshooting",
-          "text": "Troubleshooting and FAQ"
+          "source": "/artefacts/artefact-001",
+          "target": "/enc-2025-T1-W3-L2",
+          "text": "enc-2025-T1-W3-L2"
         }
       ],
-      "/features/languages": [
+      "/encounters/enc-2025-T1-W3-L2": [
         {
-          "source": "/features/languages",
-          "target": "/setup/config",
-          "text": "config"
+          "source": "/encounters/enc-2025-T1-W3-L2",
+          "target": "/enc-2025-T1-W5-L3",
+          "text": "enc-2025-T1-W5-L3"
+        },
+        {
+          "source": "/encounters/enc-2025-T1-W3-L2",
+          "target": "/memo-001",
+          "text": "memo-001"
         }
       ],
-      "/setup/config": [
+      "/encounters/enc-2025-T1-W4-L1": [
         {
-          "source": "/setup/config",
-          "target": "/features/language",
-          "text": "Chinese, Japanese, and Korean support"
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/Assessment-Rubric",
+          "text": "Assessment Rubric"
         },
         {
-          "source": "/setup/config",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/Rhizomatic-Thinking",
+          "text": "Rhizomatic Thinking"
+        },
+        {
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/memo-002",
+          "text": "memo-002"
+        },
+        {
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/essay-001",
+          "text": "essay-001"
         }
       ],
-      "/setup/editing": [
+      "/encounters/enc-2025-T1-W5-L3": [
         {
-          "source": "/setup/editing",
-          "target": "/setup/obsidian",
-          "text": "How to setup your Obsidian Vault to work with Amethyst"
+          "source": "/encounters/enc-2025-T1-W5-L3",
+          "target": "/essay-001",
+          "text": "essay-001"
         },
         {
-          "source": "/setup/editing",
-          "target": "/setup/preview-changes",
-          "text": "Preview Changes"
+          "source": "/encounters/enc-2025-T1-W5-L3",
+          "target": "/Rhizomatic-Thinking",
+          "text": "Rhizomatic Thinking"
         },
         {
-          "source": "/setup/editing",
-          "target": "/setup/hosting",
-          "text": "Hosting Amethyst online!"
-        },
-        {
-          "source": "/setup/editing",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
+          "source": "/encounters/enc-2025-T1-W5-L3",
+          "target": "/memo-003",
+          "text": "memo-003"
         }
       ],
-      "/setup/hosting": [
+      "/essays/essay-001": [
         {
-          "source": "/setup/hosting",
-          "target": "/setup/custom-Domain",
-          "text": "Learn how to set it up with Amethyst"
+          "source": "/essays/essay-001",
+          "target": "/enc-2025-T1-W3-L2",
+          "text": "enc-2025-T1-W3-L2"
         },
         {
-          "source": "/setup/hosting",
-          "target": "/setup/ignore-notes",
-          "text": "Excluding pages from being published"
+          "source": "/essays/essay-001",
+          "target": "/enc-2025-T1-W4-L1",
+          "text": "enc-2025-T1-W4-L1"
         },
         {
-          "source": "/setup/hosting",
-          "target": "/setup/config",
-          "text": "Customizing Amethyst"
+          "source": "/essays/essay-001",
+          "target": "/enc-2025-T1-W5-L3",
+          "text": "enc-2025-T1-W5-L3"
         },
         {
-          "source": "/setup/hosting",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
+          "source": "/essays/essay-001",
+          "target": "/memo-003",
+          "text": "memo-003"
         }
       ],
-      "/setup/obsidian": [
+      "/memos/memo-001": [
         {
-          "source": "/setup/obsidian",
-          "target": "/setup/setup",
-          "text": "setup"
-        },
-        {
-          "source": "/setup/obsidian",
-          "target": "/setup/preview-changes",
-          "text": "Preview Changes"
+          "source": "/memos/memo-001",
+          "target": "/enc-2025-T1-W3-L2",
+          "text": "enc-2025-T1-W3-L2"
         }
       ],
-      "/setup/preview-changes": [
+      "/memos/memo-002": [
         {
-          "source": "/setup/preview-changes",
-          "target": "/setup/hosting",
-          "text": "Hosting Amethyst online!"
+          "source": "/memos/memo-002",
+          "target": "/enc-2025-T1-W4-L1",
+          "text": "enc-2025-T1-W4-L1"
         }
       ],
-      "/setup/setup": [
+      "/memos/memo-003": [
         {
-          "source": "/setup/setup",
-          "target": "/setup/editing",
-          "text": "Editing Notes in Amethyst"
-        },
-        {
-          "source": "/setup/setup",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
-        }
-      ],
-      "/setup/troubleshooting": [
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/features/latex",
-          "text": "LaTeX"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/hosting",
-          "text": "hosting"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/ignore-notes",
-          "text": "excluding pages from being published"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/hosting",
-          "text": "hosting"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/obsidian",
-          "text": "Obsidian"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/editing",
-          "text": "the 'how to edit' guide"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/hosting",
-          "text": "the hosting guide"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/config",
-          "text": "customization guide"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/editing",
-          "text": "local editing"
+          "source": "/memos/memo-003",
+          "target": "/enc-2025-T1-W5-L3",
+          "text": "enc-2025-T1-W5-L3"
         }
       ]
     },
     "backlinks": {
-      "/features/language": [
+      "/Assessment-Rubric": [
         {
-          "source": "/setup/config",
-          "target": "/features/language",
-          "text": "Chinese, Japanese, and Korean support"
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/Assessment-Rubric",
+          "text": "Assessment Rubric"
         }
       ],
-      "/features/latex": [
+      "/Rhizomatic-Thinking": [
         {
-          "source": "/setup/troubleshooting",
-          "target": "/features/latex",
-          "text": "LaTeX"
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/Rhizomatic-Thinking",
+          "text": "Rhizomatic Thinking"
+        },
+        {
+          "source": "/encounters/enc-2025-T1-W5-L3",
+          "target": "/Rhizomatic-Thinking",
+          "text": "Rhizomatic Thinking"
         }
       ],
-      "/setup/config": [
+      "/enc-2025-T1-W3-L2": [
         {
-          "source": "/",
-          "target": "/setup/config",
-          "text": "Customizing Amethyst"
+          "source": "/artefacts/artefact-001",
+          "target": "/enc-2025-T1-W3-L2",
+          "text": "enc-2025-T1-W3-L2"
         },
         {
-          "source": "/features/languages",
-          "target": "/setup/config",
-          "text": "config"
+          "source": "/essays/essay-001",
+          "target": "/enc-2025-T1-W3-L2",
+          "text": "enc-2025-T1-W3-L2"
         },
         {
-          "source": "/setup/hosting",
-          "target": "/setup/config",
-          "text": "Customizing Amethyst"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/config",
-          "text": "customization guide"
+          "source": "/memos/memo-001",
+          "target": "/enc-2025-T1-W3-L2",
+          "text": "enc-2025-T1-W3-L2"
         }
       ],
-      "/setup/custom-Domain": [
+      "/enc-2025-T1-W4-L1": [
         {
-          "source": "/setup/hosting",
-          "target": "/setup/custom-Domain",
-          "text": "Learn how to set it up with Amethyst"
+          "source": "/essays/essay-001",
+          "target": "/enc-2025-T1-W4-L1",
+          "text": "enc-2025-T1-W4-L1"
+        },
+        {
+          "source": "/memos/memo-002",
+          "target": "/enc-2025-T1-W4-L1",
+          "text": "enc-2025-T1-W4-L1"
         }
       ],
-      "/setup/editing": [
+      "/enc-2025-T1-W5-L3": [
         {
-          "source": "/",
-          "target": "/setup/editing",
-          "text": "Editing Notes in Amethyst"
+          "source": "/encounters/enc-2025-T1-W3-L2",
+          "target": "/enc-2025-T1-W5-L3",
+          "text": "enc-2025-T1-W5-L3"
         },
         {
-          "source": "/setup/setup",
-          "target": "/setup/editing",
-          "text": "Editing Notes in Amethyst"
+          "source": "/essays/essay-001",
+          "target": "/enc-2025-T1-W5-L3",
+          "text": "enc-2025-T1-W5-L3"
         },
         {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/editing",
-          "text": "the 'how to edit' guide"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/editing",
-          "text": "local editing"
+          "source": "/memos/memo-003",
+          "target": "/enc-2025-T1-W5-L3",
+          "text": "enc-2025-T1-W5-L3"
         }
       ],
-      "/setup/hosting": [
+      "/essay-001": [
         {
-          "source": "/",
-          "target": "/setup/hosting",
-          "text": "Hosting Amethyst online!"
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/essay-001",
+          "text": "essay-001"
         },
         {
-          "source": "/setup/editing",
-          "target": "/setup/hosting",
-          "text": "Hosting Amethyst online!"
-        },
-        {
-          "source": "/setup/preview-changes",
-          "target": "/setup/hosting",
-          "text": "Hosting Amethyst online!"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/hosting",
-          "text": "hosting"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/hosting",
-          "text": "hosting"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/hosting",
-          "text": "the hosting guide"
+          "source": "/encounters/enc-2025-T1-W5-L3",
+          "target": "/essay-001",
+          "text": "essay-001"
         }
       ],
-      "/setup/ignore-notes": [
+      "/memo-001": [
         {
-          "source": "/setup/hosting",
-          "target": "/setup/ignore-notes",
-          "text": "Excluding pages from being published"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/ignore-notes",
-          "text": "excluding pages from being published"
+          "source": "/encounters/enc-2025-T1-W3-L2",
+          "target": "/memo-001",
+          "text": "memo-001"
         }
       ],
-      "/setup/obsidian": [
+      "/memo-002": [
         {
-          "source": "/",
-          "target": "/setup/obsidian",
-          "text": "How to setup your Obsidian Vault to work with Amethyst"
-        },
-        {
-          "source": "/setup/editing",
-          "target": "/setup/obsidian",
-          "text": "How to setup your Obsidian Vault to work with Amethyst"
-        },
-        {
-          "source": "/setup/troubleshooting",
-          "target": "/setup/obsidian",
-          "text": "Obsidian"
+          "source": "/encounters/enc-2025-T1-W4-L1",
+          "target": "/memo-002",
+          "text": "memo-002"
         }
       ],
-      "/setup/preview-changes": [
+      "/memo-003": [
         {
-          "source": "/",
-          "target": "/setup/preview-changes",
-          "text": "Preview Changes"
+          "source": "/encounters/enc-2025-T1-W5-L3",
+          "target": "/memo-003",
+          "text": "memo-003"
         },
         {
-          "source": "/setup/editing",
-          "target": "/setup/preview-changes",
-          "text": "Preview Changes"
-        },
-        {
-          "source": "/setup/obsidian",
-          "target": "/setup/preview-changes",
-          "text": "Preview Changes"
-        }
-      ],
-      "/setup/setup": [
-        {
-          "source": "/",
-          "target": "/setup/setup",
-          "text": "Setup your own Amethyst instance"
-        },
-        {
-          "source": "/setup/obsidian",
-          "target": "/setup/setup",
-          "text": "setup"
-        }
-      ],
-      "/setup/troubleshooting": [
-        {
-          "source": "/",
-          "target": "/setup/troubleshooting",
-          "text": "Troubleshooting and FAQ"
-        },
-        {
-          "source": "/setup/config",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
-        },
-        {
-          "source": "/setup/editing",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
-        },
-        {
-          "source": "/setup/hosting",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
-        },
-        {
-          "source": "/setup/setup",
-          "target": "/setup/troubleshooting",
-          "text": "FAQ and Troubleshooting guide"
-        }
-      ],
-      "/setup/updating": [
-        {
-          "source": "/",
-          "target": "/setup/updating",
-          "text": "update"
-        }
-      ],
-      "/tags/setup": [
-        {
-          "source": "/",
-          "target": "/tags/setup",
-          "text": "setup-related notes"
+          "source": "/essays/essay-001",
+          "target": "/memo-003",
+          "text": "memo-003"
         }
       ]
     }
   },
   "links": [
     {
-      "source": "/",
-      "target": "/setup/setup",
-      "text": "Setup your own Amethyst instance"
+      "source": "/artefacts/artefact-001",
+      "target": "/enc-2025-T1-W3-L2",
+      "text": "enc-2025-T1-W3-L2"
     },
     {
-      "source": "/",
-      "target": "/setup/editing",
-      "text": "Editing Notes in Amethyst"
+      "source": "/encounters/enc-2025-T1-W3-L2",
+      "target": "/enc-2025-T1-W5-L3",
+      "text": "enc-2025-T1-W5-L3"
     },
     {
-      "source": "/",
-      "target": "/setup/obsidian",
-      "text": "How to setup your Obsidian Vault to work with Amethyst"
+      "source": "/encounters/enc-2025-T1-W3-L2",
+      "target": "/memo-001",
+      "text": "memo-001"
     },
     {
-      "source": "/",
-      "target": "/setup/preview-changes",
-      "text": "Preview Changes"
+      "source": "/encounters/enc-2025-T1-W4-L1",
+      "target": "/Assessment-Rubric",
+      "text": "Assessment Rubric"
     },
     {
-      "source": "/",
-      "target": "/setup/hosting",
-      "text": "Hosting Amethyst online!"
+      "source": "/encounters/enc-2025-T1-W4-L1",
+      "target": "/Rhizomatic-Thinking",
+      "text": "Rhizomatic Thinking"
     },
     {
-      "source": "/",
-      "target": "/setup/config",
-      "text": "Customizing Amethyst"
+      "source": "/encounters/enc-2025-T1-W4-L1",
+      "target": "/memo-002",
+      "text": "memo-002"
     },
     {
-      "source": "/",
-      "target": "/setup/updating",
-      "text": "update"
+      "source": "/encounters/enc-2025-T1-W4-L1",
+      "target": "/essay-001",
+      "text": "essay-001"
     },
     {
-      "source": "/",
-      "target": "/tags/setup",
-      "text": "setup-related notes"
+      "source": "/encounters/enc-2025-T1-W5-L3",
+      "target": "/essay-001",
+      "text": "essay-001"
     },
     {
-      "source": "/",
-      "target": "/setup/troubleshooting",
-      "text": "Troubleshooting and FAQ"
+      "source": "/encounters/enc-2025-T1-W5-L3",
+      "target": "/Rhizomatic-Thinking",
+      "text": "Rhizomatic Thinking"
     },
     {
-      "source": "/features/languages",
-      "target": "/setup/config",
-      "text": "config"
+      "source": "/encounters/enc-2025-T1-W5-L3",
+      "target": "/memo-003",
+      "text": "memo-003"
     },
     {
-      "source": "/setup/config",
-      "target": "/features/language",
-      "text": "Chinese, Japanese, and Korean support"
+      "source": "/essays/essay-001",
+      "target": "/enc-2025-T1-W3-L2",
+      "text": "enc-2025-T1-W3-L2"
     },
     {
-      "source": "/setup/config",
-      "target": "/setup/troubleshooting",
-      "text": "FAQ and Troubleshooting guide"
+      "source": "/essays/essay-001",
+      "target": "/enc-2025-T1-W4-L1",
+      "text": "enc-2025-T1-W4-L1"
     },
     {
-      "source": "/setup/editing",
-      "target": "/setup/obsidian",
-      "text": "How to setup your Obsidian Vault to work with Amethyst"
+      "source": "/essays/essay-001",
+      "target": "/enc-2025-T1-W5-L3",
+      "text": "enc-2025-T1-W5-L3"
     },
     {
-      "source": "/setup/editing",
-      "target": "/setup/preview-changes",
-      "text": "Preview Changes"
+      "source": "/essays/essay-001",
+      "target": "/memo-003",
+      "text": "memo-003"
     },
     {
-      "source": "/setup/editing",
-      "target": "/setup/hosting",
-      "text": "Hosting Amethyst online!"
+      "source": "/memos/memo-001",
+      "target": "/enc-2025-T1-W3-L2",
+      "text": "enc-2025-T1-W3-L2"
     },
     {
-      "source": "/setup/editing",
-      "target": "/setup/troubleshooting",
-      "text": "FAQ and Troubleshooting guide"
+      "source": "/memos/memo-002",
+      "target": "/enc-2025-T1-W4-L1",
+      "text": "enc-2025-T1-W4-L1"
     },
     {
-      "source": "/setup/hosting",
-      "target": "/setup/custom-Domain",
-      "text": "Learn how to set it up with Amethyst"
-    },
-    {
-      "source": "/setup/hosting",
-      "target": "/setup/ignore-notes",
-      "text": "Excluding pages from being published"
-    },
-    {
-      "source": "/setup/hosting",
-      "target": "/setup/config",
-      "text": "Customizing Amethyst"
-    },
-    {
-      "source": "/setup/hosting",
-      "target": "/setup/troubleshooting",
-      "text": "FAQ and Troubleshooting guide"
-    },
-    {
-      "source": "/setup/obsidian",
-      "target": "/setup/setup",
-      "text": "setup"
-    },
-    {
-      "source": "/setup/obsidian",
-      "target": "/setup/preview-changes",
-      "text": "Preview Changes"
-    },
-    {
-      "source": "/setup/preview-changes",
-      "target": "/setup/hosting",
-      "text": "Hosting Amethyst online!"
-    },
-    {
-      "source": "/setup/setup",
-      "target": "/setup/editing",
-      "text": "Editing Notes in Amethyst"
-    },
-    {
-      "source": "/setup/setup",
-      "target": "/setup/troubleshooting",
-      "text": "FAQ and Troubleshooting guide"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/features/latex",
-      "text": "LaTeX"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/hosting",
-      "text": "hosting"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/ignore-notes",
-      "text": "excluding pages from being published"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/hosting",
-      "text": "hosting"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/obsidian",
-      "text": "Obsidian"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/editing",
-      "text": "the 'how to edit' guide"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/hosting",
-      "text": "the hosting guide"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/config",
-      "text": "customization guide"
-    },
-    {
-      "source": "/setup/troubleshooting",
-      "target": "/setup/editing",
-      "text": "local editing"
+      "source": "/memos/memo-003",
+      "target": "/enc-2025-T1-W5-L3",
+      "text": "enc-2025-T1-W5-L3"
     }
   ]
 }
