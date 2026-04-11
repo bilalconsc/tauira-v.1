@@ -39,14 +39,11 @@
   document.body.appendChild(tooltip);
 
   function positionTooltip(event) {
-    var x = (event.original && event.original.clientX != null)
-      ? event.original.clientX
-      : (event.x != null ? event.x : 0);
-    var y = (event.original && event.original.clientY != null)
-      ? event.original.clientY
-      : (event.y != null ? event.y : 0);
-    var tw = tooltip.offsetWidth;
-    var th = tooltip.offsetHeight;
+    // sigma 3.x: event may be a sigma SigmaMouseEvent or native MouseEvent
+    var x = event?.original?.clientX ?? event?.clientX ?? event?.x ?? 0;
+    var y = event?.original?.clientY ?? event?.clientY ?? event?.y ?? 0;
+    var tw = tooltip.offsetWidth  || 200;
+    var th = tooltip.offsetHeight || 80;
     var vw = window.innerWidth;
     var vh = window.innerHeight;
     tooltip.style.left = (x + 16 + tw > vw ? x - tw - 12 : x + 16) + 'px';
@@ -55,9 +52,9 @@
 
   // ── Load scripts sequentially then fetch data ───────────────────────
   var libs = [
-    'https://cdn.jsdelivr.net/npm/graphology@0.25.1/dist/graphology.umd.min.js',
-    'https://cdn.jsdelivr.net/npm/graphology-communities-louvain@2.0.0/dist/graphology-communities-louvain.min.js',
-    'https://cdn.jsdelivr.net/npm/sigma@2.4.0/build/sigma.min.js'
+    'https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/graphology-communities-louvain@2.0.2/dist/graphology-communities-louvain.min.js',
+    'https://cdn.jsdelivr.net/npm/sigma@3.0.2/build/sigma.min.js'
   ];
 
   function loadScripts(urls, cb) {
@@ -142,7 +139,11 @@
     // ── Sigma renderer ──────────────────────────────────────────────
     var renderer = new Sigma(g, graphEl, {
       renderEdgeLabels: false,
-      defaultEdgeColor: '#ccc'
+      defaultEdgeColor: '#ccc',
+      defaultNodeColor: '#999',
+      labelFont: 'inherit',
+      labelSize: 13,
+      allowInvalidContainer: true
     });
 
     // ── Tooltip events ──────────────────────────────────────────────
@@ -204,7 +205,7 @@
       if (payload.event) positionTooltip(payload.event);
     });
 
-    renderer.on('moveBody', function (payload) {
+    renderer.on('mousemovebody', function (payload) {
       if (payload.event) positionTooltip(payload.event);
     });
 
