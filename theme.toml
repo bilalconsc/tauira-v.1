@@ -1,4 +1,4 @@
-baseURL = "https://bilalconsc.github.io/tauira-v.1/"
+baseURL = "/tauira-v.1/"
 title = "Tauira"
 theme = "amethyst"
 
@@ -15,7 +15,7 @@ enableGitInfo = true
 [menu]
   [[menu.after]]
     name   = "GitHub"
-    url    = "https://github.com/bibymaths/tauira"
+    url    = "/tauira-v.1/"
     weight = 10
 
 [params]

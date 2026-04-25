@@ -452,7 +452,7 @@ Do not auto-redact. Report only.
 
 Before tagging a release, verify:
 
-- `config.yaml` baseURL is `https://bilalconsc.github.io/tauira-v.1/`
+- `config.yaml` baseURL is `/tauira-v.1/`
 - workflow has no `cname`
 - `static/graph/tauira-graph.json` is fresh
 - `assets/indices/` is fresh

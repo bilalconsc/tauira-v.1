@@ -12,7 +12,7 @@ The site translates classroom data into a **rhizomatic text network** — nodes
 representing participants categorised as Material (M), Knowledge (K), or
 Instinctual (I), and edges representing the relationships between them.
 
-**Live site →** [bibymaths.github.io/tauira](https://bilalconsc.github.io/tauira-v.1/)
+**Live site →** [bibymaths.github.io/tauira](/tauira-v.1/)
 
 ---
 
@@ -172,11 +172,11 @@ Override theme behaviour without editing theme internals:
 
 Deploys automatically to GitHub Pages on push to `main`.
 
-**Live URL:** `https://bilalconsc.github.io/tauira-v.1/`
+**Live URL:** `/tauira-v.1/`
 
 `baseURL` in `config.yaml` must remain:
 ```yaml
-baseURL: "https://bilalconsc.github.io/tauira-v.1/"
+baseURL: "/tauira-v.1/"
 ```
 
 ---
