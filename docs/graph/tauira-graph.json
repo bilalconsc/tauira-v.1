@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "generatedAt": "2026-04-25T10:45:59.849Z",
+    "nodeCount": 6,
+    "edgeCount": 5,
+    "schemaVersion": "v1",
+    "baseURL": "/tauira/",
+    "categories": {
+      "M": 2,
+      "K": 2,
+      "I": 2
+    }
+  },
+  "nodes": [
+    {
+      "id": "node-001",
+      "label": "Round Tables",
+      "category": "M",
+      "subcategory": "furniture"
+    },
+    {
+      "id": "node-002",
+      "label": "Student S3",
+      "category": "M",
+      "subcategory": "humanoid"
+    },
+    {
+      "id": "node-003",
+      "label": "Assessment Rubric",
+      "category": "K",
+      "subcategory": "policy"
+    },
+    {
+      "id": "node-004",
+      "label": "Rhizomatic Thinking",
+      "category": "K",
+      "subcategory": "theory"
+    },
+    {
+      "id": "node-005",
+      "label": "Boredom",
+      "category": "I",
+      "subcategory": "affect"
+    },
+    {
+      "id": "node-006",
+      "label": "Laughter",
+      "category": "I",
+      "subcategory": "affect"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "node-001",
+      "target": "node-005",
+      "weight": 0.75,
+      "relationshipType": "affect"
+    },
+    {
+      "id": "edge-002",
+      "source": "node-002",
+      "target": "node-006",
+      "weight": 0.9,
+      "relationshipType": "enables"
+    },
+    {
+      "id": "edge-003",
+      "source": "node-003",
+      "target": "node-005",
+      "weight": 0.65,
+      "relationshipType": "constraint"
+    },
+    {
+      "id": "edge-004",
+      "source": "node-006",
+      "target": "node-005",
+      "weight": 0.85,
+      "relationshipType": "disrupts"
+    },
+    {
+      "id": "edge-005",
+      "source": "node-004",
+      "target": "node-001",
+      "weight": 0.5,
+      "relationshipType": "diffracts"
+    }
+  ]
+}

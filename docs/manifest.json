@@ -1,0 +1,15 @@
+{
+  "name": "📓 Tauira",
+  "short_name": "📓 Tauira",
+  "start_url": "/bilalconsc/tauira-v.1/",
+  "scope": "/bilalconsc/tauira-v.1/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/bilalconsc/tauira-v.1/favicon.png",
+      "sizes": "1024x1024"
+    }
+  ]
+}

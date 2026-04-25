@@ -1,0 +1,77 @@
+{
+  "edges": [
+    {
+      "id": "edge-001",
+      "relationshipType": "affect",
+      "source": "node-001",
+      "target": "node-005",
+      "weight": 0.75
+    },
+    {
+      "id": "edge-002",
+      "relationshipType": "enables",
+      "source": "node-002",
+      "target": "node-006",
+      "weight": 0.9
+    },
+    {
+      "id": "edge-003",
+      "relationshipType": "constraint",
+      "source": "node-003",
+      "target": "node-005",
+      "weight": 0.65
+    },
+    {
+      "id": "edge-004",
+      "relationshipType": "disrupts",
+      "source": "node-006",
+      "target": "node-005",
+      "weight": 0.85
+    },
+    {
+      "id": "edge-005",
+      "relationshipType": "diffracts",
+      "source": "node-004",
+      "target": "node-001",
+      "weight": 0.5
+    }
+  ],
+  "nodes": [
+    {
+      "category": "M",
+      "id": "node-001",
+      "label": "Round Tables",
+      "subcategory": "furniture"
+    },
+    {
+      "category": "M",
+      "id": "node-002",
+      "label": "Student S3",
+      "subcategory": "humanoid"
+    },
+    {
+      "category": "K",
+      "id": "node-003",
+      "label": "Assessment Rubric",
+      "subcategory": "policy"
+    },
+    {
+      "category": "K",
+      "id": "node-004",
+      "label": "Rhizomatic Thinking",
+      "subcategory": "theory"
+    },
+    {
+      "category": "I",
+      "id": "node-005",
+      "label": "Boredom",
+      "subcategory": "affect"
+    },
+    {
+      "category": "I",
+      "id": "node-006",
+      "label": "Laughter",
+      "subcategory": "affect"
+    }
+  ]
+}
