@@ -1,4 +1,4 @@
-baseURL: "https://github.com/bilalconsc/tauira-v.1"
+baseURL: "/tauira-v.1/"
 languageCode: "en-nz"
 
 # Book configuration
@@ -31,7 +31,7 @@ menu:
   #     weight: 10
   after:
     - name: "GitHub"
-      url: "https://github.com/bilalconsc/tauira-v.1"
+      url: "/tauira-v.1/"
       weight: 10
 
 params:
@@ -82,7 +82,7 @@ params:
   enableMermaid: true
 
   # Link to your Github repo
-  GitHubLink: https://github.com/bilalconsc/tauira-v.1
+  GitHubLink: /tauira-v.1/
 
   # Search (WIP)
   search:
@@ -98,7 +98,7 @@ params:
   # Footer links
   links:
     - link_name: GitHub
-      link: https://github.com/bilalconsc/tauira-v.1
+      link: /tauira-v.1/
 
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
@@ -120,7 +120,7 @@ params:
 
   # Set source repository location.
   # Used for 'Last Modified' and 'Edit this page' links.
-  BookRepo: https://github.com/bilalconsc/tauira-v.1
+  BookRepo: /tauira-v.1/
 
   # (Optional, default 'commit') Specifies commit portion of the link to the page's last modified
   # commit hash for 'doc' page type.
