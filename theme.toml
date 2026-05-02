@@ -1,4 +1,6 @@
 baseURL = "/tauira-v.1/"
+relativeURLs = true
+canonifyURLs = false
 title = "Tauira"
 theme = "amethyst"
 
@@ -19,7 +21,7 @@ enableGitInfo = true
     weight = 10
 
 [params]
-  name        = "Abhinav Mishra"
+  name        = "Bilal Arafaat"
   title       = "Tauira"
   description = "Capturing entanglements of an educator-researcher experience."
 
@@ -49,7 +51,7 @@ enableGitInfo = true
   BookComments             = false
 
   # ── Repo link (used by Last Modified footer and Edit links)
-  BookRepo                 = "https://github.com/bibymaths/tauira"
+  BookRepo                 = "https://github.com/bilalconsc/tauira-v.1"
   BookDateFormat           = "January 2, 2006"
   BookSection              = "/"
 

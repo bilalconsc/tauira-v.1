@@ -1,6 +1,116 @@
-# Tauira Hugo configuration has been consolidated into config.yaml.
-#
-# This file exists as a placeholder only. Do not add configuration here.
-# Hugo loads config.yaml as the active root configuration for this project.
-# See config.yaml for all site settings including outputs, taxonomies,
-# and Tauira-specific params (schemaVersion, graphDataPath).
+baseURL: "http://localhost:1313/tauira-v.1/"
+languageCode: "en-nz"
+
+# Book configuration
+disablePathToLower: true
+enableGitInfo: true
+
+# Needed for mermaid/katex shortcodes
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 1
+
+# Tauira output formats: generate HTML for all sections + JSON at home for graph export
+outputs:
+  home: [HTML, JSON]
+  section: [HTML]
+
+# Tauira taxonomies
+taxonomies:
+  tag: tags
+  assemblage: assemblages
+
+menu:
+  after:
+    - name: "GitHub"
+      url: "/"
+      weight: 10
+
+params:
+  # Tauira project settings
+  schemaVersion: "v1"
+  # Points to the static pre-built graph JSON (from static/graph/tauira-graph.json).
+  # The template uses Hugo relURL to derive the correct subpath at render time.
+  graphDataPath: "graph/tauira-graph.json"
+
+  name: Tauira
+  title: "Tauira"
+
+  # whether to display on-hover link preview cards
+  enableLinkPreview: true
+
+  # Enable rendering of LaTeX blocks
+  enableLatex: true
+
+  # whether to render titles for code blocks
+  enableCodeBlockTitle: true
+
+  # whether to render copy buttons for code blocks
+  enableCodeBlockCopy: true
+
+  # whether to render callouts
+  enableCallouts: true
+
+  # Show footer, including backlinks and graph view
+  enableFooter: true
+
+  # whether backlinks of pages should show the context in which
+  # they were mentioned
+  enableContextualBacklinks: true
+
+  # whether to show a section of recent notes on the home page
+  enableRecentNotes: false
+
+  # whether to display an 'edit' button next to the last edited field
+  # that links to github
+  enableGitHubEdit: true
+
+  # whether to render mermaid diagrams
+  enableMermaid: true
+
+  # Link to your Github repo
+  GitHubLink: /tauira-v.1/
+
+  # Search (WIP)
+  search:
+    enableSemanticSearch: false
+    operandApiKey: "REPLACE-WITH-YOUR-OPERAND-API-KEY"
+    operandIndexId: "REPLACE-WITH-YOUR-OPERAND-INDEX-ID"
+
+  # Site description and title
+  description: "Tauira - Autoethnographic knowledge graph for classroom entanglements"
+
+  # Footer links
+  links:
+    - link_name: GitHub
+      link: /tauira-v.1/
+
+  # Controls table of contents visibility on right side of pages.
+  BookToC: true
+
+  # Specify root page to render child pages as menu.
+  BookSection: "/"
+
+  # Set source repository location.
+  BookRepo: /tauira-v.1/
+
+  # Edit path must point to root directory of repo.
+  BookEditPath: edit/main/exampleSite
+
+  # Configure the date format used on the pages
+  BookDateFormat: "January 2, 2006"
+
+  # Enables comments template on pages
+  BookComments: true
+
+  # Enables a drop-down menu for translations only if a translation is present.
+  BookTranslatedOnly: false
+
+  # Don't change this
+  enableSPA: false
+  BookSearch: false
+  BookServiceWorker: false
+  BookPortableLinks: false

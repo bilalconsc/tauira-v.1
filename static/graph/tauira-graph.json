@@ -1,87 +1,269 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-25T10:45:59.849Z",
-    "nodeCount": 6,
-    "edgeCount": 5,
+    "generatedAt": "2026-04-26T13:47:34.176Z",
+    "nodeCount": 14,
+    "edgeCount": 10,
     "schemaVersion": "v1",
     "baseURL": "/tauira/",
     "categories": {
-      "M": 2,
-      "K": 2,
+      "M": 5,
+      "K": 7,
       "I": 2
+    },
+    "weightScale": {
+      "0.50": "background or supporting relation",
+      "0.65": "moderate structuring relation",
+      "0.75": "strong inhibiting or enabling relation",
+      "0.85": "high disruptive or transformative relation",
+      "0.90": "dominant relation in the encounter"
     }
   },
   "nodes": [
     {
       "id": "node-001",
-      "label": "Round Tables",
+      "label": "analytic-performance",
+      "category": "K",
+      "subcategory": "performance"
+    },
+    {
+      "id": "node-002",
+      "label": "creative-transition",
+      "category": "K",
+      "subcategory": "state"
+    },
+    {
+      "id": "node-003",
+      "label": "worksheet-correctness",
+      "category": "M",
+      "subcategory": "assignment"
+    },
+    {
+      "id": "node-004",
+      "label": "desk-orientation",
       "category": "M",
       "subcategory": "furniture"
     },
     {
-      "id": "node-002",
-      "label": "Student S3",
-      "category": "M",
-      "subcategory": "humanoid"
-    },
-    {
-      "id": "node-003",
-      "label": "Assessment Rubric",
-      "category": "K",
-      "subcategory": "policy"
-    },
-    {
-      "id": "node-004",
-      "label": "Rhizomatic Thinking",
-      "category": "K",
-      "subcategory": "theory"
-    },
-    {
       "id": "node-005",
-      "label": "Boredom",
-      "category": "I",
-      "subcategory": "affect"
+      "label": "visible-thinking",
+      "category": "K",
+      "subcategory": "social thinking"
     },
     {
       "id": "node-006",
-      "label": "Laughter",
+      "label": "compliance-affect",
       "category": "I",
       "subcategory": "affect"
+    },
+    {
+      "id": "node-007",
+      "label": "teacher-managerial-shift",
+      "category": "I",
+      "subcategory": "affect"
+    },
+    {
+      "id": "node-008",
+      "label": "written-legitimacy",
+      "category": "K",
+      "subcategory": "norms"
+    },
+    {
+      "id": "node-009",
+      "label": "video-medium",
+      "category": "M",
+      "subcategory": "mode"
+    },
+    {
+      "id": "node-010",
+      "label": "student-capability",
+      "category": "K",
+      "subcategory": "performance"
+    },
+    {
+      "id": "node-011",
+      "label": "assessment-rigour",
+      "category": "K",
+      "subcategory": "performance"
+    },
+    {
+      "id": "node-012",
+      "label": "teacher-comfort",
+      "category": "K",
+      "subcategory": "performance"
+    },
+    {
+      "id": "node-013",
+      "label": "differentiation-script",
+      "category": "M",
+      "subcategory": "strategy"
+    },
+    {
+      "id": "node-014",
+      "label": "medium-recognition",
+      "category": "M",
+      "subcategory": "strategy"
+    },
+    {
+      "id": "node-015",
+      "label": "schema",
+      "category": "K",
+      "subcategory": "concept"
+    },
+    {
+      "id": "node-016",
+      "label": "student-recognition",
+      "category": "I",
+      "subcategory": "affect"
+    },
+    {
+      "id": "node-017",
+      "label": "affective-threshold",
+      "category": "I",
+      "subcategory": "affect"
+    },
+    {
+      "id": "node-018",
+      "label": "worksheet-analysis",
+      "category": "K",
+      "subcategory": "performance"
+    },
+    {
+      "id": "node-019",
+      "label": "board-key-terms",
+      "category": "M",
+      "subcategory": "furniture"
+    },
+    {
+      "id": "node-020",
+      "label": "lesson-tempo",
+      "category": "M",
+      "subcategory": "lesson plan"
+    },
+    {
+      "id": "node-021",
+      "label": "teacher-role-instability",
+      "category": "I",
+      "subcategory": "state"
     }
   ],
   "edges": [
     {
       "id": "edge-001",
+      "label": "analytic-performance_to_creative-transition",
       "source": "node-001",
-      "target": "node-005",
+      "target": "node-002",
       "weight": 0.75,
-      "relationshipType": "affect"
+      "relationshipType": "disables"
     },
     {
       "id": "edge-002",
-      "source": "node-002",
+      "label": "worksheet-correctness_to_compliance-affect",
+      "source": "node-003",
       "target": "node-006",
       "weight": 0.9,
       "relationshipType": "enables"
     },
     {
       "id": "edge-003",
-      "source": "node-003",
+      "label": "desk-orientation_to_relational-thinning",
+      "source": "node-004",
       "target": "node-005",
       "weight": 0.65,
       "relationshipType": "constraint"
     },
     {
       "id": "edge-004",
-      "source": "node-006",
-      "target": "node-005",
+      "label": "visible-thinking_to_teacher-managerial-shift",
+      "source": "node-005",
+      "target": "node-007",
       "weight": 0.85,
       "relationshipType": "disrupts"
     },
     {
       "id": "edge-005",
-      "source": "node-004",
-      "target": "node-001",
+      "label": "compliance-affect_to_relational-thinning",
+      "source": "node-006",
+      "target": "node-005",
+      "weight": 0.5,
+      "relationshipType": "diffracts"
+    },
+    {
+      "id": "edge-006",
+      "label": "written-legitimacy_to_assessment-rigour",
+      "source": "node-008",
+      "target": "node-011",
+      "weight": 0.5,
+      "relationshipType": "constraint"
+    },
+    {
+      "id": "edge-007",
+      "label": "student-capability_to_video-medium",
+      "source": "node-010",
+      "target": "node-009",
+      "weight": 0.5,
+      "relationshipType": "enables"
+    },
+    {
+      "id": "edge-008",
+      "label": "video-medium_to_teacher-comfort",
+      "source": "node-009",
+      "target": "node-012",
+      "weight": 0.5,
+      "relationshipType": "disrupts"
+    },
+    {
+      "id": "edge-009",
+      "label": "differentiation-script_to_medium-recognition",
+      "source": "node-013",
+      "target": "node-014",
+      "weight": 0.5,
+      "relationshipType": "enables"
+    },
+    {
+      "id": "edge-010",
+      "label": "teacher-comfort_to_written-legitimacy",
+      "source": "node-012",
+      "target": "node-008",
+      "weight": 0.5,
+      "relationshipType": "enables"
+    },
+    {
+      "id": "edge-011",
+      "label": "schema-concept_to_student-recognition",
+      "source": "node-015",
+      "target": "node-016",
+      "weight": 0.5,
+      "relationshipType": "enables"
+    },
+    {
+      "id": "edge-012",
+      "label": "student-recognition_to_affective-threshold",
+      "source": "node-016",
+      "target": "node-017",
+      "weight": 0.5,
+      "relationshipType": "disrupts"
+    },
+    {
+      "id": "edge-013",
+      "label": "worksheet-analysis_to_lesson-tempo",
+      "source": "node-018",
+      "target": "node-020",
+      "weight": 0.5,
+      "relationshipType": "constraints"
+    },
+    {
+      "id": "edge-014",
+      "label": "board-key-terms_to_conceptual-authority",
+      "source": "node-018",
+      "target": "node-020",
+      "weight": 0.5,
+      "relationshipType": "diffracts"
+    },
+    {
+      "id": "edge-015",
+      "label": "affective-threshold_to_teacher-role-instability",
+      "source": "node-017",
+      "target": "node-021",
       "weight": 0.5,
       "relationshipType": "diffracts"
     }

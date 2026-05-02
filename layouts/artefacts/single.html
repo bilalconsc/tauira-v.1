@@ -24,7 +24,7 @@
     <h2>Related Nodes</h2>
     <div class="node-badges">
       {{ range .Params.nodeRefs }}
-        {{ $node := index $.Site.Data.nodes . }}
+        {{ $node := index hugo.Data.nodes . }}
         {{ if $node }}{{ partial "node-badge.html" $node }}{{ end }}
       {{ end }}
     </div>

@@ -4,4 +4,4 @@ weight: 4
 bookFlatSection: true
 ---
 
-Teaching artefacts — lesson plans and classroom documents referenced across encounters.
+Learning artefacts — lesson plans, worksheets, reflective template, and classroom documents referenced across encounters.

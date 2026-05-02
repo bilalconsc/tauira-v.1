@@ -1,50 +1,61 @@
 ---
-title: "Artefact 001 — Collaborative Writing Lesson Plan (T1 W3–W4)"
+title: "Artefact 001 — Critical Incident Report - Encounter One"
 date: "2025-03-10"
 weight: 20250310
 schemaType: artefact
 id: artefact-001
-type: lesson-plan
+type: critical-incident-report
 layout: default
 encounterId: enc-2025-T1-W3-L2
 anonymised: true
 nodeRefs:
-  - node-001
-  - node-003
+  - node-analytic-performance
+  - node-creative-transition
+  - node-worksheet-correctness
+  - node-visible-thinking
+  - node-compliance-affect
+  - node-teacher-managerial-shift
 ---
 
-## Learning Intentions
+## Summary of Critical Incident
 
-- Students will draft a 400-word collaborative argument using the Assessment Rubric criteria.
-- Students will practise peer-editing using the four-criteria feedback protocol.
-- Students will identify one aspect of the rubric that they find constraining and one they find enabling.
+The last activity of the lesson on “Affordance” required students to transfer their knowledge of the principles of Affordance to designing a product. Initially, students engaged well with prior knowledge activation and affordance scanning, but as tasks shifted to critical analysis and creative application, I noticed damp energy in discussions. I felt uneasy owing to my fact-heavy structure, which cultivated intellect effectively, but neglected emotional connection. I recognised the challenge to integrate love—empathy, relational warmth—with reason for acquiring and using knowledge.
 
-## Materials
+##  Context
 
-- Assessment Rubric (NCEA Level 2 collaborative writing, laminated, one per student)
-- Whiteboard markers (four colours)
-- Draft response booklets (one per group of four)
-- Timer visible to students
+This incident occurred during the final activity of the lesson with IBDP Psychology students.  
 
-## Lesson Plan
+## Wider Influences
 
-| Time | Activity | Notes |
-|------|----------|-------|
-| 0–5 min | Silent reading of the rubric | Students annotate: circle one criterion they understand, underline one they find unclear |
-| 5–10 min | Table discussion: share annotations | Each group nominates a scribe; tables are arranged in cluster near the whiteboard |
-| 10–25 min | Collaborative draft — 400 words | Whole group works toward shared argument; rubric on desk for reference |
-| 25–35 min | Gallery walk: read another group's draft | Two representatives stay at table, two rotate |
-| 35–45 min | Peer-edit using rubric criteria | Focus on one strength and one suggestion per criterion |
-| 45–50 min | Reflection: which criterion helped most? | Open discussion; teacher notes responses on whiteboard |
+My realisation of intellect-love imbalance has brought to my awareness the challenges associated with it. Nel Noddings' care ethics (1984, Caring) posits education as a relational act where teachers prioritise "caring-for" through engrossment and motivational displacement, shifting from abstract knowledge transference to authentic, personalised connections that are embedded in learners' lived realities. In my lesson, this critique fact-heavy tasks for neglecting the relatedness needed to perceive emotional affordances.Jiddu Krishnamurti (1970s dialogues, Education and the Significance of Life) urges choiceless awareness. The reason is detached from conditioning and is integrated with love as a unified perception. Rejecting fragmented intellect cultivation for direct seeing (perceiving) resonates with ecological affordance's unmediated organism-environment mutuality. This incident has made me aware of my own learning experiences that are fact-heavy. Furthermore, I see learning not as a collection of facts and objects, but a meaning-making process that gives structure to our lives. 
 
-## Assessment
+## Application to professional practice: 
 
-This lesson plan is an anonymised teaching artefact. Student names do not appear in any column. Group identifiers (Table A, Table B, etc.) are used in the original record.
+This incident reveals an affective challenge: balancing curriculum demands (e.g., critical evaluation of research) with learners' humanity.  The former risks superficial engagement. Future lessons will integrate love-reason before theory. For instance, gallery walks will include peer empathy feedback. As Palmer (1998) states, "Good teaching comes from the identity and integrity of the teacher," so I commit to relational routines. These routines will include discreet emotion prompts amid activities while ensuring replicable depth without stifling inquiry.  
 
-The rubric referenced here is the NCEA Level 2 collaborative writing rubric, distributed in W2. It appears in the node graph as **node-003 (Assessment Rubric)** and is active across both [[enc-2025-T1-W3-L2]] and the W4 encounter.
+## Related Teachers’ Standards
+
+- **5c** — Demonstrate awareness of the physical, social, and intellectual development of learners, and adapt teaching to support them. 
+- **1c** — Demonstrate consistently the positive attitudes, values, and behaviour expected of pupils. 
+- **1a** — Establish a safe and stimulating environment for pupils, rooted in mutual respect. 
+
+## Self-Evaluation Assessment for Learning
+
+The report records that **ALL** learners were able to describe affordance with evidence and **MOST** were able to analyse ecological versus cognitive perspectives.  At the same time, pair discussions revealed factual recall without emotional depth, and time-management notes indicated disengagement during evaluative stages. 
+
+The report also notes that students’ creativity appeared in their abstracts, including novel ideas such as body-scaled BCI. Yet I also recognised my discomfort in “simply knowing” learner needs without relational dimensions, which limited holistic transfer. 
+The proposed next step is to incorporate love-reason integration in future lessons, including journal activities and pre/post reflection on emotional-concept connections through exit feedback. 
+
+## Rationale
+
+The portfolio explicitly states that this self-evaluation follows Gibbs’ Reflective Cycle. The sequence of description, feelings, and evaluation is grounded in lesson observations, discomfort with disengagement, and evidence of factual success alongside emotional gaps.
+
+Within Tauira, this is precisely what makes the artefact analytically useful. It offers a clear example of how prescribed reflection organizes pedagogical experience into a legible narrative of observation, feeling, evaluation, and future action, while also leaving open a richer diffractive rereading through the encounter and memo network. 
 
 ## Notes
 
-- Round tables (node-001) supported the cluster seating arrangement essential to this task.
-- Boredom (node-005) was observable in the first ten minutes; the gallery walk partially addressed this.
-- This lesson plan was not followed exactly in W3 — the S3 joke event interrupted the sequence at the 10-minute mark.
+- This artefact is an anonymised critical incident report from the Professional Development Portfolio. 
+- Student names do not appear in the record. 
+- The lesson centred on Affordance in IBDP Psychology and the final task required transfer from conceptual understanding to product design. 
+- The portfolio frames the event through Gibbs’ Reflective Cycle, while Tauira extends it through assemblage analysis and rhizomatic mapping. 
+- See [[enc-2025-T1-W3-L2]] for the encounter version of the event and [[memo-001]] for the diffractive memo that identifies further gaps, especially around time pressure and the ambiguity of the creative task. 

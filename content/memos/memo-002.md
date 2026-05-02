@@ -1,5 +1,5 @@
 ---
-title: "Memo 002 — Absence as Participant"
+title: "Memo 002 — Writing, Video, and the Legitimacy of Form"
 date: "2025-03-18"
 weight: 20250318
 bookToC: false
@@ -7,25 +7,36 @@ schemaType: analyticMemo
 id: memo-002
 encounterId: enc-2025-T1-W4-L1
 rqFocus:
-  - RQ1
   - RQ1a
+  - RQ1b
 gapSuggestions:
-  - "Absence is itself a participant. The three absent students structured the lesson as much as those present — consider naming absence as a recurring Instinctual or Material node."
+  - "The student's pre-existing digital practice is acknowledged, but the platform history of that practice remains absent. YouTube is present as medium but not yet as an ecology of audience, editing, performance, and self-presentation."
+  - "Assessment uncertainty is named, but the rubric or criteria structure that stabilises writing as legitimate evidence is still underdeveloped in the analysis."
 diffractiveFocus:
-  - "Read through Derrida's trace: the absent students left an impression on the lesson's movement — the gaps in group work, the silences where their voices might have been, structured what did happen."
-  - "Read through posthumanist pedagogy (Snaza et al.): the lesson plan is an artefact that assumed full presence; the plan's failure to account for absence reveals a humanist bias toward the present, counted body."
+  - "Read through Barad's agential realism: the shift to video was not a simple teacher adaptation to student need, but an intra-action among medium, capability, assessment expectations, and pedagogical legitimacy."
+  - "Read through affect theory (Massumi): the student's enthusiasm and the teacher's discomfort can be understood as contrasting affective intensities that redistributed authority within the task."
 ---
 
-This memo responds to [[enc-2025-T1-W4-L1]], the lesson in which three absent students became structuring presences.
+This memo responds to [[enc-2025-T1-W4-L1]], the encounter in which the writing-rigour, medium-recognition, and assessment-comfort clusters became visible.
 
 ## Gap: Naming Absence
 
-I did not accept the gap suggestion in its strongest form — I am not yet ready to commit to "absence" as a named node in the graph. But I cannot dismiss it. The three students who were missing shaped the lesson's tempo, its emotional undertow, and my movement through the room. I avoided the spaces their chairs occupied. I spoke louder than usual, as if to fill.
+In the encounter, I noted that the student regularly created informational content on YouTube, and I treated that as a clue toward a different mode of learning. Yet the platform itself remains under-analysed. It is present only as “video,” not as an ecology of editing, audience, performance, circulation, and self-fashioning. (ref) If Tauira is to support rhizomatic analysis, then YouTube should be mapped not simply as a medium but as a participant in the pedagogical assemblage. (ref)
 
-## Diffractive Reading 1 — Derrida
+A second gap concerns assessment structure. I recognised that writing felt more measurable, academic, and institutionally legible to me, but I did not sufficiently analyse the criteria, habits, or inherited evaluative logics that make writing appear stable in the first place. This gap matters because the encounter is not only about student choice. It is also about the systems that secure one form as normal and cast another as a risk. (ref)
 
-The absent students left a trace. In Derrida's sense, the trace is not nothing — it is the mark of a presence that was expected and did not arrive. The lesson plan carried the assumption of their presence throughout; their absence produced a perpetual deferral.
 
-## Diffractive Reading 2 — Posthumanist Pedagogy
 
-Snaza et al. (2014) argue that humanist pedagogy is constituted around the present, counted body. My notebook notation of the absent students' names at the end of class was a humanist gesture: an attempt to restore them to presence through inscription.
+## Diffractive Reading 1 — Barad
+
+Read through Barad, the move from written paragraph to video submission is no longer reducible to my flexibility as a teacher. (ref) The event emerges through the intra-action of student capability, platform familiarity, writing as institutional norm, assessment expectation, and my own comfort with textual evidence. What appears as adaptation is also a reconfiguration of legitimacy.
+
+This reading helps the encounter travel rhizomatically across Tauira. It links to other nodes around visible rigour, institutional legibility, medium, and pedagogical authority, showing that the event is not unique but part of a broader pattern in which form silently governs what counts as learning. The encounter therefore becomes a site for tracing how legitimacy is assembled, not merely how differentiation is performed. (ref)
+
+## Diffractive Reading 2 — Massumi
+
+Read through Massumi, the affective contrast in the scene becomes analytically useful. (ref) The student’s enthusiasm and my discomfort were not simply emotions attached to different preferences. They were intensities moving through the task and redistributing where confidence, recognition, and authority were felt.
+
+This matters because the task changed shape affectively before it changed shape pedagogically. (ref) The assignment became charged by recognition for the student and by uncertainty for me. Tauira can hold that tension as a recurring pattern: when alternative media enter the room, legitimacy is not just debated conceptually but felt through bodies, habits, and assessment anxieties.
+
+
