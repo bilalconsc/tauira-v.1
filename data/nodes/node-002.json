@@ -1,9 +1,9 @@
 {
   "id": "node-002",
-  "label": "Student S3",
+  "label": "Desk Orientation",
   "category": "M",
-  "subcategory": "humanoid",
-  "description": "A student participant known for lateral thinking and comedic interruptions that reorient the room.",
-  "tags": ["student", "humour", "agency"],
-  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W5-L3"]
+  "subcategory": "spatial arrangement",
+  "description": "The bodily and material orientation of desks, paper, and screens that keeps attention directed toward work objects rather than relation.",
+  "tags": ["spatial", "desks", "orientation", "materiality"],
+  "encounterRefs": ["enc-2025-T1-W3-L2"]
 }

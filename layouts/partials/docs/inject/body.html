@@ -1,4 +1,4 @@
-{{- if and .File (or (eq .File.Path "_index.md") (hasPrefix .File.Dir "map")) }}
+{{- if false }}
 <script>
 (function () {
   /* ── 0. Guard: only run if the graph container exists on this page ── */
@@ -185,7 +185,7 @@
   }
 
   /* ── 6. Dynamic CDN loader ── */
-  var graphURL = '{{ site.Params.graphDataPath | relURL }}';
+  var graphURL = '{{ site.Params.graphDataPath | relURL }}?v={{ now.Unix }}';
   var libs = [
     'https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js',
     'https://cdn.jsdelivr.net/npm/sigma@3.0.2/dist/sigma.min.js'

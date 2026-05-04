@@ -1,10 +1,10 @@
 {
   "id": "edge-004",
-  "source": "node-006",
-  "target": "node-005",
+  "source": "node-007",
+  "target": "node-006",
   "directed": true,
-  "relationshipType": "disrupts",
-  "weight": 0.85,
+  "relationshipType": "affect",
+  "weight": 0.65,
   "encounterRefs": ["enc-2025-T1-W3-L2"],
-  "notes": "Laughter disrupts boredom, producing a visible affective shift across the classroom."
+  "notes": "Creative task ambiguity coincides with the slowing and thinning of relational energy."
 }

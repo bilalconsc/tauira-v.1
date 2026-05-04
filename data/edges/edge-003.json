@@ -1,10 +1,10 @@
 {
   "id": "edge-003",
-  "source": "node-003",
-  "target": "node-005",
+  "source": "node-004",
+  "target": "node-006",
   "directed": true,
   "relationshipType": "constraint",
-  "weight": 0.65,
-  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W4-L1"],
-  "notes": "The rubric's prescriptive criteria produce disengagement in students who resist its framing."
+  "weight": 0.75,
+  "encounterRefs": ["enc-2025-T1-W3-L2"],
+  "notes": "The demand for visible evidence constrains relation by pulling attention toward productivity."
 }

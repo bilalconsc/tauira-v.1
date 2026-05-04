@@ -11,9 +11,9 @@
     "validate": "ajv validate -s tauira-schema.json -d \"data/nodes/*.json\" --errors=json && ajv validate -s tauira-schema.json -d \"data/edges/*.json\" --errors=json"
   },
   "dependencies": {
-    "graphology": "0.26.0",
+    "graphology": "^0.26.0",
     "openai": "4.104.0",
-    "sigma": "3.0.2"
+    "sigma": "^3.0.3"
   },
   "devDependencies": {
     "ajv-cli": "^5.0.0",

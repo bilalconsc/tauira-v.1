@@ -1,10 +1,10 @@
 {
   "id": "edge-005",
-  "source": "node-004",
-  "target": "node-001",
-  "directed": false,
-  "relationshipType": "diffracts",
-  "weight": 0.5,
-  "encounterRefs": ["enc-2025-T1-W4-L1", "enc-2025-T1-W5-L3"],
-  "notes": "Rhizomatic thinking diffracts through the physical table arrangement — multiple entry points, no centre."
+  "source": "node-002",
+  "target": "node-006",
+  "directed": true,
+  "relationshipType": "assembles",
+  "weight": 0.6,
+  "encounterRefs": ["enc-2025-T1-W3-L2"],
+  "notes": "Desk and screen orientation help assemble the relation-thinning pattern described in the encounter."
 }

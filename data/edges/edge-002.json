@@ -1,10 +1,10 @@
 {
   "id": "edge-002",
-  "source": "node-002",
-  "target": "node-006",
+  "source": "node-003",
+  "target": "node-004",
   "directed": true,
   "relationshipType": "enables",
-  "weight": 0.9,
-  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W5-L3"],
-  "notes": "S3's comedic interruptions reliably produce collective laughter that re-assembles the room's attention."
+  "weight": 0.7,
+  "encounterRefs": ["enc-2025-T1-W3-L2"],
+  "notes": "Analytic sequencing enables visible evidence to appear as a sign of lesson success."
 }

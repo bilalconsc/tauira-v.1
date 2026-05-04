@@ -2,9 +2,9 @@
   "id": "edge-001",
   "source": "node-001",
   "target": "node-005",
-  "directed": false,
-  "relationshipType": "affect",
-  "weight": 0.75,
-  "encounterRefs": ["enc-2025-T1-W3-L2", "enc-2025-T1-W4-L1"],
-  "notes": "Boredom intensifies when students sit at back tables distant from the whiteboard."
+  "directed": true,
+  "relationshipType": "mediates",
+  "weight": 0.8,
+  "encounterRefs": ["enc-2025-T1-W3-L2"],
+  "notes": "The worksheet mediates the room's movement from curiosity toward compliant completion."
 }
