@@ -1,0 +1,10 @@
+{
+  "id": "edge-012",
+  "source": "node-016",
+  "target": "node-019",
+  "directed": true,
+  "relationshipType": "mediates",
+  "weight": 0.85,
+  "encounterRefs": ["enc-2025-T1-W5-L3"],
+  "notes": "Student identity mediates the cost of conceptual recognition."
+}

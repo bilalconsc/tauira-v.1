@@ -1,0 +1,9 @@
+{
+  "id": "node-011",
+  "label": "Assessment Comfort",
+  "category": "I",
+  "subcategory": "teacher affect",
+  "description": "The teacher-researcher's felt comfort with written evidence because it appears more measurable and institutionally recognisable.",
+  "tags": ["assessment", "comfort", "teacher-affect", "legibility"],
+  "encounterRefs": ["enc-2025-T1-W4-L1"]
+}

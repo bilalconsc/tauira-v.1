@@ -1,0 +1,10 @@
+{
+  "id": "edge-006",
+  "source": "node-008",
+  "target": "node-010",
+  "directed": true,
+  "relationshipType": "enables",
+  "weight": 0.75,
+  "encounterRefs": ["enc-2025-T1-W4-L1"],
+  "notes": "Written homework enables writing to appear as the default legitimate evidence of learning."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "node-007",
+  "label": "Creative Task Ambiguity",
+  "category": "K",
+  "subcategory": "task threshold",
+  "description": "The move from conceptual analysis into creative design, where uncertainty grows and pedagogical control weakens.",
+  "tags": ["creative-task", "ambiguity", "threshold", "pacing"],
+  "encounterRefs": ["enc-2025-T1-W3-L2"]
+}

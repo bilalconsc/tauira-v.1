@@ -1,0 +1,10 @@
+{
+  "id": "edge-015",
+  "source": "node-019",
+  "target": "node-021",
+  "directed": true,
+  "relationshipType": "disrupts",
+  "weight": 0.8,
+  "encounterRefs": ["enc-2025-T1-W5-L3"],
+  "notes": "Sadness disrupts the teacher-researcher's stable role, making care, witness, teaching, and research co-present."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "edge-014",
+  "source": "node-018",
+  "target": "node-015",
+  "directed": true,
+  "relationshipType": "co-presence",
+  "weight": 0.6,
+  "encounterRefs": ["enc-2025-T1-W5-L3"],
+  "notes": "Board language keeps the concept visibly present in the room."
+}

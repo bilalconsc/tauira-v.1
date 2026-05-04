@@ -1,0 +1,9 @@
+{
+  "id": "node-018",
+  "label": "Board Language",
+  "category": "K",
+  "subcategory": "classroom inscription",
+  "description": "The key terms on the board that keep the lesson concept visible and pedagogically legible.",
+  "tags": ["board", "language", "concept", "legibility"],
+  "encounterRefs": ["enc-2025-T1-W5-L3"]
+}

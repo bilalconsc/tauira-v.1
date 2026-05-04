@@ -1,0 +1,9 @@
+{
+  "id": "node-019",
+  "label": "Sadness",
+  "category": "I",
+  "subcategory": "affect",
+  "description": "The quiet affective threshold where conceptual recognition moves into identity and changes the room's atmosphere.",
+  "tags": ["sadness", "affect", "threshold", "learning"],
+  "encounterRefs": ["enc-2025-T1-W5-L3"]
+}

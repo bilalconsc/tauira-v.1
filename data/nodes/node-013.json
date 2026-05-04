@@ -1,0 +1,9 @@
+{
+  "id": "node-013",
+  "label": "Teacher Discomfort",
+  "category": "I",
+  "subcategory": "teacher affect",
+  "description": "The unsettled feeling that appears when video disturbs familiar assessment habits and the authority of writing.",
+  "tags": ["discomfort", "assessment", "authority", "medium"],
+  "encounterRefs": ["enc-2025-T1-W4-L1"]
+}

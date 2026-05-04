@@ -1,0 +1,9 @@
+{
+  "id": "node-012",
+  "label": "Student Enthusiasm",
+  "category": "I",
+  "subcategory": "student affect",
+  "description": "The affective intensity produced when a student's already-live mode of learning is recognised within the task.",
+  "tags": ["enthusiasm", "recognition", "student-agency", "affect"],
+  "encounterRefs": ["enc-2025-T1-W4-L1"]
+}

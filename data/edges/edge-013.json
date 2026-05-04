@@ -1,0 +1,10 @@
+{
+  "id": "edge-013",
+  "source": "node-017",
+  "target": "node-020",
+  "directed": true,
+  "relationshipType": "enables",
+  "weight": 0.65,
+  "encounterRefs": ["enc-2025-T1-W5-L3"],
+  "notes": "The analytic worksheet helps sustain classroom tempo after the affective threshold appears."
+}

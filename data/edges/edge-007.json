@@ -1,0 +1,10 @@
+{
+  "id": "edge-007",
+  "source": "node-009",
+  "target": "node-014",
+  "directed": true,
+  "relationshipType": "disrupts",
+  "weight": 0.85,
+  "encounterRefs": ["enc-2025-T1-W4-L1"],
+  "notes": "The student's video practice disrupts the written task by introducing another credible medium."
+}

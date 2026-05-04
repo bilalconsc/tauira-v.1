@@ -1,0 +1,10 @@
+{
+  "id": "edge-008",
+  "source": "node-014",
+  "target": "node-012",
+  "directed": true,
+  "relationshipType": "affect",
+  "weight": 0.8,
+  "encounterRefs": ["enc-2025-T1-W4-L1"],
+  "notes": "Recognition of video as a legitimate medium intensifies the student's enthusiasm."
+}

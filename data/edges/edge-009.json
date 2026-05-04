@@ -1,0 +1,10 @@
+{
+  "id": "edge-009",
+  "source": "node-010",
+  "target": "node-011",
+  "directed": true,
+  "relationshipType": "mediates",
+  "weight": 0.7,
+  "encounterRefs": ["enc-2025-T1-W4-L1"],
+  "notes": "Writing's institutional legitimacy mediates the teacher-researcher's assessment comfort."
+}
