@@ -1,6 +1,6 @@
 ---
 title: "Artefacts"
-weight: 4
+weight: 1
 bookFlatSection: true
 ---
 
