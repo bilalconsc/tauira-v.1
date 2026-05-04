@@ -27,8 +27,13 @@
   </div>
 
   <div class="tauira-graph-layout">
+  <div>
+    <button id="btn-fullscreen" type="button">⛶ Fullscreen</button>
+
     <div id="tauira-graph" style="width: 100%; height: 560px; border: 1px solid #ddd; border-radius: 8px;"></div>
-    <aside id="tauira-graph-details" class="tauira-graph-details"></aside>
+  </div>
+
+  <aside id="tauira-graph-details" class="tauira-graph-details"></aside>
   </div>
 
   {{ $js := resources.Get "js/tauira-sigma.js" | js.Build | resources.Fingerprint }}

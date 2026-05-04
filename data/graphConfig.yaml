@@ -36,7 +36,7 @@ localGraph:
     repelForce: 0.5
     centerForce: 0.3
     linkDistance: 50
-    fontSize: 12
+    fontSize: 14
     opacityScale: 3
 
 ### Global Graph ###

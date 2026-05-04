@@ -71,7 +71,7 @@ function renderGraph(container, graph) {
 
   // Draw edges
   ctx.strokeStyle = '#ccc';
-  ctx.lineWidth = 1;
+  ctx.lineWidth = 1.5;
   edges.forEach(function (edge) {
     var src = positions[edge.source];
     var tgt = positions[edge.target];

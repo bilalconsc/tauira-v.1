@@ -79,6 +79,31 @@ function buildGraph(data) {
   return graph;
 }
 
+function enableFullscreen(container, renderer) {
+  const btn = document.getElementById("btn-fullscreen");
+
+  if (!btn) {
+    console.log("❌ Fullscreen button not found");
+    return;
+  }
+
+  console.log("✅ Fullscreen button wired");
+
+  btn.addEventListener("click", () => {
+    console.log("🔥 Fullscreen clicked");
+
+    if (!document.fullscreenElement) {
+      container.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    setTimeout(() => renderer.refresh(), 100);
+  });
+}
+
 function updateDetails(panel, kind, id, attrs) {
   if (!panel) return;
 
@@ -394,7 +419,9 @@ async function initTauiraSigma(container, dataPath, detailsSelector = "#tauira-g
       minCameraRatio: 0.2,
       maxCameraRatio: 8,
     });
-
+    requestAnimationFrame(() => {
+    enableFullscreen(container, renderer);
+    });
     attachInteractions(renderer, graph, detailsPanel);
     updateDetails(detailsPanel, null, null, null);
 
