@@ -1,5 +1,6 @@
 {{if $.Site.Params.enableFooter}}
-  {{if hugo.Data.graphConfig.enableGlobalGraph}}
+  {{- $graphConfig := index $.Site.Data "graphConfig" -}}
+  {{if $graphConfig.enableGlobalGraph}}
       <div class="page-end" id="footer">
 
         <div>
