@@ -14,11 +14,21 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
 
   const { index, links, content } = await fetchData
 
-  const siteBase = new URL(baseUrl).pathname.replace(/\/$/, "")
-  const rawPage  = window.location.pathname.replace(/\/$/, "")
-  const curPage  = rawPage.startsWith(siteBase)
+  // Safely derive siteBase — works whether baseUrl is absolute or a plain path
+  let siteBase
+  try {
+    siteBase = new URL(baseUrl).pathname.replace(/\/$/, "")
+  } catch {
+    siteBase = baseUrl.replace(/\/$/, "")
+  }
+
+  const rawPage = window.location.pathname.replace(/\/$/, "")
+  const curPage = rawPage.startsWith(siteBase)
     ? rawPage.slice(siteBase.length) || "/"
     : rawPage
+
+  // Normalise an id for content lookup: strip leading slash
+  const normaliseId = (id) => id.replace(/^\//, "")
 
   const parseIdsFromLinks = (links) => [
     ...new Set(links.flatMap((link) => [link.source, link.target])),
@@ -102,13 +112,17 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
         .distance(40),
     )
     .force("center", d3.forceCenter())
+    .force("x", d3.forceX().strength(0.05))
+    .force("y", d3.forceY().strength(0.05))
 
   const svg = d3
     .select("#graph-container")
     .append("svg")
     .attr("width",   width)
     .attr("height",  height)
+    // Add padding so labels near edges are not clipped
     .attr("viewBox", [-width / 2 / scale, -height / 2 / scale, width / scale, height / scale])
+    .style("overflow", "visible")
 
   if (enableLegend) {
     const legend = [{ Current: "var(--g-node-active)" }, { Note: "var(--g-node)" }, ...pathColors]
@@ -151,6 +165,18 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
   // Helper: build a safe absolute URL for a node id
   function nodeUrl(id) {
     return baseUrl.replace(/\/$/, "") + "/" + decodeURI(id).replace(/^\//, "").replace(/\s+/g, "-") + "/"
+  }
+
+  // Helper: look up a node title from the content index
+  // The content index may key pages with or without a leading slash,
+  // so we try both forms before falling back to a prettified id.
+  function nodeTitle(id) {
+    const withSlash    = id.startsWith("/") ? id : "/" + id
+    const withoutSlash = id.replace(/^\//, "")
+    const entry = content[id] || content[withSlash] || content[withoutSlash]
+    if (entry?.title) return entry.title
+    // Prettify the raw path segment as a last resort
+    return withoutSlash.split("/").pop().replace(/-/g, " ")
   }
 
   const node = graphNode
@@ -214,7 +240,7 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
     .attr("dx", 0)
     .attr("dy", (d) => nodeRadius(d) + 8 + "px")
     .attr("text-anchor", "middle")
-    .text((d) => content[d.id]?.title || d.id.replace("-", " "))
+    .text((d) => nodeTitle(d.id))
     .style("opacity", (opacityScale - 1) / 3.75)
     .style("pointer-events", "none")
     .style("font-size", fontSize + "em")
