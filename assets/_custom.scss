@@ -124,7 +124,6 @@ aside.book-aside .book-backlinks {
 
 .tauira-memo header,
 .tauira-encounter header {
-  // Ensure no inherited positioning or margin issues
   position: relative !important;
   margin-top: 0 !important;
 
@@ -180,7 +179,46 @@ aside.book-aside .book-backlinks {
   }
 }
 
-// Dark mode: use the dark-mode --header value
+// ── Essay content header ─────────────────────────────────────────────
+// Gold tint (#f0d98a) matches the /essays path colour in the Amethyst
+// graph (#d19900). Stacked layout accommodates the optional abstract.
+
+.tauira-essay header {
+  position: relative !important;
+  margin-top: 0 !important;
+  background-color: #f0d98a;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem 1.1rem;
+  color: var(--dark, #141021);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.45rem;
+    line-height: 1.3;
+    color: var(--dark, #141021);
+  }
+
+  time {
+    font-size: 0.82rem;
+    color: var(--dark, #141021);
+    opacity: 0.75;
+  }
+
+  .essay-abstract {
+    margin: 0.5rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    font-style: italic;
+    max-width: 72ch;
+    opacity: 0.9;
+  }
+}
+
+// ── Dark mode ────────────────────────────────────────────────────────
 [saved-theme="dark"] {
   .tauira-memo header,
   .tauira-encounter header {
@@ -196,6 +234,18 @@ aside.book-aside .book-backlinks {
       color: var(--dark, #f7f2fa);
 
       a { color: var(--tertiary, #92a8ff); }
+    }
+  }
+
+  .tauira-essay header {
+    background-color: #a07800;
+
+    h1, time {
+      color: var(--dark, #f7f2fa);
+    }
+
+    .essay-abstract {
+      color: var(--dark, #f7f2fa);
     }
   }
 }
