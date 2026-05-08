@@ -115,3 +115,23 @@ To reflect and to narrate growth otherwise is not to abandon reflection. It is t
 Barad, K. (2007). *Meeting the universe halfway: Quantum physics and the entanglement of matter and meaning*. Duke University Press.
 
 Deleuze, G., & Guattari, F. (1987). *A thousand plateaus: Capitalism and schizophrenia* (B. Massumi, Trans.). University of Minnesota Press.
+
+Bozalek, V. and Zembylas, M. (2017) ‘Diffraction or reflection? Sketching the contours of two methodologies in educational research’, International Journal of Qualitative Studies in Education, 30(2), pp. 111-127.
+
+Gibbs, G. (1988) Learning by Doing: A Guide to Teaching and Learning Methods. Oxford: Oxford Polytechnic.
+
+Hill, C.M. (2017) ‘More-than-reflective practice: Becoming a diffractive practitioner’, Teacher Learning and Professional Development, 2.
+
+Kolb, D.A. (1984) Experiential Learning: Experience as the Source of Learning and Development. Englewood Cliffs, NJ: Prentice-Hall.
+
+Lambert, L. (2021) ‘Diffraction as an otherwise practice of exploring new teachers’ entanglements in time and space’, Professional Development in Education, 47(2-3), pp. 421-435.
+
+Noddings, N. (1984) Caring: A Feminine Approach to Ethics and Moral Education. Berkeley: University of California Press.
+
+Nociti, K. (2024) ‘Beyond reflective practice: Blogging-with Place as a diffractive practice for (re)imagining place-based education’, Contemporary Issues in Early Childhood, 25(1), pp. 7-20.
+
+Palmer, P.J. (1998) The Courage to Teach: Exploring the Inner Landscape of a Teacher’s Life. San Francisco: Jossey-Bass.
+
+Schön, D.A. (1983) The Reflective Practitioner: How Professionals Think in Action. New York: Basic Books.
+
+Strom, K.J. and Viesca, K.M. (2023) ‘Towards a complex framework of teacher learning-practice’, in Non-linear Perspectives on Teacher Development. London: Routledge, pp. 13-28.
