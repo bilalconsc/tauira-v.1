@@ -46,4 +46,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: deploy
-          cname: tauira.yourdomain.com   # ← your domain or subdomain here
+                                # ← your domain or subdomain here
