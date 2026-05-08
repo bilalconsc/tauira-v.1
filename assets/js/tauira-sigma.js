@@ -329,6 +329,56 @@ function attachInteractions(renderer, graph, detailsPanel) {
   bindFilterControls(renderer, detailsPanel, state);
 }
 
+// ─── HOISTED: declared before initTauiraSigma so it is never called before
+//     its definition. Fixes the ReferenceError-in-waiting and eliminates the
+//     duplicate-edge Graphology crash caused by the previous double-call. ────
+function addCrossEncounterEdges(graph) {
+  const nodes = graph.nodes();
+
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i];
+      const b = nodes[j];
+
+      const aAttrs = graph.getNodeAttributes(a);
+      const bAttrs = graph.getNodeAttributes(b);
+
+      const aEnc = new Set(aAttrs.encounterRefs || []);
+      const bEnc = new Set(bAttrs.encounterRefs || []);
+
+      // Nodes that already share an encounter get a direct edge from buildGraph;
+      // bridge only nodes that share NO encounter and have no edge yet.
+      const shared = [...aEnc].some((e) => bEnc.has(e));
+
+      if (!shared && !graph.hasEdge(a, b) && Math.random() < 0.15) {
+        const edgeId = `bridge-${a}-${b}`;
+
+        // Idempotency guard — never add the same key twice.
+        if (graph.hasEdge(edgeId)) continue;
+
+        graph.addEdgeWithKey(edgeId, a, b, {
+          size: 0.5,
+          weight: 0.15,
+          color: "#eeeeee",
+          relationshipType: "cross-encounter",
+          encounterRefs: [],
+          isSynthetic: true,
+        });
+      }
+    }
+  }
+}
+
+function normalizeEdgeWeights(graph) {
+  graph.forEachEdge((edge, attrs) => {
+    const w = attrs.weight || 0.5;
+    // Compress range so strong edges don't dominate as much.
+    const normalized = 0.3 + w * 0.5;
+    graph.setEdgeAttribute(edge, "weight", normalized);
+    graph.setEdgeAttribute(edge, "size", normalized * 2);
+  });
+}
+
 async function initTauiraSigma(container, dataPath, detailsSelector = "#tauira-graph-details") {
   if (!container) return;
 
@@ -348,22 +398,11 @@ async function initTauiraSigma(container, dataPath, detailsSelector = "#tauira-g
 
     const graph = buildGraph(data);
 
-    addCrossEncounterEdges(graph);
-    function normalizeEdgeWeights(graph) {
-    graph.forEachEdge((edge, attrs) => {
-    const w = attrs.weight || 0.5;
-
-    // compress range so strong edges don’t dominate as much
-    const normalized = 0.3 + (w * 0.5);
-
-    graph.setEdgeAttribute(edge, "weight", normalized);
-    graph.setEdgeAttribute(edge, "size", normalized * 2);
-  });
-}
+    // Correct order: normalise weights first, then stitch cross-encounter
+    // bridge edges ONCE. Previously addCrossEncounterEdges was called twice
+    // (before and after normalizeEdgeWeights, with its declaration sandwiched
+    // between them), causing Graphology to throw on duplicate edge keys.
     normalizeEdgeWeights(graph);
-
-
-// NEW: add rhizomatic stitching
     addCrossEncounterEdges(graph);
 
     if (graph.order === 0) {
@@ -371,42 +410,6 @@ async function initTauiraSigma(container, dataPath, detailsSelector = "#tauira-g
       updateDetails(detailsPanel, null, null, null);
       return;
     }
-    function addCrossEncounterEdges(graph) {
-  const nodes = graph.nodes();
-
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const a = nodes[i];
-      const b = nodes[j];
-
-      const aAttrs = graph.getNodeAttributes(a);
-      const bAttrs = graph.getNodeAttributes(b);
-
-      const aEnc = new Set(aAttrs.encounterRefs || []);
-      const bEnc = new Set(bAttrs.encounterRefs || []);
-
-      // Check if they share ANY encounter
-      const shared = [...aEnc].some((e) => bEnc.has(e));
-
-      // Only create bridge if they do NOT already have an edge
-      if (!shared && !graph.hasEdge(a, b) && Math.random() < 0.15) {
-        const edgeId = `bridge-${a}-${b}`;
-
-        // Prevent duplicates
-        if (graph.hasEdge(edgeId)) continue;
-
-        graph.addEdgeWithKey(edgeId, a, b, {
-          size: 0.5,
-          weight: 0.15,
-          color: "#eeeeee",
-          relationshipType: "cross-encounter",
-          encounterRefs: [],
-          isSynthetic: true,
-        });
-      }
-    }
-  }
-}
 
     container.innerHTML = "";
 
@@ -419,9 +422,11 @@ async function initTauiraSigma(container, dataPath, detailsSelector = "#tauira-g
       minCameraRatio: 0.2,
       maxCameraRatio: 8,
     });
+
     requestAnimationFrame(() => {
-    enableFullscreen(container, renderer);
+      enableFullscreen(container, renderer);
     });
+
     attachInteractions(renderer, graph, detailsPanel);
     updateDetails(detailsPanel, null, null, null);
 
@@ -431,5 +436,3 @@ async function initTauiraSigma(container, dataPath, detailsSelector = "#tauira-g
     updateDetails(detailsPanel, null, null, null);
   }
 }
-
-window.initTauiraSigma = initTauiraSigma;
