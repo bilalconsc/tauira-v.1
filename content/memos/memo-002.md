@@ -17,26 +17,22 @@ diffractiveFocus:
   - "Read through affect theory (Massumi): the student's enthusiasm and the teacher's discomfort can be understood as contrasting affective intensities that redistributed authority within the task."
 ---
 
-This memo responds to [[enc-2025-T1-W4-L1]], the encounter in which the writing-rigour, medium-recognition, and assessment-comfort clusters became visible.
+This memo responds to [[enc-2025-T1-W4-L1]], the encounter in which the writing-rigour, medium-recognition, and assessment-comfort clusters became visible. The legitimacy question it raises connects backward to the compliance patterns of [[enc-2025-T1-W3-L2]] analysed in [[memo-001]], and forward to the role-instability threshold of [[enc-2025-T1-W5-L3]] analysed in [[memo-003]].
 
 ## Gap: Naming Absence
 
-In the encounter, I noted that the student regularly created informational content on YouTube, and I treated that as a clue toward a different mode of learning. Yet the platform itself remains under-analysed. It is present only as “video,” not as an ecology of editing, audience, performance, circulation, and self-fashioning. (ref) If Tauira is to support rhizomatic analysis, then YouTube should be mapped not simply as a medium but as a participant in the pedagogical assemblage. (ref)
+In the encounter, I noted that the student regularly created informational content on YouTube, and I treated that as a clue toward a different mode of learning. Yet the platform itself remains under-analysed. It is present only as "video," not as an ecology of editing, audience, performance, circulation, and self-fashioning. If Tauira is to support rhizomatic analysis, then YouTube should be mapped not simply as a medium but as a participant in the pedagogical assemblage.
 
-A second gap concerns assessment structure. I recognised that writing felt more measurable, academic, and institutionally legible to me, but I did not sufficiently analyse the criteria, habits, or inherited evaluative logics that make writing appear stable in the first place. This gap matters because the encounter is not only about student choice. It is also about the systems that secure one form as normal and cast another as a risk. (ref)
-
-
+A second gap concerns assessment structure. I recognised that writing felt more measurable, academic, and institutionally legible to me, but I did not sufficiently analyse the criteria, habits, or inherited evaluative logics that make writing appear stable in the first place. This gap matters because the encounter is not only about student choice. It is also about the systems that secure one form as normal and cast another as a risk. The institutional grip of writing as evidence is the same force that produces compliance in [[enc-2025-T1-W3-L2]] and holds the lesson moving in [[enc-2025-T1-W5-L3]] even as sadness opens another temporality.
 
 ## Diffractive Reading 1 — Barad
 
-Read through Barad, the move from written paragraph to video submission is no longer reducible to my flexibility as a teacher. (ref) The event emerges through the intra-action of student capability, platform familiarity, writing as institutional norm, assessment expectation, and my own comfort with textual evidence. What appears as adaptation is also a reconfiguration of legitimacy.
+Read through Barad, the move from written paragraph to video submission is no longer reducible to my flexibility as a teacher. The event emerges through the intra-action of student capability, platform familiarity, writing as institutional norm, assessment expectation, and my own comfort with textual evidence. What appears as adaptation is also a reconfiguration of legitimacy.
 
-This reading helps the encounter travel rhizomatically across Tauira. It links to other nodes around visible rigour, institutional legibility, medium, and pedagogical authority, showing that the event is not unique but part of a broader pattern in which form silently governs what counts as learning. The encounter therefore becomes a site for tracing how legitimacy is assembled, not merely how differentiation is performed. (ref)
+This reading helps the encounter travel rhizomatically across Tauira. It links to other nodes around visible rigour, institutional legibility, medium, and pedagogical authority, showing that the event is not unique but part of a broader pattern in which form silently governs what counts as learning. The same Baradian framework is applied to material compliance in [[memo-001]] and to the concept-affect intra-action in [[memo-003]].
 
 ## Diffractive Reading 2 — Massumi
 
-Read through Massumi, the affective contrast in the scene becomes analytically useful. (ref) The student’s enthusiasm and my discomfort were not simply emotions attached to different preferences. They were intensities moving through the task and redistributing where confidence, recognition, and authority were felt.
+Read through Massumi, the affective contrast in the scene becomes analytically useful. The student's enthusiasm and my discomfort were not simply emotions attached to different preferences. They were intensities moving through the task and redistributing where confidence, recognition, and authority were felt.
 
-This matters because the task changed shape affectively before it changed shape pedagogically. (ref) The assignment became charged by recognition for the student and by uncertainty for me. Tauira can hold that tension as a recurring pattern: when alternative media enter the room, legitimacy is not just debated conceptually but felt through bodies, habits, and assessment anxieties.
-
-
+This matters because the task changed shape affectively before it changed shape pedagogically. The assignment became charged by recognition for the student and by uncertainty for me. Tauira can hold that tension as a recurring pattern: when alternative media enter the room, legitimacy is not just debated conceptually but felt through bodies, habits, and assessment anxieties. This affective redistribution of authority connects to the relational thinning of [[enc-2025-T1-W3-L2]] and to the sadness-threshold of [[enc-2025-T1-W5-L3]], both of which are held as affective events rather than procedural problems in [[memo-001]] and [[memo-003]].
