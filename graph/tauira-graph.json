@@ -1,0 +1,644 @@
+{
+  "metadata": {
+    "generatedAt": "2026-05-08T12:29:19.716Z",
+    "nodeCount": 21,
+    "edgeCount": 15,
+    "schemaVersion": "v1",
+    "baseURL": "/tauira/",
+    "categories": {
+      "M": 6,
+      "K": 7,
+      "I": 8
+    },
+    "sigmaReady": true,
+    "layout": "force-directed",
+    "layoutHints": {
+      "clusteredBy": [
+        "encounterRefs",
+        "category",
+        "edges"
+      ],
+      "deterministic": true
+    },
+    "visualEncodingVersion": "v1"
+  },
+  "nodes": [
+    {
+      "id": "node-001",
+      "label": "Worksheet",
+      "category": "M",
+      "subcategory": "teaching artefact",
+      "description": "The worksheet that holds the lesson sequence steady and orients students toward task completion and visible analysis.",
+      "tags": [
+        "worksheet",
+        "materiality",
+        "visible-evidence",
+        "compliance"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "x": -150,
+      "y": -46.143,
+      "size": 6,
+      "color": "#01696f"
+    },
+    {
+      "id": "node-002",
+      "label": "Desk Orientation",
+      "category": "M",
+      "subcategory": "spatial arrangement",
+      "description": "The bodily and material orientation of desks, paper, and screens that keeps attention directed toward work objects rather than relation.",
+      "tags": [
+        "spatial",
+        "desks",
+        "orientation",
+        "materiality"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "x": -129.634,
+      "y": -4.193,
+      "size": 6,
+      "color": "#01696f"
+    },
+    {
+      "id": "node-003",
+      "label": "Analytic Sequencing",
+      "category": "K",
+      "subcategory": "pedagogical structure",
+      "description": "The movement through prior knowledge, analysis, and creative design that gives the lesson clarity while narrowing its relational texture.",
+      "tags": [
+        "analysis",
+        "sequence",
+        "rigour",
+        "pacing"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "x": -81.198,
+      "y": -84.315,
+      "size": 6,
+      "color": "#5b4fcf"
+    },
+    {
+      "id": "node-004",
+      "label": "Visible Evidence",
+      "category": "M",
+      "subcategory": "assessment logic",
+      "description": "The teacher-researcher desire for visible thinking, productivity, and evidence that can be recognised as successful learning.",
+      "tags": [
+        "evidence",
+        "assessment",
+        "productivity",
+        "rigour"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "x": -106.305,
+      "y": -45.666,
+      "size": 6.83,
+      "color": "#01696f"
+    },
+    {
+      "id": "node-005",
+      "label": "Compliance",
+      "category": "K",
+      "subcategory": "affect",
+      "description": "The quiet continuation of task behaviour after curiosity narrows into completing what the lesson appears to require.",
+      "tags": [
+        "affect",
+        "compliance",
+        "attention",
+        "completion"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "x": -125.541,
+      "y": -84.897,
+      "size": 6,
+      "color": "#5b4fcf"
+    },
+    {
+      "id": "node-006",
+      "label": "Relational Thinning",
+      "category": "I",
+      "subcategory": "affect",
+      "description": "The affective thinning of the room, where students remain with the task but less fully with one another.",
+      "tags": [
+        "affect",
+        "relation",
+        "slowing",
+        "attention"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "x": -84.136,
+      "y": -8.873,
+      "size": 7.46,
+      "color": "#d19900"
+    },
+    {
+      "id": "node-007",
+      "label": "Creative Task Ambiguity",
+      "category": "I",
+      "subcategory": "task threshold",
+      "description": "The move from conceptual analysis into creative design, where uncertainty grows and pedagogical control weakens.",
+      "tags": [
+        "creative-task",
+        "ambiguity",
+        "threshold",
+        "pacing"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "x": -58.162,
+      "y": -44.316,
+      "size": 6,
+      "color": "#d19900"
+    },
+    {
+      "id": "node-008",
+      "label": "Written Homework",
+      "category": "M",
+      "subcategory": "task form",
+      "description": "The planned written paragraph that initially frames consolidation as textual evidence.",
+      "tags": [
+        "writing",
+        "homework",
+        "task",
+        "legibility"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "x": 70.987,
+      "y": -11.761,
+      "size": 6,
+      "color": "#01696f"
+    },
+    {
+      "id": "node-009",
+      "label": "Student Video Practice",
+      "category": "M",
+      "subcategory": "digital practice",
+      "description": "The student's existing practice of creating informational videos, which enters the classroom as a legitimate mode of meaning-making.",
+      "tags": [
+        "video",
+        "student-agency",
+        "digital-practice",
+        "medium"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "x": 59.066,
+      "y": -61.48,
+      "size": 6,
+      "color": "#01696f"
+    },
+    {
+      "id": "node-010",
+      "label": "Writing Legitimacy",
+      "category": "K",
+      "subcategory": "institutional norm",
+      "description": "The inherited assumption that writing is the stable and serious carrier of academic evidence.",
+      "tags": [
+        "writing",
+        "legitimacy",
+        "institutional-legibility",
+        "assessment"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "x": 99.846,
+      "y": -39.915,
+      "size": 6.83,
+      "color": "#5b4fcf"
+    },
+    {
+      "id": "node-011",
+      "label": "Assessment Comfort",
+      "category": "I",
+      "subcategory": "teacher affect",
+      "description": "The teacher-researcher's felt comfort with written evidence because it appears more measurable and institutionally recognisable.",
+      "tags": [
+        "assessment",
+        "comfort",
+        "teacher-affect",
+        "legibility"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "x": 126.676,
+      "y": -2.565,
+      "size": 6,
+      "color": "#d19900"
+    },
+    {
+      "id": "node-012",
+      "label": "Student Enthusiasm",
+      "category": "I",
+      "subcategory": "student affect",
+      "description": "The affective intensity produced when a student's already-live mode of learning is recognised within the task.",
+      "tags": [
+        "enthusiasm",
+        "recognition",
+        "student-agency",
+        "affect"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "x": 139.031,
+      "y": -43.203,
+      "size": 6,
+      "color": "#d19900"
+    },
+    {
+      "id": "node-013",
+      "label": "Teacher Discomfort",
+      "category": "I",
+      "subcategory": "teacher affect",
+      "description": "The unsettled feeling that appears when video disturbs familiar assessment habits and the authority of writing.",
+      "tags": [
+        "discomfort",
+        "assessment",
+        "authority",
+        "medium"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "x": 140.643,
+      "y": -80.551,
+      "size": 6,
+      "color": "#d19900"
+    },
+    {
+      "id": "node-014",
+      "label": "Medium Recognition",
+      "category": "K",
+      "subcategory": "pedagogical legitimacy",
+      "description": "The shift through which video becomes recognised as a legitimate form of classroom meaning-making.",
+      "tags": [
+        "medium",
+        "recognition",
+        "legitimacy",
+        "differentiation"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "x": 98.928,
+      "y": -81.124,
+      "size": 7.46,
+      "color": "#5b4fcf"
+    },
+    {
+      "id": "node-015",
+      "label": "Schema and Stereotype Concept",
+      "category": "K",
+      "subcategory": "lesson concept",
+      "description": "The concepts of schema, stereotype, and culture that move from abstract analysis into affective recognition.",
+      "tags": [
+        "schema",
+        "stereotype",
+        "culture",
+        "concept"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "x": -8.207,
+      "y": 56.513,
+      "size": 6.83,
+      "color": "#5b4fcf"
+    },
+    {
+      "id": "node-016",
+      "label": "Student Identity",
+      "category": "K",
+      "subcategory": "embodied history",
+      "description": "The personal and cultural histories through which the concept becomes costly and affectively charged.",
+      "tags": [
+        "identity",
+        "culture",
+        "memory",
+        "embodiment"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "x": -38.72,
+      "y": 84.984,
+      "size": 6,
+      "color": "#5b4fcf"
+    },
+    {
+      "id": "node-017",
+      "label": "Analytic Worksheet",
+      "category": "M",
+      "subcategory": "teaching artefact",
+      "description": "The worksheet that continues to ask for analysis even as the lesson crosses an affective threshold.",
+      "tags": [
+        "worksheet",
+        "analysis",
+        "tempo",
+        "materiality"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "x": -35.185,
+      "y": 129.256,
+      "size": 6,
+      "color": "#01696f"
+    },
+    {
+      "id": "node-018",
+      "label": "Board Language",
+      "category": "K",
+      "subcategory": "classroom inscription",
+      "description": "The key terms on the board that keep the lesson concept visible and pedagogically legible.",
+      "tags": [
+        "board",
+        "language",
+        "concept",
+        "legibility"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "x": 33.064,
+      "y": 67.556,
+      "size": 6,
+      "color": "#5b4fcf"
+    },
+    {
+      "id": "node-019",
+      "label": "Sadness",
+      "category": "I",
+      "subcategory": "affect",
+      "description": "The quiet affective threshold where conceptual recognition moves into identity and changes the room's atmosphere.",
+      "tags": [
+        "sadness",
+        "affect",
+        "threshold",
+        "learning"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "x": 4.207,
+      "y": 99.609,
+      "size": 7.46,
+      "color": "#d19900"
+    },
+    {
+      "id": "node-020",
+      "label": "Classroom Tempo",
+      "category": "I",
+      "subcategory": "temporal pressure",
+      "description": "The forward motion of lesson time that continues even as another affective layer opens in the room.",
+      "tags": [
+        "tempo",
+        "time",
+        "institutional-expectation",
+        "threshold"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "x": 9.542,
+      "y": 141.747,
+      "size": 6,
+      "color": "#d19900"
+    },
+    {
+      "id": "node-021",
+      "label": "Role Instability",
+      "category": "I",
+      "subcategory": "teacher-researcher position",
+      "description": "The unstable co-presence of teacher, witness, caretaker, and researcher after sadness enters the lesson.",
+      "tags": [
+        "teacher-researcher",
+        "care",
+        "ethics",
+        "role"
+      ],
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "x": 46.669,
+      "y": 113.352,
+      "size": 6,
+      "color": "#d19900"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "node-001",
+      "target": "node-005",
+      "weight": 0.8,
+      "size": 2.6,
+      "color": "#7aa6c2",
+      "relationshipType": "mediates",
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "notes": "The worksheet mediates the room's movement from curiosity toward compliant completion."
+    },
+    {
+      "id": "edge-002",
+      "source": "node-003",
+      "target": "node-004",
+      "weight": 0.7,
+      "size": 2.4,
+      "color": "#4d9a67",
+      "relationshipType": "enables",
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "notes": "Analytic sequencing enables visible evidence to appear as a sign of lesson success."
+    },
+    {
+      "id": "edge-003",
+      "source": "node-004",
+      "target": "node-006",
+      "weight": 0.75,
+      "size": 2.5,
+      "color": "#c46a3a",
+      "relationshipType": "constraint",
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "notes": "The demand for visible evidence constrains relation by pulling attention toward productivity."
+    },
+    {
+      "id": "edge-004",
+      "source": "node-007",
+      "target": "node-006",
+      "weight": 0.65,
+      "size": 2.3,
+      "color": "#d17c7c",
+      "relationshipType": "affect",
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "notes": "Creative task ambiguity coincides with the slowing and thinning of relational energy."
+    },
+    {
+      "id": "edge-005",
+      "source": "node-002",
+      "target": "node-006",
+      "weight": 0.6,
+      "size": 2.2,
+      "color": "#9a84d6",
+      "relationshipType": "assembles",
+      "encounterRefs": [
+        "enc-2025-T1-W3-L2"
+      ],
+      "notes": "Desk and screen orientation help assemble the relation-thinning pattern described in the encounter."
+    },
+    {
+      "id": "edge-006",
+      "source": "node-008",
+      "target": "node-010",
+      "weight": 0.75,
+      "size": 2.5,
+      "color": "#4d9a67",
+      "relationshipType": "enables",
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "notes": "Written homework enables writing to appear as the default legitimate evidence of learning."
+    },
+    {
+      "id": "edge-007",
+      "source": "node-009",
+      "target": "node-014",
+      "weight": 0.85,
+      "size": 2.7,
+      "color": "#c85656",
+      "relationshipType": "disrupts",
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "notes": "The student's video practice disrupts the written task by introducing another credible medium."
+    },
+    {
+      "id": "edge-008",
+      "source": "node-014",
+      "target": "node-012",
+      "weight": 0.8,
+      "size": 2.6,
+      "color": "#d17c7c",
+      "relationshipType": "affect",
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "notes": "Recognition of video as a legitimate medium intensifies the student's enthusiasm."
+    },
+    {
+      "id": "edge-009",
+      "source": "node-010",
+      "target": "node-011",
+      "weight": 0.7,
+      "size": 2.4,
+      "color": "#7aa6c2",
+      "relationshipType": "mediates",
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "notes": "Writing's institutional legitimacy mediates the teacher-researcher's assessment comfort."
+    },
+    {
+      "id": "edge-010",
+      "source": "node-014",
+      "target": "node-013",
+      "weight": 0.65,
+      "size": 2.3,
+      "color": "#d17c7c",
+      "relationshipType": "affect",
+      "encounterRefs": [
+        "enc-2025-T1-W4-L1"
+      ],
+      "notes": "Medium recognition produces teacher discomfort by unsettling inherited assessment habits."
+    },
+    {
+      "id": "edge-011",
+      "source": "node-015",
+      "target": "node-019",
+      "weight": 0.9,
+      "size": 2.8,
+      "color": "#d17c7c",
+      "relationshipType": "affect",
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "notes": "The schema and stereotype concept becomes affective when recognition tips into sadness."
+    },
+    {
+      "id": "edge-012",
+      "source": "node-016",
+      "target": "node-019",
+      "weight": 0.85,
+      "size": 2.7,
+      "color": "#7aa6c2",
+      "relationshipType": "mediates",
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "notes": "Student identity mediates the cost of conceptual recognition."
+    },
+    {
+      "id": "edge-013",
+      "source": "node-017",
+      "target": "node-020",
+      "weight": 0.65,
+      "size": 2.3,
+      "color": "#4d9a67",
+      "relationshipType": "enables",
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "notes": "The analytic worksheet helps sustain classroom tempo after the affective threshold appears."
+    },
+    {
+      "id": "edge-014",
+      "source": "node-018",
+      "target": "node-015",
+      "weight": 0.6,
+      "size": 2.2,
+      "color": "#b8b8b8",
+      "relationshipType": "co-presence",
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "notes": "Board language keeps the concept visibly present in the room."
+    },
+    {
+      "id": "edge-015",
+      "source": "node-019",
+      "target": "node-021",
+      "weight": 0.8,
+      "size": 2.6,
+      "color": "#c85656",
+      "relationshipType": "disrupts",
+      "encounterRefs": [
+        "enc-2025-T1-W5-L3"
+      ],
+      "notes": "Sadness disrupts the teacher-researcher's stable role, making care, witness, teaching, and research co-present."
+    }
+  ]
+}
