@@ -29,7 +29,7 @@ jobs:
         run: npm ci
 
       - name: Install hugo-obsidian
-        run: go install github.com/jackyzha0/hugo-obsidian@v0.3.0
+        run: go install github.com/jackyzha0/hugo-obsidian@latest
 
       - name: Build wikilink index
         run: hugo-obsidian -input=content -output=assets/indices -index -root=.
@@ -46,4 +46,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: deploy
-                                # ← your domain or subdomain here
