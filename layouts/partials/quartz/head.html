@@ -85,7 +85,7 @@ resources.Minify }}
   const SEARCH_ENABLED = {{.Site.Params.search.enableSemanticSearch}}
   const LATEX_ENABLED = {{.Site.Params.enableLatex}}
   const PRODUCTION = {{ hugo.IsProduction }}
-  const BASE_URL = {{ .Site.BaseURL | jsonify }}
+  const BASE_URL = "{{ strings.TrimRight "/" .Site.BaseURL }}"
   const fetchData = Promise.all([
         fetch("{{ $linkIndex.Permalink }}")
           .then(data => data.json())
@@ -123,7 +123,7 @@ resources.Minify }}
 
     {{if $data.enableLinkPreview | default $.Site.Params.enableLinkPreview}}
     initPopover(
-      {{ strings.TrimRight "/" .Site.BaseURL | jsonify }},
+      "{{ strings.TrimRight "/" .Site.BaseURL }}",
       {{$data.enableContextualBacklinks | default $.Site.Params.enableContextualBacklinks}}
     )
     {{end}}
@@ -139,7 +139,7 @@ resources.Minify }}
 
       const drawGlobal = isHome && {{$graphConfig.enableGlobalGraph}};
       drawGraph(
-          {{ strings.TrimRight "/" .Site.BaseURL | jsonify }},
+          "{{ strings.TrimRight "/" .Site.BaseURL }}",
           drawGlobal,
           {{$graphConfig.paths}},
           drawGlobal ? {{$graphConfig.globalGraph}} : {{$graphConfig.localGraph}}
