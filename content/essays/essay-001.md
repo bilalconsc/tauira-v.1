@@ -1,7 +1,7 @@
 ---
 title: "Narrating Growth Diffractively 
 "
-date: "2026-05-11"
+date: "2025-03-30"
 weight: 20250330
 schemaType: essay
 id: essay-001
