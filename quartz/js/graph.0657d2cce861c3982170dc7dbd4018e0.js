@@ -1,3 +1,4 @@
+// graph.js v2 — baseUrl absolute/relative try-catch fix (cache-bust)
 async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
   let {
   depth,
