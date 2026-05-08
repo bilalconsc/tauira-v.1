@@ -4,7 +4,7 @@
   crossorigin="anonymous"
 ></script>
 <h3>{{ i18n "interactive_graph" }}</h3>
-<div id="graph-container"></div>
+<div id="graph-container" style="width:100%;height:250px;"></div>
 <style>
   :root {
     --g-node: var(--secondary);
@@ -13,6 +13,7 @@
     --g-link: var(--outlinegray);
     --g-link-active: #5a7282;
   }
+  #graph-container svg { display: block; }
 </style>
 {{ $js := resources.Get "quartz/js/graph.js" | resources.Fingerprint "md5" }}
 <script src="{{ $js.Permalink }}"></script>
