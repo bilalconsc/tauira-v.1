@@ -91,87 +91,111 @@ aside.book-aside .book-backlinks {
   .tauira-graph-details {
     min-height: auto;
   }
+
   .tauira-graph-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: end;
-  margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: end;
+    margin-bottom: 1rem;
+  }
+
+  .tauira-graph-toolbar label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 180px;
+  }
+
+  .tauira-graph-toolbar select,
+  .tauira-graph-toolbar button {
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    color: inherit;
+  }
 }
 
-.tauira-graph-toolbar label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  min-width: 180px;
-}
-
-.tauira-graph-toolbar select,
-.tauira-graph-toolbar button {
-  padding: 0.55rem 0.7rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: #fff;
-  color: inherit;
-}
-}
-
-// ── Fix: memo & encounter header box misalignment ───────────────────
-// The Hugo Book theme applies a negative margin-top to the first child
-// of article, which pulls the <header> upward out of its coloured box.
-// This resets that for all tauira content types.
+// ── Memo & Encounter content header ─────────────────────────────────
+// The global `header` rule in _amethyst.scss was applying position:fixed
+// to ALL headers including content ones. Now that _amethyst.scss is scoped
+// to .book-header only, we define the content header styles here.
 
 .tauira-memo header,
 .tauira-encounter header {
-  // Kill any theme-applied negative top margin
+  // Ensure no inherited positioning or margin issues
+  position: relative !important;
   margin-top: 0 !important;
 
-  // Layout: title + date side by side, encounter link below date
+  // Purple banner matching the site's --header colour
+  background-color: #bca1ff;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+
+  // Grid: title on left (spans both rows), date + encounter link stacked on right
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: auto auto;
   align-items: start;
   gap: 0.2rem 1.25rem;
-
   padding: 1.25rem 1.5rem 1.1rem;
-  border-radius: 4px;
-  margin-bottom: 2rem;
 
-  // Title occupies full left column across both rows
   h1 {
     grid-column: 1;
     grid-row: 1 / 3;
     margin: 0;
     font-size: 1.45rem;
     line-height: 1.3;
-    color: inherit;
+    color: var(--dark, #141021);
     align-self: center;
   }
 
-  // Date sits top-right
   time {
     grid-column: 2;
     grid-row: 1;
     font-size: 0.82rem;
     white-space: nowrap;
-    opacity: 0.85;
+    color: var(--dark, #141021);
+    opacity: 0.8;
     padding-top: 0.15rem;
   }
 
-  // Encounter link / memo link sits below the date
   .memo-encounter-link,
-  .encounter-date-label {
+  .encounter-location,
+  .encounter-duration {
     grid-column: 2;
     grid-row: 2;
     font-size: 0.8rem;
     margin: 0;
-    opacity: 0.9;
+    color: var(--dark, #141021);
 
     a {
+      color: var(--secondary, #7c00ce);
       font-weight: 600;
       text-decoration: none;
 
       &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+// Dark mode: use the dark-mode --header value
+[saved-theme="dark"] {
+  .tauira-memo header,
+  .tauira-encounter header {
+    background-color: #7838f8;
+
+    h1, time {
+      color: var(--dark, #f7f2fa);
+    }
+
+    .memo-encounter-link,
+    .encounter-location,
+    .encounter-duration {
+      color: var(--dark, #f7f2fa);
+
+      a { color: var(--tertiary, #92a8ff); }
     }
   }
 }
