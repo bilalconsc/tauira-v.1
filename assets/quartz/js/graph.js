@@ -15,7 +15,13 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
   // Use .pathname to remove hashes / searchParams / text fragments
   const cleanUrl = window.location.origin + window.location.pathname
 
-  const curPage = cleanUrl.replace(/\/$/g, "").replace(baseUrl, "")
+  // Strip the baseUrl path prefix, then ensure a leading slash so the result
+  // matches the keys in linkIndex.json (e.g. "/encounters/enc-2025-T1-W3-L2")
+  const siteBase = new URL(baseUrl).pathname.replace(/\/$/, "")
+  const rawPage = window.location.pathname.replace(/\/$/, "")
+  const curPage = rawPage.startsWith(siteBase)
+    ? rawPage.slice(siteBase.length) || "/"
+    : rawPage
 
   const parseIdsFromLinks = (links) => [
     ...new Set(links.flatMap((link) => [link.source, link.target])),
@@ -51,7 +57,7 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
   }
 
   const color = (d) => {
-    if (d.id === curPage || (d.id === "/" && curPage === "")) {
+    if (d.id === curPage || (d.id === "/" && curPage === "/")) {
       return "var(--g-node-active)"
     }
 
@@ -166,8 +172,7 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
     .attr("fill", color)
     .style("cursor", "pointer")
     .on("click", (_, d) => {
-      // SPA navigation
-      window.Million.navigate(new URL(`${baseUrl}${decodeURI(d.id).replace(/\s+/g, "-")}/`), ".singlePage")
+      window.Million.navigate(new URL(`${baseUrl}${decodeURI(d.id).replace(/^\//, "").replace(/\s+/g, "-")}/`), ".singlePage")
     })
     .on("mouseover", function (_, d) {
       d3.selectAll(".node").transition().duration(100).attr("fill", "var(--g-node-inactive)")
@@ -178,7 +183,7 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
       ])
       const neighbourNodes = d3.selectAll(".node").filter((d) => neighbours.includes(d.id))
       const currentId = d.id
-      window.Million.prefetch(new URL(`${baseUrl}${decodeURI(d.id).replace(/\s+/g, "-")}/`))
+      window.Million.prefetch(new URL(`${baseUrl}${decodeURI(d.id).replace(/^\//, "").replace(/\s+/g, "-")}/`))
       const linkNodes = d3
         .selectAll(".link")
         .filter((d) => d.source.id === currentId || d.target.id === currentId)
@@ -200,7 +205,7 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
         .attr('opacityOld', d3.select(this.parentNode).select('text').style("opacity"))
         .style('opacity', 1)
         .style('font-size', bigFont+'em')
-        .attr('dy', d => nodeRadius(d) + 20 + 'px') // radius is in px
+        .attr('dy', d => nodeRadius(d) + 20 + 'px')
     })
     .on("mouseleave", function (_, d) {
       d3.selectAll(".node").transition().duration(200).attr("fill", color)
@@ -218,7 +223,7 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
       .duration(200)
       .style('opacity', d3.select(this.parentNode).select('text').attr("opacityOld"))
       .style('font-size', fontSize+'em')
-      .attr('dy', d => nodeRadius(d) + 8 + 'px') // radius is in px
+      .attr('dy', d => nodeRadius(d) + 8 + 'px')
     })
     .call(drag(simulation))
 
@@ -234,8 +239,6 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
     .style('font-size', fontSize+'em')
     .raise()
     .call(drag(simulation))
-
-  // set panning
 
   if (enableZoom) {
     svg.call(
