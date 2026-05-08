@@ -1,7 +1,7 @@
 <!-- set data/config yaml file based on website language -->
 {{ $config := cond (eq $.Site.Language.Lang "en") "config" (printf "config.%s" $.Site.Language.Lang) }}
 {{ $data := $.Site.Params }}
-{{ $graphConfig := index hugo.Data "graphConfig" }}
+{{ $graphConfig := index $.Site.Data "graphConfig" }}
 <!-- Meta tags -->
 <meta charset="UTF-8" />
 <meta
