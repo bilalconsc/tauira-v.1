@@ -348,7 +348,7 @@ async function initTauiraSigma(container, dataPath, detailsSelector = "#tauira-g
 
     const graph = buildGraph(data);
 
-    addCrossEncounterEdges(graph);
+
     function normalizeEdgeWeights(graph) {
     graph.forEachEdge((edge, attrs) => {
     const w = attrs.weight || 0.5;
