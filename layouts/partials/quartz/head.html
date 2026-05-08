@@ -1,6 +1,7 @@
 <!-- set data/config yaml file based on website language -->
 {{ $config := cond (eq $.Site.Language.Lang "en") "config" (printf "config.%s" $.Site.Language.Lang) }}
 {{ $data := $.Site.Params }}
+{{ $graphConfig := index $.Site.Data "graphConfig" }}
 <!-- Meta tags -->
 <meta charset="UTF-8" />
 <meta
@@ -136,12 +137,12 @@ resources.Minify }}
       // clear the graph in case there is anything within it
       container.textContent = ""
 
-      const drawGlobal = isHome && {{hugo.Data.graphConfig.enableGlobalGraph}};
+      const drawGlobal = isHome && {{$graphConfig.enableGlobalGraph}};
       drawGraph(
           {{ strings.TrimRight "/" .Site.BaseURL | jsonify }},
           drawGlobal,
-          {{hugo.Data.graphConfig.paths}},
-          drawGlobal ? {{hugo.Data.graphConfig.globalGraph}} : {{hugo.Data.graphConfig.localGraph}}
+          {{$graphConfig.paths}},
+          drawGlobal ? {{$graphConfig.globalGraph}} : {{$graphConfig.localGraph}}
         );
 
       }
@@ -177,7 +178,7 @@ resources.Minify }}
         {left: '$', right: '$', display: false},
       ],
       macros: {
-        '’': "'"
+        '\u2019': "'"
       },
       throwOnError : false
     });

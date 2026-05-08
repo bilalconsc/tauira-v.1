@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
@@ -16,7 +19,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.128.0'
+          hugo-version: '0.147.0'
           extended: true
 
       - name: Install Node.js
@@ -29,7 +32,9 @@ jobs:
         run: npm ci
 
       - name: Install hugo-obsidian
-        run: go install github.com/jackyzha0/hugo-obsidian@v0.3.0
+        run: |
+          go install github.com/jackyzha0/hugo-obsidian@latest
+          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
 
       - name: Build wikilink index
         run: hugo-obsidian -input=content -output=assets/indices -index -root=.
@@ -46,4 +51,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: deploy
-                                # ← your domain or subdomain here

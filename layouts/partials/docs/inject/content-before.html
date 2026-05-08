@@ -1,6 +1,6 @@
 {{/* Part 2.1 — Node Badge Strip
      Renders a responsive row of MKI-coloured node badges for encounters and essays.
-     Reads .Params.nodeRefs, resolves via hugo.Data.nodes, skips memos. */}}
+     Reads .Params.nodeRefs, resolves via $.Site.Data.nodes, skips memos. */}}
 {{- $section := .Section | default "" -}}
 {{- if or (eq $section "encounters") (eq $section "essays") -}}
   {{- with .Params.nodeRefs -}}
@@ -10,7 +10,7 @@
       {{- $labels := dict "M" "Material" "K" "Knowledge" "I" "Instinctual" -}}
       {{- range . -}}
         {{- $nodeId := . -}}
-        {{- $node := index hugo.Data.nodes $nodeId -}}
+        {{- $node := index $.Site.Data.nodes $nodeId -}}
         {{- with $node -}}
           {{- $bg := index $colors .category | default "#666" -}}
           {{- $fg := index $textColors .category | default "#fff" -}}

@@ -114,3 +114,46 @@ params:
   BookSearch: false
   BookServiceWorker: false
   BookPortableLinks: false
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Amethyst Graph Configuration
+  # NOTE: This controls the Amethyst force-graph only (wikilink-based).
+  # The Tauira rhizomatic map (D3.js, /map/) is separate — see static/graph/.
+  # ─────────────────────────────────────────────────────────────────────────
+
+  # Show full Global Graph on home page; Local Graphs on sub-pages.
+  enableGlobalGraph: true
+
+  localGraph:
+    enableLegend: true
+    enableDrag: true
+    enableZoom: true
+    depth: 1
+    enableRadial: false
+    scale: 1.2
+    repelForce: 0.5
+    centerForce: 0.3
+    linkDistance: 50
+    fontSize: 14
+    opacityScale: 3
+
+  globalGraph:
+    enableLegend: true
+    enableDrag: true
+    enableZoom: true
+    depth: -1
+    enableRadial: false
+    scale: 1.4
+    repelForce: 0.5
+    centerForce: 0.3
+    linkDistance: 50
+    fontSize: 12
+    opacityScale: 3
+
+  # Path-based node colours for the Amethyst graph
+  graphConfig:
+    paths:
+      - /moc: "#4388cc"
+      - /encounters: "#01696f"
+      - /memos: "#5b4fcf"
+      - /essays: "#d19900"
