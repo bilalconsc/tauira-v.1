@@ -29,7 +29,7 @@ nodeRefs:
 Reflection in professional practice, especially in teacher education, is at a tipping point. In contemporary teacher education, reflection often takes the form of evidence in prescribed post-lesson commentary (ref). Such routines may support accountability and professional discipline, but they could also narrow what counts as learning (ref). Over time, the routines become a script for how both professional and personal growth should be narrated. In this essay, I examine scripting as the central aspect of reflection in my own professional practice.
 This inquiry matters to me personally and professionally because it extends my progression as an educator-researcher from the module EDU7393 (appendix) and the wider PGDEI programme. The EDU 7393 inquiry began with discomfort toward the convenience of prescribed reflective routines. That discomfort pushed me to ask not whether reflection matters, but what kind of reflection becomes possible when classroom life is approached as relational, affective, and materially entangled.  In this essay, I move beyond treating classroom encounters as a scene for retrospective self-improvement. Drawing on evidence and its analysis curated through Tauira (website), I argue that prescribed reflective practices do not merely document experience and that they regulate how professional growth could be narrated.
 
-
+---
 
 ## Defining the Aspect
 
@@ -37,22 +37,22 @@ The aspect I examine here is the way prescribed reflection scripts professional 
 To understand the importance of the aspect, I focus on the literature on diffraction and reflective practice. Bozalek and Zembylas describe diffraction as an “otherwise” methodology that attends to how bodies, materials, and discourses intra-act, rather than presuming a detached subject who reflects on the world from a distance. Hill’s “diffractive practitioner” similarly challenges reflective models that overlook affect, matter, place, and more-than-human agencies in learning. The authors bring our attention to the prescribed reflection, which centralises the reflective subject and underreads the relations that construct classroom life.
 Tauira is crucial here because it supports this essay and a different kind of inquiry. In my research project, Tauira is a website-based knowledge environment where encounters, fieldnotes, memos, artefacts, and interaction maps are gathered and revisited across practice. It is not simply a repository. It functions as a relation-disclosing object that allows pedagogical moments to be reread across bodies, objects, timings, affects, and media. Thus, Tauira is not only evidence of my individual competence or growth.
 
-
+---
 
 ## Context of Practice
 
 The essay draws on encounters from my professional teaching practice, especially within IBDP Psychology lessons and portfolio-based reflection in the PGDEI programme. This context matters because it combines deep conceptual understanding with institutional expectations for evidence, progress, and reflective accountability. In such settings, there is strong pressure to demonstrate rigour, show impact, and clearly narrate improvement.
 In the current context, there are also distinctive opportunities and constraints. The curriculum invites conceptual depth, critical thought, and ethical questioning. Moreover, classroom artefacts, assessment routines, time pressures, student identities, and institutional formats are all coparticipants in what the lesson becomes. Ethics is embedded throughout this essay on anonymity, power relations, inclusivity, and the consequences of pedagogical action. For that reason, the evidence used here is anonymised and treated not as raw data, but as part of my professional inquiry.
 
-
+---
 
 ### Reflective Investigation
----
+
 ## a. Identifying the Issue
 
 The evidence for this essay consists primarily of post-lesson reflections and critical incident reports gathered in the professional development portfolio and curated through Tauira. These materials are useful because they make visible the structure of prescribed reflection. The template does not simply ask what happened in a lesson; it already organises response into what was successful, what should change, and what this means for personal growth. The issue, then, is not only what I say in reflection, but how the form of reflection pre-narrates what legitimate growth should look like.
 
----
+
 
 ## b. Intervention and Inquiry
 
@@ -83,7 +83,7 @@ What the diffractive reading then demands attention to is what happens downstrea
 Moreover, the diffractive reading further illuminates what the graph does not yet contain. Track B, Analytic Worksheet enabling Classroom Tempo, carries no disruption, no affect, no acknowledgement of what Track A just produced. This is not because the teacher was inattentive rather it is because the apparatus itself has no receiver for this frequency. The worksheet was not designed to ask, “what did it cost you to recognise this?”. Classroom Tempo was not designed to slow when sadness enters. The diffractive reading makes this understading of structural insensitivity not as a personal failure of pedagogy but as an intra-active limitation of the apparatus. It reveals a diffractive gap between what curricula ask students to know and what it costs emotionally to know it, a gap that no worksheet, no board, no institutional clock is currently equipped to hold. Role Instability is where I stepped into that gap. The graph maps it. 
 
 
----
+
 
 ## c. Professional Learning
 
