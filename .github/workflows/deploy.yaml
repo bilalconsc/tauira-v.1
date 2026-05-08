@@ -29,7 +29,9 @@ jobs:
         run: npm ci
 
       - name: Install hugo-obsidian
-        run: go install github.com/jackyzha0/hugo-obsidian@latest
+        run: |
+          go install github.com/jackyzha0/hugo-obsidian@latest
+          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
 
       - name: Build wikilink index
         run: hugo-obsidian -input=content -output=assets/indices -index -root=.
