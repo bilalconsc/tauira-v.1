@@ -12,28 +12,21 @@
   <main class="flex">
     <aside class="book-menu">
       <div class="book-menu-content">
-        {{ template "menu" . }} <!-- Left menu Content -->
+        {{ template "menu" . }}
       </div>
     </aside>
     <div class="book-page container">
-      {{/*  <header class="book-header">
-        {{ template "header" . }} <!-- Mobile layout header -->
-      </header>  */}}
-
       {{ partial "docs/inject/content-before" . }}
-      {{ template "main" . }} <!-- Page Content -->
+      {{ template "main" . }}
       {{ partial "docs/inject/content-after" . }}
-      
-      
-      {{ template "comments" . }} <!-- Comments block -->
-
+      {{ template "comments" . }}
       <label for="menu-control" class="hidden book-menu-overlay"></label>
     </div>
 
     {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
     <aside class="book-toc">
       <div class="book-toc-content">
-        {{ template "toc" . }} <!-- Table of Contents -->
+        {{ template "toc" . }}
       </div>
     </aside>
     {{ end }}
@@ -49,7 +42,6 @@
 
 {{ define "header" }}
   {{ partial "docs/header" . }}
-
   {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
   <aside class="hidden clearfix">
     {{ template "toc" . }}
@@ -73,8 +65,8 @@
   <article class="markdown">
     <h1 class="title">{{ partial "docs/title.html" . }}</h1>
     {{partial "quartz/textprocessing" . }}
-    {{ partial "quartz/footer" .}}
-    {{/*  {{- .Content -}}  */}}
+    {{partial "quartz/footerIndex" . }}
+    {{ partial "quartz/footer" . }}
   </article>
 {{ end }}
 
