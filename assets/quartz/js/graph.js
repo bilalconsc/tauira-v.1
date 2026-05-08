@@ -10,16 +10,13 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
   fontSize} = graphConfig;
 
   const container = document.getElementById("graph-container")
+  if (!container) return
+
   const { index, links, content } = await fetchData
 
-  // Use .pathname to remove hashes / searchParams / text fragments
-  const cleanUrl = window.location.origin + window.location.pathname
-
-  // Strip the baseUrl path prefix, then ensure a leading slash so the result
-  // matches the keys in linkIndex.json (e.g. "/encounters/enc-2025-T1-W3-L2")
   const siteBase = new URL(baseUrl).pathname.replace(/\/$/, "")
-  const rawPage = window.location.pathname.replace(/\/$/, "")
-  const curPage = rawPage.startsWith(siteBase)
+  const rawPage  = window.location.pathname.replace(/\/$/, "")
+  const curPage  = rawPage.startsWith(siteBase)
     ? rawPage.slice(siteBase.length) || "/"
     : rawPage
 
@@ -27,15 +24,12 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
     ...new Set(links.flatMap((link) => [link.source, link.target])),
   ]
 
-  // Links is mutated by d3. We want to use links later on, so we make a copy and pass that one to d3
-  // Note: shallow cloning does not work because it copies over references from the original array
   const copyLinks = JSON.parse(JSON.stringify(links))
 
   const neighbours = new Set()
   const wl = [curPage || "/", "__SENTINEL"]
   if (depth >= 0) {
     while (depth >= 0 && wl.length > 0) {
-      // compute neighbours
       const cur = wl.shift()
       if (cur === "__SENTINEL") {
         depth--
@@ -60,7 +54,6 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
     if (d.id === curPage || (d.id === "/" && curPage === "/")) {
       return "var(--g-node-active)"
     }
-
     for (const pathColor of pathColors) {
       const path = Object.keys(pathColor)[0]
       const colour = pathColor[path]
@@ -68,7 +61,6 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
         return colour
       }
     }
-
     return "var(--g-node)"
   }
 
@@ -78,28 +70,26 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
       d.fx = d.x
       d.fy = d.y
     }
-
     function dragged(event, d) {
       d.fx = event.x
       d.fy = event.y
     }
-
     function dragended(event, d) {
       if (!event.active) simulation.alphaTarget(0)
       d.fx = null
       d.fy = null
     }
-
     const noop = () => {}
     return d3
       .drag()
       .on("start", enableDrag ? dragstarted : noop)
-      .on("drag", enableDrag ? dragged : noop)
-      .on("end", enableDrag ? dragended : noop)
+      .on("drag",  enableDrag ? dragged     : noop)
+      .on("end",   enableDrag ? dragended   : noop)
   }
 
-  const height = Math.max(container.offsetHeight, isHome ? 500 : 250)
-  const width = container.offsetWidth
+  // Ensure the container has a rendered size before we read it
+  const height = Math.max(container.offsetHeight || 0, isHome ? 500 : 250)
+  const width  = Math.max(container.offsetWidth  || 0, 300)
 
   const simulation = d3
     .forceSimulation(data.nodes)
@@ -116,23 +106,21 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
   const svg = d3
     .select("#graph-container")
     .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr('viewBox', [-width / 2 / scale, -height / 2 / scale, width / scale, height / scale])
+    .attr("width",   width)
+    .attr("height",  height)
+    .attr("viewBox", [-width / 2 / scale, -height / 2 / scale, width / scale, height / scale])
 
   if (enableLegend) {
     const legend = [{ Current: "var(--g-node-active)" }, { Note: "var(--g-node)" }, ...pathColors]
     legend.forEach((legendEntry, i) => {
-      const key = Object.keys(legendEntry)[0]
+      const key    = Object.keys(legendEntry)[0]
       const colour = legendEntry[key]
-      svg
-        .append("circle")
+      svg.append("circle")
         .attr("cx", -width / 2 + 20)
         .attr("cy", height / 2 - 30 * (i + 1))
         .attr("r", 6)
         .style("fill", colour)
-      svg
-        .append("text")
+      svg.append("text")
         .attr("x", -width / 2 + 40)
         .attr("y", height / 2 - 30 * (i + 1))
         .text(key)
@@ -141,7 +129,6 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
     })
   }
 
-  // draw links between nodes
   const link = svg
     .append("g")
     .selectAll("line")
@@ -153,59 +140,55 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
     .attr("data-source", (d) => d.source.id)
     .attr("data-target", (d) => d.target.id)
 
-  // svg groups
   const graphNode = svg.append("g").selectAll("g").data(data.nodes).enter().append("g")
 
-  // calculate radius
   const nodeRadius = (d) => {
     const numOut = index.links[d.id]?.length || 0
-    const numIn = index.backlinks[d.id]?.length || 0
+    const numIn  = index.backlinks[d.id]?.length || 0
     return 2 + Math.sqrt(numOut + numIn)
   }
 
-  // draw individual nodes
+  // Helper: build a safe absolute URL for a node id
+  function nodeUrl(id) {
+    return baseUrl.replace(/\/$/, "") + "/" + decodeURI(id).replace(/^\//, "").replace(/\s+/g, "-") + "/"
+  }
+
   const node = graphNode
     .append("circle")
     .attr("class", "node")
-    .attr("id", (d) => d.id)
-    .attr("r", nodeRadius)
-    .attr("fill", color)
+    .attr("id",    (d) => d.id)
+    .attr("r",     nodeRadius)
+    .attr("fill",  color)
     .style("cursor", "pointer")
     .on("click", (_, d) => {
-      window.Million.navigate(new URL(`${baseUrl}${decodeURI(d.id).replace(/^\//, "").replace(/\s+/g, "-")}/`), ".singlePage")
+      window.location.href = nodeUrl(d.id)
     })
     .on("mouseover", function (_, d) {
       d3.selectAll(".node").transition().duration(100).attr("fill", "var(--g-node-inactive)")
 
-      const neighbours = parseIdsFromLinks([
-        ...(index.links[d.id] || []),
+      const neighbourIds = parseIdsFromLinks([
+        ...(index.links[d.id]     || []),
         ...(index.backlinks[d.id] || []),
       ])
-      const neighbourNodes = d3.selectAll(".node").filter((d) => neighbours.includes(d.id))
+      const neighbourNodes = d3.selectAll(".node").filter((d) => neighbourIds.includes(d.id))
       const currentId = d.id
-      window.Million.prefetch(new URL(`${baseUrl}${decodeURI(d.id).replace(/^\//, "").replace(/\s+/g, "-")}/`))
+
       const linkNodes = d3
         .selectAll(".link")
         .filter((d) => d.source.id === currentId || d.target.id === currentId)
 
-      // highlight neighbour nodes
       neighbourNodes.transition().duration(200).attr("fill", color)
-
-      // highlight links
       linkNodes.transition().duration(200).attr("stroke", "var(--g-link-active)")
 
-      const bigFont = fontSize*1.5
-
-      // show text for self
+      const bigFont = fontSize * 1.5
       d3.select(this.parentNode)
         .raise()
         .select("text")
-        .transition()
-        .duration(200)
-        .attr('opacityOld', d3.select(this.parentNode).select('text').style("opacity"))
-        .style('opacity', 1)
-        .style('font-size', bigFont+'em')
-        .attr('dy', d => nodeRadius(d) + 20 + 'px')
+        .transition().duration(200)
+        .attr("opacityOld", d3.select(this.parentNode).select("text").style("opacity"))
+        .style("opacity", 1)
+        .style("font-size", bigFont + "em")
+        .attr("dy", (d) => nodeRadius(d) + 20 + "px")
     })
     .on("mouseleave", function (_, d) {
       d3.selectAll(".node").transition().duration(200).attr("fill", color)
@@ -218,48 +201,41 @@ async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
       linkNodes.transition().duration(200).attr("stroke", "var(--g-link)")
 
       d3.select(this.parentNode)
-      .select("text")
-      .transition()
-      .duration(200)
-      .style('opacity', d3.select(this.parentNode).select('text').attr("opacityOld"))
-      .style('font-size', fontSize+'em')
-      .attr('dy', d => nodeRadius(d) + 8 + 'px')
+        .select("text")
+        .transition().duration(200)
+        .style("opacity", d3.select(this.parentNode).select("text").attr("opacityOld"))
+        .style("font-size", fontSize + "em")
+        .attr("dy", (d) => nodeRadius(d) + 8 + "px")
     })
     .call(drag(simulation))
 
-  // draw labels
   const labels = graphNode
     .append("text")
     .attr("dx", 0)
     .attr("dy", (d) => nodeRadius(d) + 8 + "px")
     .attr("text-anchor", "middle")
     .text((d) => content[d.id]?.title || d.id.replace("-", " "))
-    .style('opacity', (opacityScale - 1) / 3.75)
+    .style("opacity", (opacityScale - 1) / 3.75)
     .style("pointer-events", "none")
-    .style('font-size', fontSize+'em')
+    .style("font-size", fontSize + "em")
     .raise()
     .call(drag(simulation))
 
   if (enableZoom) {
     svg.call(
-      d3
-        .zoom()
-        .extent([
-          [0, 0],
-          [width, height],
-        ])
+      d3.zoom()
+        .extent([[0, 0], [width, height]])
         .scaleExtent([0.25, 4])
         .on("zoom", ({ transform }) => {
           link.attr("transform", transform)
           node.attr("transform", transform)
-          const scale = transform.k * opacityScale;
-          const scaledOpacity = Math.max((scale - 1) / 3.75, 0)
+          const s = transform.k * opacityScale
+          const scaledOpacity = Math.max((s - 1) / 3.75, 0)
           labels.attr("transform", transform).style("opacity", scaledOpacity)
         }),
     )
   }
 
-  // progress the simulation
   simulation.on("tick", () => {
     link
       .attr("x1", (d) => d.source.x)
