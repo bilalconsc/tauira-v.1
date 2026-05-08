@@ -39,6 +39,9 @@ jobs:
       - name: Build wikilink index
         run: hugo-obsidian -input=content -output=assets/indices -index -root=.
 
+      - name: Normalise linkIndex paths
+        run: node scripts/fix-link-index.js
+
       - name: Build graph JSON
         run: node scripts/regenerate-graph.js
 
