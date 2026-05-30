@@ -1,0 +1,11 @@
+cff-version: 1.0.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Arafaat"
+  given-names: "Bilal"
+  orcid: "https://orcid.org/0000-0002-8774-9182"
+title: "tauira-v.1"
+version: 1.0.0
+doi: h10.5281/zenodo.20453683
+date-released: 2026-05-29
+url: "https://github.com/bilalconsc/tauira-v.1"
